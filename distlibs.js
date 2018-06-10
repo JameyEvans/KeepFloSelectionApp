@@ -4,34 +4,34 @@
 
 
 //distributor library module
-var partNo;
-var keepFloModel;
-var sporlanModel;
-var isSporlan;
-var style; // nozzle or venturi
-var connectionType;
-var sidePort;
-var sideConnection; //number and size of possible connections
-var nozzleSize; // (P)ermanent, L, J, E, C, A
-var inletNumber;
-var outletNumber;
-var numberCircuits;
-var orificeNumber;
-var refrgt;
-var q = 0;
-var qt; // tube capacity; wasn't global in c++ version
-var qn; // nozzle capacity; wasn't global in c++ version
-var tSuct;
-var tLiq;
-var length;
-var dp;
-var dpn;
-var dpt;
-var pln; // percent loading nozzle (or body)
-var plt; // percent loading tubes
-var orificeSize;
-var inletSize;
-var outletSize;
+// var partNo;
+// var keepFloModel;
+// var sporlanModel;
+// var isSporlan;
+// var style; // nozzle or venturi
+// var connectionType;
+// var sidePort;
+// var sideConnection; //number and size of possible connections
+// var nozzleSize; // (P)ermanent, L, J, E, C, A
+// var inletNumber;
+// var outletNumber;
+// var numberCircuits;
+// var orificeNumber;
+// var refrgt;
+// var q = 0;
+// var qt; // tube capacity; wasn't global in c++ version
+// var qn; // nozzle capacity; wasn't global in c++ version
+// var tSuct;
+// var tLiq;
+// var length;
+// var dp;
+// var dpn;
+// var dpt;
+// var pln; // percent loading nozzle (or body)
+// var plt; // percent loading tubes
+// var orificeSize;
+// var inletSize;
+// var outletSize;
 function ErrorText(e) {
     var c = null;
     switch (e) {
@@ -305,8 +305,7 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
     qn = n1 * kEvap * f1 * kRef;
     return qn;
 }
-exports.StdNozzleRating = StdNozzleRating;
-function RateVenturi() {
+function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, q=0, qt) {
     // assigns values to q (capacity), plt (percent tube loading), pln (percent nozzle loading)
     // dpn (pressure drop nozzle), dpt (pressure drop tubes), and dp (total pressure drop)
     // returns 0 if no errors, else returns error code
@@ -315,9 +314,9 @@ function RateVenturi() {
     var kLoad;
     var n;
     //check for errors in StdTubeRating()
-    n = StdTubeRating();
-    if (n > 0)
-        return n;
+    // n = StdTubeRating();
+    // if (n > 0)
+    //     return n;
     // if capacity is not defined
     if (q == 0)
         q = qt * numberCircuits;
@@ -326,9 +325,9 @@ function RateVenturi() {
     dpn = 5 * kLoad;
     dpt = 20 * kLoad * length / 36;
     dp = dpn + dpt;
-    return 0;
+    return q;
 }
-exports.RateVenturi = RateVenturi;
+
 tLiq = 100;
 tSuct = 40;
 length = 30;
