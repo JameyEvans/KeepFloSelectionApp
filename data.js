@@ -1,4 +1,5 @@
-var nozzleLibrary =[ {
+var nozzleLibrary = [
+  {
     "bodyStyle": 401,
     "sporlanStyle": 1613,
     "type": "nozzle",
@@ -473,8 +474,8 @@ var nozzleLibrary =[ {
     "hasSidePort": "no",
     "OAL": 2.444,
     "OD": 1.89,
-    "IDTol": "1.373-1.375",
-    "inletDiameter": 1.375,
+    "IDTol": "1.123-1.125",
+    "inletDiameter": 1.125,
     "E": "*",
     "F": "*"
   },
@@ -489,8 +490,8 @@ var nozzleLibrary =[ {
     "hasSidePort": "no",
     "OAL": 2.444,
     "OD": 1.89,
-    "IDTol": "1.373-1.375",
-    "inletDiameter": 1.375,
+    "IDTol": "1.123-1.125",
+    "inletDiameter": 1.125,
     "E": "*",
     "F": "*"
   },
@@ -505,8 +506,8 @@ var nozzleLibrary =[ {
     "hasSidePort": "no",
     "OAL": 2.444,
     "OD": 1.89,
-    "IDTol": "1.373-1.375",
-    "inletDiameter": 1.375,
+    "IDTol": "1.123-1.125",
+    "inletDiameter": 1.125,
     "E": "*",
     "F": "*"
   },
@@ -650,7 +651,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.156,
+    "inletDiameter": 1.375,
     "E": "*",
     "F": "*"
   },
@@ -666,7 +667,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.375,
     "E": "*",
     "F": "*"
   },
@@ -682,7 +683,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.375,
     "E": "*",
     "F": "*"
   },
@@ -698,7 +699,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.375,
     "E": "*",
     "F": "*"
   },
@@ -714,7 +715,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -730,7 +731,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -746,7 +747,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -762,7 +763,7 @@ var nozzleLibrary =[ {
     "OAL": 4.464,
     "OD": 2.933,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.125,
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -778,7 +779,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -794,7 +795,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -810,7 +811,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -826,7 +827,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -842,7 +843,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -858,7 +859,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -874,7 +875,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -890,7 +891,7 @@ var nozzleLibrary =[ {
     "OAL": "*",
     "OD": "*",
     "IDTol": "1.623-1.625",
-    "inletDiameter": "*",
+    "inletDiameter": 1.625,
     "E": "*",
     "F": "*"
   },
@@ -906,7 +907,7 @@ var nozzleLibrary =[ {
     "OAL": 2.15,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -922,7 +923,7 @@ var nozzleLibrary =[ {
     "OAL": 2.15,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -938,7 +939,7 @@ var nozzleLibrary =[ {
     "OAL": 2.15,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -954,7 +955,7 @@ var nozzleLibrary =[ {
     "OAL": 1,
     "OD": 0.835,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -970,7 +971,7 @@ var nozzleLibrary =[ {
     "OAL": 1,
     "OD": 0.835,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -986,7 +987,7 @@ var nozzleLibrary =[ {
     "OAL": 1,
     "OD": 0.835,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1002,7 +1003,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1018,7 +1019,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1034,7 +1035,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1050,7 +1051,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1066,7 +1067,7 @@ var nozzleLibrary =[ {
     "OAL": 1.38,
     "OD": 1.009,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1082,7 +1083,7 @@ var nozzleLibrary =[ {
     "OAL": 1.38,
     "OD": 1.009,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1098,7 +1099,7 @@ var nozzleLibrary =[ {
     "OAL": 1.38,
     "OD": 1.009,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1114,7 +1115,7 @@ var nozzleLibrary =[ {
     "OAL": 1.38,
     "OD": 1.009,
     "IDTol": "0.430-0.432",
-    "inletDiameter": 0.33,
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1130,7 +1131,7 @@ var nozzleLibrary =[ {
     "OAL": 2.5,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1146,7 +1147,7 @@ var nozzleLibrary =[ {
     "OAL": 2.5,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1162,7 +1163,7 @@ var nozzleLibrary =[ {
     "OAL": 2.5,
     "OD": 0.835,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1178,7 +1179,7 @@ var nozzleLibrary =[ {
     "OAL": 2.78,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1194,7 +1195,7 @@ var nozzleLibrary =[ {
     "OAL": 2.78,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1210,7 +1211,7 @@ var nozzleLibrary =[ {
     "OAL": 2.78,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1226,7 +1227,7 @@ var nozzleLibrary =[ {
     "OAL": 2.78,
     "OD": 1.009,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": "*",
     "F": "*"
   },
@@ -1242,7 +1243,7 @@ var nozzleLibrary =[ {
     "OAL": 3.22,
     "OD": 1.19,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": "*",
     "F": "*"
   },
@@ -1258,7 +1259,7 @@ var nozzleLibrary =[ {
     "OAL": 3.22,
     "OD": 1.19,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": "*",
     "F": "*"
   },
@@ -1274,7 +1275,7 @@ var nozzleLibrary =[ {
     "OAL": 3.22,
     "OD": 1.19,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": "*",
     "F": "*"
   },
@@ -1290,7 +1291,7 @@ var nozzleLibrary =[ {
     "OAL": 2.02,
     "OD": 0.88,
     "IDTol": "0.623-0.625",
-    "inletDiameter": 0.66,
+    "inletDiameter": 0.625,
     "E": 0.98,
     "F": "0.375-0.5"
   },
@@ -1306,7 +1307,7 @@ var nozzleLibrary =[ {
     "OAL": 2.02,
     "OD": 0.88,
     "IDTol": "0.623-0.626",
-    "inletDiameter": 0.66,
+    "inletDiameter": 0.625,
     "E": 0.98,
     "F": "0.375-0.5"
   },
@@ -1322,7 +1323,7 @@ var nozzleLibrary =[ {
     "OAL": 2.02,
     "OD": 0.88,
     "IDTol": "0.623-0.627",
-    "inletDiameter": 0.66,
+    "inletDiameter": 0.625,
     "E": 0.98,
     "F": "0.375-0.5"
   },
@@ -1338,7 +1339,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.25,
     "IDTol": "0.873-0.875",
-    "inletDiameter": 0.91,
+    "inletDiameter": 0.875,
     "E": 1.22,
     "F": "0.375-0.5"
   },
@@ -1354,7 +1355,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.25,
     "IDTol": "0.873-0.875",
-    "inletDiameter": 0.91,
+    "inletDiameter": 0.875,
     "E": 1.22,
     "F": "0.375-0.5"
   },
@@ -1370,7 +1371,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.25,
     "IDTol": "0.873-0.875",
-    "inletDiameter": 0.91,
+    "inletDiameter": 0.875,
     "E": 1.22,
     "F": "0.375-0.5"
   },
@@ -1386,7 +1387,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.25,
     "IDTol": "0.873-0.875",
-    "inletDiameter": 0.91,
+    "inletDiameter": 0.875,
     "E": 1.22,
     "F": "0.375-0.5"
   },
@@ -1402,7 +1403,7 @@ var nozzleLibrary =[ {
     "OAL": 2.55,
     "OD": 1.25,
     "IDTol": "0.873-0.875",
-    "inletDiameter": 0.91,
+    "inletDiameter": 0.875,
     "E": 1.22,
     "F": "0.375-0.5"
   },
@@ -1418,7 +1419,7 @@ var nozzleLibrary =[ {
     "OAL": 3.25,
     "OD": 1.62,
     "IDTol": "1.123-1.125",
-    "inletDiameter": 1.06,
+    "inletDiameter": 1.125,
     "E": 1.47,
     "F": "0.375-0.5-0.625"
   },
@@ -1434,7 +1435,7 @@ var nozzleLibrary =[ {
     "OAL": 3.25,
     "OD": 1.62,
     "IDTol": "1.123-1.125",
-    "inletDiameter": 1.06,
+    "inletDiameter": 1.125,
     "E": 1.47,
     "F": "0.375-0.5-0.625"
   },
@@ -1450,7 +1451,7 @@ var nozzleLibrary =[ {
     "OAL": 3.25,
     "OD": 1.62,
     "IDTol": "1.123-1.125",
-    "inletDiameter": 1.06,
+    "inletDiameter": 1.125,
     "E": 1.47,
     "F": "0.375-0.5-0.625"
   },
@@ -1466,7 +1467,7 @@ var nozzleLibrary =[ {
     "OAL": 3.25,
     "OD": 1.62,
     "IDTol": "1.123-1.125",
-    "inletDiameter": 1.06,
+    "inletDiameter": 1.125,
     "E": 1.47,
     "F": "0.375-0.5-0.625"
   },
@@ -1482,7 +1483,7 @@ var nozzleLibrary =[ {
     "OAL": 3.25,
     "OD": 1.62,
     "IDTol": "1.123-1.125",
-    "inletDiameter": 1.06,
+    "inletDiameter": 1.125,
     "E": 1.47,
     "F": "0.375-0.5-0.625"
   },
@@ -1498,7 +1499,7 @@ var nozzleLibrary =[ {
     "OAL": 4.25,
     "OD": 2.25,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.31,
+    "inletDiameter": 1.375,
     "E": 1.88,
     "F": "0.5-0.625-0.875"
   },
@@ -1514,7 +1515,7 @@ var nozzleLibrary =[ {
     "OAL": 4.25,
     "OD": 2.25,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.31,
+    "inletDiameter": 1.375,
     "E": 1.88,
     "F": "0.5-0.625-0.875"
   },
@@ -1530,7 +1531,7 @@ var nozzleLibrary =[ {
     "OAL": 4.25,
     "OD": 2.25,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.31,
+    "inletDiameter": 1.375,
     "E": 1.88,
     "F": "0.5-0.625-0.875"
   },
@@ -1546,7 +1547,7 @@ var nozzleLibrary =[ {
     "OAL": 4.25,
     "OD": 2.25,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.31,
+    "inletDiameter": 1.375,
     "E": 1.88,
     "F": "0.5-0.625-0.875"
   },
@@ -1562,7 +1563,7 @@ var nozzleLibrary =[ {
     "OAL": 4.25,
     "OD": 2.25,
     "IDTol": "1.373-1.375",
-    "inletDiameter": 1.31,
+    "inletDiameter": 1.375,
     "E": 1.88,
     "F": "0.5-0.625-0.875"
   },
@@ -1578,7 +1579,7 @@ var nozzleLibrary =[ {
     "OAL": 4.88,
     "OD": 2.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.62,
+    "inletDiameter": 1.625,
     "E": 2.31,
     "F": "0.875-1.125"
   },
@@ -1594,7 +1595,7 @@ var nozzleLibrary =[ {
     "OAL": 4.88,
     "OD": 2.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.62,
+    "inletDiameter": 1.625,
     "E": 2.31,
     "F": "0.875-1.125"
   },
@@ -1610,7 +1611,7 @@ var nozzleLibrary =[ {
     "OAL": 4.88,
     "OD": 2.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.62,
+    "inletDiameter": 1.625,
     "E": 2.31,
     "F": "0.875-1.125"
   },
@@ -1626,7 +1627,7 @@ var nozzleLibrary =[ {
     "OAL": 3.1,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": 2.06,
     "F": "0.375-0.5"
   },
@@ -1642,7 +1643,7 @@ var nozzleLibrary =[ {
     "OAL": 3.1,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": 2.06,
     "F": "0.375-0.5"
   },
@@ -1658,7 +1659,7 @@ var nozzleLibrary =[ {
     "OAL": 3.1,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.5,
     "E": 2.06,
     "F": "0.375-0.5"
   },
@@ -1674,7 +1675,7 @@ var nozzleLibrary =[ {
     "OAL": 3.5,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.5,
     "F": "0.375-0.5"
   },
@@ -1690,7 +1691,7 @@ var nozzleLibrary =[ {
     "OAL": 3.5,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.5,
     "F": "0.375-0.5"
   },
@@ -1706,7 +1707,7 @@ var nozzleLibrary =[ {
     "OAL": 3.5,
     "OD": 0.88,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.5,
     "F": "0.375-0.5"
   },
@@ -1722,7 +1723,7 @@ var nozzleLibrary =[ {
     "OAL": 4.05,
     "OD": 1.25,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.75,
     "F": "0.375-0.5"
   },
@@ -1738,7 +1739,7 @@ var nozzleLibrary =[ {
     "OAL": 4.05,
     "OD": 1.25,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.75,
     "F": "0.375-0.5"
   },
@@ -1754,7 +1755,7 @@ var nozzleLibrary =[ {
     "OAL": 4.05,
     "OD": 1.25,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.75,
     "F": "0.375-0.5"
   },
@@ -1770,7 +1771,7 @@ var nozzleLibrary =[ {
     "OAL": 4.05,
     "OD": 1.25,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.75,
     "F": "0.375-0.5"
   },
@@ -1786,7 +1787,7 @@ var nozzleLibrary =[ {
     "OAL": 4.05,
     "OD": 1.25,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.75,
     "F": "0.375-0.5"
   },
@@ -1802,7 +1803,7 @@ var nozzleLibrary =[ {
     "OAL": 4.75,
     "OD": 1.62,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.94,
     "F": "0.375-0.5"
   },
@@ -1818,7 +1819,7 @@ var nozzleLibrary =[ {
     "OAL": 4.75,
     "OD": 1.62,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.94,
     "F": "0.375-0.5"
   },
@@ -1834,7 +1835,7 @@ var nozzleLibrary =[ {
     "OAL": 4.75,
     "OD": 1.62,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.94,
     "F": "0.375-0.5"
   },
@@ -1850,7 +1851,7 @@ var nozzleLibrary =[ {
     "OAL": 4.75,
     "OD": 1.62,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.94,
     "F": "0.375-0.5"
   },
@@ -1866,7 +1867,7 @@ var nozzleLibrary =[ {
     "OAL": 4.75,
     "OD": 1.62,
     "IDTol": "*",
-    "inletDiameter": "*",
+    "inletDiameter": 0.625,
     "E": 2.94,
     "F": "0.375-0.5"
   },
@@ -1882,7 +1883,7 @@ var nozzleLibrary =[ {
     "OAL": 3.325,
     "OD": 3.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1898,7 +1899,7 @@ var nozzleLibrary =[ {
     "OAL": 3.325,
     "OD": 3.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1914,7 +1915,7 @@ var nozzleLibrary =[ {
     "OAL": 3.325,
     "OD": 3.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1930,7 +1931,7 @@ var nozzleLibrary =[ {
     "OAL": 3.325,
     "OD": 3.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1946,7 +1947,7 @@ var nozzleLibrary =[ {
     "OAL": 3.915,
     "OD": 4,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1962,7 +1963,7 @@ var nozzleLibrary =[ {
     "OAL": 3.915,
     "OD": 4,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1978,7 +1979,7 @@ var nozzleLibrary =[ {
     "OAL": 3.915,
     "OD": 4,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -1994,7 +1995,7 @@ var nozzleLibrary =[ {
     "OAL": 3.915,
     "OD": 4,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2010,7 +2011,7 @@ var nozzleLibrary =[ {
     "OAL": 4.13,
     "OD": 4.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2026,7 +2027,7 @@ var nozzleLibrary =[ {
     "OAL": 4.13,
     "OD": 4.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2042,7 +2043,7 @@ var nozzleLibrary =[ {
     "OAL": 4.13,
     "OD": 4.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2058,7 +2059,7 @@ var nozzleLibrary =[ {
     "OAL": 4.13,
     "OD": 4.5,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2074,7 +2075,7 @@ var nozzleLibrary =[ {
     "OAL": 4.37,
     "OD": 4.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2090,7 +2091,7 @@ var nozzleLibrary =[ {
     "OAL": 4.37,
     "OD": 4.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2106,7 +2107,7 @@ var nozzleLibrary =[ {
     "OAL": 4.37,
     "OD": 4.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },
@@ -2122,7 +2123,7 @@ var nozzleLibrary =[ {
     "OAL": 4.37,
     "OD": 4.75,
     "IDTol": "1.623-1.625",
-    "inletDiameter": 1.44,
+    "inletDiameter": 1.625,
     "E": "",
     "F": ""
   },

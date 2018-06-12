@@ -74,7 +74,7 @@ filterTest = function(el) {
   	var isValid = true
   	arr.forEach(function(element){
   		// console.log("el2 = " + element[0]);
-  		if(element[0] != null && element[0] != undefined  && element[0] != "any"){
+  		if(element[0] != null && element[0] != undefined  && element[0] != "any" && element[0].toLowerCase() != "select"){
   			// console.log(element[0] + " does not equal 'any'");
 
   			if(element[0] != element[1]){
