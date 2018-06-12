@@ -31,7 +31,7 @@
 									<div class="col-sm-6 form-group">
 										<label for="distType">Distributor Type:</label>
 										<select id="distType" name="distType" class="form-control">
-											<option value="either" selected>Either</option>
+											<option value="any" selected>Either</option>
 											<option value="nozzle">Nozzle</option>s
 											<option value="venturi">Venturi</option>
 										</select>						
@@ -40,7 +40,7 @@
 									<div class="col-sm-6 form-group">
 										<label for="inletType">Inlet Type:</label>
 										<select id="inletType" name="inletType" class="form-control">
-											<option value="anyKind" selected>Any Kind</option>
+											<option value="any" selected>Any Kind</option>
 											<option value="solderODM">Solder (ODM)</option>
 											<option value="solderIDM">Solder (IDM)</option>
 											<option value="flare">Flare</option>
@@ -50,11 +50,11 @@
 									<div class="col-sm-6 form-group">
 										<label for="inletSize">Inlet Size (inch):</label>
 										<select id="inletSize" name="inletSize" class="form-control">
-											<option value="" selected hidden>Select</option>
-											<option value=.375>3/8</option>
-											<option value=.500>1/2</option>
-											<option value=.625>5/8</option>
-											<option value=.875>7/8</option>
+											<option value="any" selected hidden>Select</option>
+											<option value=0.375>3/8</option>
+											<option value=0.500>1/2</option>
+											<option value=0.625>5/8</option>
+											<option value=0.875>7/8</option>
 											<option value=1.125>1-1/8</option>
 											<option value=1.375>1-3/8</option>
 											<option value=1.625>1-5/8</option>
@@ -69,27 +69,27 @@
 									<div class="col-sm-6 form-group">
 										<label for="tubingOD">Distributor Tubing OD (inch):</label>
 										<select id="tubingOD" name="tubingOD" class="form-control">
-											<option value="" selected hidden>Select</option>
-											<option value=.156>5/32</option>
-											<option value=.188>3/16</option>
-											<option value=.250>1/4</option>
-											<option value=.313>5/16</option>
-											<option value=.375>3/8</option>
-											<option value=.500>1/2</option>
+											<option value="any" selected hidden>Select</option>
+											<option value=0.156>5/32</option>
+											<option value=0.188>3/16</option>
+											<option value=0.250>1/4</option>
+											<option value=0.313>5/16</option>
+											<option value=0.375>3/8</option>
+											<option value=0.500>1/2</option>
 										</select>						
 									</div>	
 
 									<div class="col-sm-6 form-group">
 										<label for="nozzleSize">Nozzle Orifice Size:</label>
 										<select id="nozzleSize" name="nozzleSize" class="form-control">
-											<option value="" selected hidden>Select</option>
-											<option value=.110>1/9</option>
-											<option value=.167>1/6</option>
-											<option value=.250>1/4</option>
-											<option value=.333>1/3</option>
-											<option value=.500>1/2</option>
-											<option value=.667>2/3</option>
-											<option value=.750>3/4</option>
+											<option value="any" selected hidden>Select</option>
+											<option value=0.110>1/9</option>
+											<option value=0.167>1/6</option>
+											<option value=0.250>1/4</option>
+											<option value=0.333>1/3</option>
+											<option value=0.500>1/2</option>
+											<option value=0.667>2/3</option>
+											<option value=0.750>3/4</option>
 											<option value=1.00>1</option>
 											<option value=1.50>1-1/2</option>
 											<option value=1.75>1-3/4</option>
@@ -119,7 +119,7 @@
 									<div class="col-sm-6 form-group">
 										<label for="nozzleType">Nozzle Type:</label>
 										<select id="nozzleType" name="nozzleType" class="form-control">
-											<option value="" selected hidden>Select</option>
+											<option value="any" selected hidden>Select</option>
 											<option value="permanent">Permanent</option>
 											<option value="replaceable">Replaceable</option>
 										</select>						
@@ -128,14 +128,14 @@
 									<div class="col-sm-6 form-group">
 										<label for="sidePort">Side Port:</label>
 										<select id="sidePort" name="sidePort" class="form-control">
-											<option value="none" selected>None</option>
-											<option value="integral">Integral</option>
-											<option value="auxiliary">Auxiliary</option>
+											<option value="no" selected>None</option>
+											<option value="yes">Integral</option>
+											<option value="no">Auxiliary</option>
 										</select>						
 									</div>	
 
 									<div class="col-sm-6">
-										<button type="select" class="btn btn-primary">Select Distributor</button>
+										<button type="select" id="distSelectBtn" class="btn btn-primary">Select Distributor</button>
 									</div>																
 									</form>
 								</div>
@@ -152,12 +152,12 @@
 										<select id="refrgType" name="refrgType" class="form-control">
 											<option value="R-12" selected>R-12</option>
 											<option value="R-22" selected>R-22</option>
-											<option value="R-134a" selected>R-134a</option>
-											<option value="R-401a" selected>R-401a</option>
-											<option value="R-402a" selected>R-402a</option>
-											<option value="R-404a" selected>R-404a</option>
-											<option value="R-407c" selected>R-407c</option>
-											<option value="R-410a" selected>R-410a</option>
+											<option value="R-134A" selected>R-134a</option>
+											<option value="R-401A" selected>R-401a</option>
+											<option value="R-402A" selected>R-402a</option>
+											<option value="R-404A" selected>R-404a</option>
+											<option value="R-407C" selected>R-407c</option>
+											<option value="R-410A" selected>R-410a</option>
 											<option value="R-502" selected>R-502</option>
 											<option value="R-507" selected>R-507</option>
 										</select>						
@@ -321,7 +321,7 @@
 										<input type="text" id="distPartNumber" name="distPartNumber" class="form-control">					
 									</div>
 									<div class="col-sm-6">
-										<button type="select" class="btn btn-primary">Rate distributor for properties listed</button>
+										<button type="button" id="distSelectBtn">Rate distributor for properties listed</button>
 									</div>	
 									</form>	
 								</div>

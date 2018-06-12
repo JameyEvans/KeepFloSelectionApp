@@ -126,14 +126,16 @@ function ErrorText(e) {
     }
     console.log("Error encountered: " + c);
 }
-exports.ErrorText = ErrorText;
-function StdTubeRating(qt, tLiq, length, style, refrgt, outletSize,tSuct) {
+
+function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
     // function assigns value to qt = standard tube rating (circuits) in tons
     // returns 0 if no errors else returns error code
     // outputs tube rating.  Following variables need to be assigned before calling:
     // tLiq, tSuct, length, refrgt, outletSize, style.  qt must be initialized
     var qStd; // std rating (tons) at 40°F evap, 100°F liquid
     var kLiq, kLength, kEvap; //multipliers
+    var qt;
+
     if (tLiq < 10)
         return 105;
     if (tLiq > 130)
@@ -145,7 +147,7 @@ function StdTubeRating(qt, tLiq, length, style, refrgt, outletSize,tSuct) {
     // pressure drop factor for liquid temperatures between 10° and 120°F
     // original data Sporlan Bulletin 20-10 data between 50° and 120°F
     kLiq = 3.7791071 + tLiq * (-0.039410714 + tLiq * 1.1607143E-4);
-    if (style == "N") {
+    if (style == "nozzle") {
         // tubing pressure drop factor for tubing length between 12 and 72 inches
         kLength = 3.0971 * Math.pow(length, -0.33353);
         // tubing pressure drop
@@ -251,7 +253,7 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
     // tubing pressure drop
     if (refrgt == "R-22" || //R-22 is baseline
         refrgt == "R-12" ||
-        refrgt == "R-134a" ||
+        refrgt == "R-134A" ||
         refrgt == "R-401A" ||
         refrgt == "R-407C" ||
         refrgt == "R-410A") {
@@ -328,16 +330,16 @@ function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, q=0, qt) {
     return q;
 }
 
-tLiq = 100;
-tSuct = 40;
-length = 30;
-refrgt = "R-22";
-outletSize = 1 / 4.;
-style = "V";
-orificeSize = 8;
-numberCircuits = 6;
-RateVenturi();
-console.log("Q = " + q);
+// tLiq = 100;
+// tSuct = 40;
+// length = 30;
+// refrgt = "R-22";
+// outletSize = 1 / 4.;
+// style = "V";
+// orificeSize = 8;
+// numberCircuits = 6;
+// RateVenturi();
+// console.log("Q = " + q);
 //function TestPrintEntries() {
 //  var stdTubeRatingValue = StdTubeRating();
 //  csvArr.push([refrgt, outletSize, tSuct, stdTubeRatingValue]);

@@ -1,0 +1,22 @@
+{
+  "name": "keepfloselectionapp",
+  "version": "1.0.0",
+  "description": "KeepFlo Selection Software",
+  "main": "kfApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JameyEvans/KeepFloSelectionApp.git"
+  },
+  "author": "Jamey Evans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JameyEvans/KeepFloSelectionApp/issues"
+  },
+  "homepage": "https://github.com/JameyEvans/KeepFloSelectionApp#readme",
+  "devDependencies": {
+    "excel-as-json": "^2.0.2"
+  }
+}
