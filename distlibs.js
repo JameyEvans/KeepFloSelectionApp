@@ -131,19 +131,19 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
     // function assigns value to qt = standard tube rating (circuits) in tons
     // returns 0 if no errors else returns error code
     // outputs tube rating.  Following variables need to be assigned before calling:
-    // tLiq, tSuct, length, refrgt, outletSize, style.  qt must be initialized
+    // tLiq, tSuct, length, refrgt, outletSize (string), style.  qt must be initialized
     var qStd; // std rating (tons) at 40°F evap, 100°F liquid
     var kLiq, kLength, kEvap; //multipliers
     var qt;
 
     if (tLiq < 10)
-        return 105;
+        return ErrorText(105);
     if (tLiq > 130)
-        return 106;
+        return ErrorText(106);
     if (length < 12)
-        return 107;
+        return ErrorText(107);
     if (length > 72)
-        return 108;
+        return ErrorText(108);
     // pressure drop factor for liquid temperatures between 10° and 120°F
     // original data Sporlan Bulletin 20-10 data between 50° and 120°F
     kLiq = 3.7791071 + tLiq * (-0.039410714 + tLiq * 1.1607143E-4);
@@ -155,7 +155,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
             refrgt == "R-134a" || refrgt == "R-401A" ||
             refrgt == "R-407C" || refrgt == "R-410A") {
             // tubing capacity at 40°F
-            qStd = 64.94034 * Math.pow(outletSize, 2.9194);
+            qStd = 64.94034 * Math.pow(eval(outletSize), 2.9194);
             //tubing capacity for temperatures between 40°F and -40°F
             kEvap = 0.60758064 + tSuct * (8.1076916e-03 + tSuct * 4.6342592e-05);
         }
@@ -175,40 +175,40 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
             refrgt == "R-401A" ||
             refrgt == "R-407C" ||
             refrgt == "R-410A") {
-            if (outletSize == 5 / 32.)
+            if (outletSize == "5/32")
                 qStd = 0.44;
-            else if (outletSize == 3 / 16.)
+            else if (outletSize == "3/16")
                 qStd = 0.90;
-            else if (outletSize == 1 / 4.)
+            else if (outletSize == "1/4")
                 qStd = 1.75;
-            else if (outletSize == 5 / 16.)
+            else if (outletSize == "5/16")
                 qStd = 3.5;
-            else if (outletSize == 3 / 8.)
+            else if (outletSize == "3/8")
                 qStd = 6.125;
-            else if (outletSize == 1 / 2.)
+            else if (outletSize == "1/2")
                 qStd = 8.75;
             else
-                return 109;
+                return ErrorText(109);
             kEvap = 0.45259728 + tSuct * (0.0098863610 + tSuct * 9.334425E-5);
         }
         else if (refrgt == "R-502" ||
             refrgt == "R-402A" ||
             refrgt == "R-404A" ||
             refrgt == "R-507") {
-            if (outletSize == 5 / 32.)
+            if (outletSize == "5/32")
                 qStd = 0.225;
-            else if (outletSize == 3 / 16.)
+            else if (outletSize == "3/16")
                 qStd = 0.45;
-            else if (outletSize == 1 / 4.)
+            else if (outletSize == "1/4")
                 qStd = 0.9;
-            else if (outletSize == 5 / 16.)
+            else if (outletSize == "5/16")
                 qStd = 1.8;
-            else if (outletSize == 3 / 8.)
+            else if (outletSize == "3/8")
                 qStd = 3.15;
-            else if (outletSize == 1 / 2.)
+            else if (outletSize == "1/2")
                 qStd = 4.5;
             else
-                return 110;
+                return ErrorText(110);
             kEvap = 0.42984171 + tSuct * (0.010111100 + tSuct * 1.0714286E-4);
         }
     }
@@ -241,12 +241,11 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
     // qt needs to be defined but doesn't need a value
     var n1, kEvap, f1, qt;
     if (tLiq < 10) {
-        ErrorText(111);
-        return 111;
+        return ErrorText(111);
     }
     if (tLiq > 120) {
         ErrorText(111);
-        return 112; //liquid temp needs to be between 10 and 120
+        return ErrorText(112); //liquid temp needs to be between 10 and 120
     }
     // pressure drop factor for liquid temperatures between 10°F and 120°F
     f1 = 3.7791071 + tLiq * (-0.039410714 + tLiq * 1.1607143E-4);
@@ -278,7 +277,7 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
         case "R-12":
             kRef = 0.56;
             break;
-        case "R-134a":
+        case "R-134A":
             kRef = 0.77;
             break; // changed 12-2005
         case "R-401A":
@@ -301,7 +300,7 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
             break;
         default:
             ErrorText(99101);
-            return 99101; // refrigerant not found
+            return ErrorText(99101); // refrigerant not found
     }
     // rated capacity at actual suction and liquid temperature
     qn = n1 * kEvap * f1 * kRef;

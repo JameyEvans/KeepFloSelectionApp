@@ -122,7 +122,7 @@ function genHTMLFormData(){
 				"<td>" + fmTubeLength + "</td>" +
 				"<td>dP(total)</td>" + 
 				"<td>dP(tubes)</td>" +
-				"<td>% Tube Loading</td>" +
+				"<td>" + StdTubeRating(fmLiquidTemp, fmTubeLength, el.bodyStyle, fmRefrgt, el.circuitSize, fmSuctionTemp) + "</td>" +
 				"<td>dP (nozzle/body)</td>" +
 				"<td>% Dist Loading</td>" +
 				"<td>" + el.inletDiameter + "</td>" +
