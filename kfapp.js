@@ -5,37 +5,66 @@ dataObject = nozzleLibrary;
 
 
 var fmDistType, fmInletType, fmInletSize, fmCircuitCt;
-var fmStrCircuitSize, fmFloatCircuitSize, fmOrificeSize, fmNozzleType, fmHasSidePort;
+var fmStrCircuitSize, fmFloatCircuitSize, fmOrificeSize, fmStrOrificeSize, fmNozzleType, fmHasSidePort;
 var fmRefrgt, fmCapacity, fmSuctionTemp, fmLiquidTemp;
 var fmTubeLength, fmSelectBtn;
 var requiredForms, isValid;
 var tableSelector, tableHTML;
+
+var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667, 
+					"1/4" : 0.25, "1/3" : 0.3333, 
+					"1/2" : 0.5, "3/4" : 0.75, 
+					"1" : 1, "1-1/2" : 1.5,
+					"2" : 2, "2-1/2" : 2.5, 
+					"3" : 3, "4" : 4, 
+					"5" : 5, "6" : 6, 
+					"8" : 8, "10" : 10, 
+					"12" : 12, "15" : 15, 
+					"17" : 17, "20" : 20, 
+					"25" : 25, "30" : 30, 
+					"35" : 35, "40" : 40, 
+					"50" : 50, "68" : 68,
+					"120" : 120 
+					};
 
 fmSelectBtn = document.querySelector("#distSelectBtn");
 tableSelector = document.querySelector("#distContents");
 
 
 
-  fmSelectBtn.addEventListener("click", function(event) {
+fmSelectBtn.addEventListener("click", function (event) {
+    //not sure why the preventDefault works but it prevents errors.
+  	event.preventDefault();
+	// when event button is clicked then assign values to variables.
+	updateFormValues();
 
-  		event.preventDefault();
-	    // when event button is clicked then assign values to variables.
-	    updateFormValues();
-		console.log("button was clicked");
-		requiredForms = [fmCircuitCt, fmRefrgt, fmCapacity, fmSuctionTemp, fmLiquidTemp, fmTubeLength];
-		isValid = true;
-		for (var i = 0; i < requiredForms.length; i++) {
-			if(requiredForms[i] == ""){
-				isValid = false;
-				alert("Missing required values");
-			}
-		};
-		genHTMLFormData();
+    // determine if any required forms are missing data.
+    requiredForms = [[fmCircuitCt, "Circuit Count"], [fmRefrgt, "Refrigerant Type"],
+        [fmCapacity, "Capacity"], [fmSuctionTemp, "Suction Temperature"],
+        [fmLiquidTemp, "Liquid Temperature"], [fmTubeLength, "Distributor Tube Length"]];
+
+    var missingValues = ""
+	for (var i = 0; i < requiredForms.length; i++) {
+        if (requiredForms[i][0] == "") {
+            if (i == 0) {
+                missingValues = requiredForms[i][1];
+            } else {
+                missingValues += ", " + requiredForms[i][1];
+            }
+        }
+    }
+
+    if (missingValues.length == 0) {
+        // if no errors then populate table containing distributor selections
+        genHTMLFormData();
+    } else {
+        alert("The following required fields are missing data: " + missingValues);
+    }
 
   });
 
-function generateNozzlePartNumber(bodyStyle, circuitCt, strCircuitSize){
-	return bodyStyle + "-" + circuitCt + "-" + strCircuitSize;
+function generateNozzlePartNumber(bodyStyle, circuitCt, strCircuitSize, strOrificeSize){
+	return bodyStyle + "-" + circuitCt + "-" + strCircuitSize + "-" + strOrificeSize;
 };
 
 function updateFormValues(){
@@ -46,6 +75,7 @@ function updateFormValues(){
 		fmStrCircuitSize = document.querySelector("#tubingOD").selectedOptions[0].label;
 		fmFloatCircuitSize = document.querySelector("#tubingOD").selectedOptions[0].value;
 		fmOrificeSize = document.querySelector("#nozzleSize").selectedOptions[0].value;
+		fmStrOrificeSize = document.querySelector("#nozzleSize").selectedOptions[0].label;
 		fmNozzleType = document.querySelector("#nozzleType").selectedOptions[0].value;
 		fmHasSidePort = document.querySelector("#sidePort").selectedOptions[0].value;
 		fmRefrgt = document.querySelector("#refrgType").selectedOptions[0].value;
@@ -98,41 +128,120 @@ function genValidDistObjects(){
 	return dataObject.filter(filterTest);
 }
 
+function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length, minNzLoad = 50, maxNzLoad = 150){
+	// returns array of valid orifice sizes	
+
+	var keyList = Object.keys(orificeList);
+	var validKeys = [];
+	var pctLoading, nzlRating;
+
+	if(fmStrOrificeSize.toLowerCase() != "select"){
+		validKeys.push(fmStrOrificeSize);
+	} else{
+		for (var i = 0; i < keyList.length; i++) {
+			nzlRating = StdNozzleRating(refrgt, orificeList[keyList[i]], tLiq, tSuct, length);
+			console.log("Nozzle Rating (" + keyList[i] + ") = " + nzlRating);
+			pctLoading = (sysCapacity / nzlRating) * 100;
+			console.log("Percent loading = " + pctLoading + "%");
+
+			if(pctLoading >= minNzLoad && pctLoading <= maxNzLoad){
+				validKeys.push(keyList[i]);
+			}
+		}
+	}
+	return validKeys;
+}
+
 function genHTMLFormData(){
+	if(fmStrCircuitSize == "Select"){
+		fmStrCircuitSize = SelectTubeSize(fmLiquidTemp, fmTubeLength, "nozzle", fmRefrgt, fmSuctionTemp, fmCapacity, fmCircuitCt);
+	}
+
 	var objArr = genValidDistObjects();
 	var HTMLStr = "";
 	var partNumber;
+	var arrValidNozzle = ["N/A"];
 	//clear html in table body
 	tableSelector.innerHtml = ""
 
+	if(fmDistType != "venturi"){
+		arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad = 50, maxNzLoad = 150);
+	}
+
+
+
 	objArr.forEach(function(el){
-		if(el.type == "nozzle"){
-			partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, fmStrCircuitSize);
-		} else{
-			partNumber = el.bodyStyle;
-		}
-		
-		HTMLStr = HTMLStr + "<tr>" + 
-				"<td>" + el.type + "</td>" +
-				"<td>" + partNumber + "</td>" +
-				"<td>" + fmRefrgt + "</td>" +
-				"<td>" + fmCapacity + "</td>" +
-				"<td>" + fmSuctionTemp + "</td>" +
-				"<td>" + fmLiquidTemp + "</td>" +
-				"<td>" + fmTubeLength + "</td>" +
-				"<td>dP(total)</td>" + 
-				"<td>dP(tubes)</td>" +
-				"<td>" + StdTubeRating(fmLiquidTemp, fmTubeLength, el.bodyStyle, fmRefrgt, el.circuitSize, fmSuctionTemp) + "</td>" +
-				"<td>dP (nozzle/body)</td>" +
-				"<td>% Dist Loading</td>" +
-				"<td>" + el.inletDiameter + "</td>" +
-				"<td>" + fmStrCircuitSize + "</td>" +
-				"<td>" + fmCircuitCt + "</td>" +
-				"<td>Orifice Size</td>" +
-				"<td>Orifice Type</td>" +
-			"</tr>";
+
+		for (var i = 0; i < arrValidNozzle.length; i++) {
+
+			if(el.type == "nozzle"){
+				partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i]);
+
+			} else{
+				partNumber = el.bodyStyle;
+			}
+			var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize,fmSuctionTemp))*100;
+			// pressure drop across tubes assuming 10 psi is 100% loading
+			var dpTubes = percentTubeLoading / 10;
+
+
+
+			HTMLStr = HTMLStr + "<tr>" + 
+					"<td class=\"style\">" + el.type + "</td>" +
+					"<td class=\"partNumber>\">" + partNumber + "</td>" +
+					"<td class=\"refrigerant>\">" + fmRefrgt + "</td>" +
+					"<td class=\"capacity>\">" + fmCapacity + "</td>" +
+					"<td class=\"suctionTemp>\">" + fmSuctionTemp + "</td>" +
+					"<td class=\"liquidTemp>\">" + fmLiquidTemp + "</td>" +
+					"<td class=\"tubeLength>\">" + fmTubeLength + "</td>" +
+					"<td class=\"dpTotal>\">dP(total)</td>" + 
+					"<td class=\"dpTubes>\">" + dpTubes.toFixed(2) + "</td>" +
+					"<td class=\"pctTubeLoading>\">" + percentTubeLoading.toFixed(1) + "</td>" +
+					"<td class=\"dpNozzle\">dP (nozzle/body)</td>" +
+					"<td class=\"pctDistLoading\">% Dist Loading</td>" +
+					"<td class=\"inletSize\">" + el.inletDiameter + "</td>" +
+					"<td class=\"outletSize\">" + fmStrCircuitSize + "</td>" +
+					"<td class=\"circuitCount\">" + fmCircuitCt + "</td>" +
+					"<td class=\"orificeSize\">" + arrValidNozzle[i] + "</td>" +
+					"<td class=\"orificeType\">Orifice Type</td>" +
+				"</tr>";				
+			}
 	});
 
 	tableSelector.innerHTML = HTMLStr;
 };
 
+// -----------------------------------------------------
+// -----------------------------------------------------
+// fix header bar position once it reaches certain point
+// sort of like freeze-pane in Excel
+
+// // When the user scrolls the page, execute freezePane function 
+// window.onscroll = function() {freezePane()};
+
+// // Get the header
+// var header = document.getElementById("myHeader");
+
+// // Get the offset position of the navbar
+// var sticky = header.getBoundingClientRect().top;
+
+// // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function freezePane() {
+//   if (window.pageYOffset > sticky) {
+//     header.classList.add("sticky");
+//     console.log("add sticky");
+//   } else {
+//     header.classList.remove("sticky");
+//     console.log("remove sticky");
+//   }
+//}
+
+//configure table with fixed header and scrolling rows
+//$('#dataTable').DataTable({
+//    scrollY: 400,
+//    scrollCollapse: true,
+//    paging: false,
+//    searching: false,
+//    ordering: false,
+//    info: false
+//});

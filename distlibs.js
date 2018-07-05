@@ -152,7 +152,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
         kLength = 3.0971 * Math.pow(length, -0.33353);
         // tubing pressure drop
         if (refrgt == "R-22" || refrgt == "R-12" ||
-            refrgt == "R-134a" || refrgt == "R-401A" ||
+            refrgt == "R-134A" || refrgt == "R-401A" ||
             refrgt == "R-407C" || refrgt == "R-410A") {
             // tubing capacity at 40°F
             qStd = 64.94034 * Math.pow(eval(outletSize), 2.9194);
@@ -161,7 +161,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
         }
         else if (refrgt == "R-502" || refrgt == "R-402A" ||
             refrgt == "R-404A" || refrgt == "R-507") {
-            qStd = 43.51153 * Math.pow(outletSize, 2.91);
+            qStd = 43.51153 * Math.pow(eval(outletSize), 2.91);
             kEvap = .57194756 + tSuct * 8.6468732e-03 + tSuct * (5.0839548e-05);
         }
     }
@@ -171,7 +171,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
         // tubing capacity at 40°F
         if (refrgt == "R-22" ||
             refrgt == "R-12" ||
-            refrgt == "R-134a" ||
+            refrgt == "R-134A" ||
             refrgt == "R-401A" ||
             refrgt == "R-407C" ||
             refrgt == "R-410A") {
@@ -215,7 +215,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
     var kRef = 1.0;
     if (refrgt == "R-12")
         kRef = 0.56;
-    if (refrgt == "R-134a")
+    if (refrgt == "R-134A")
         kRef = 0.77; // was 1.09
     if (refrgt == "R-401A")
         kRef = 0.65; // was 0.95// was 1.01
@@ -234,10 +234,26 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
     return qt;
 }
 
-function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, style) {
+function SelectTubeSize(tLiq, length, style, refrgt, tSuct, capacity, circuitCount){
+    var tubeSizeList = ["5/32", "3/16", "1/4", "5/16", "3/8", "1/2"];
+    var bestSize, bestValue=0, curVal;
+    for (var i = 0; i < tubeSizeList.length; i++) {
+        // determine percent loading for tube size
+        curVal = (capacity / circuitCount) / StdTubeRating(tLiq, length, style, refrgt, tubeSizeList[i],tSuct)
+        //console.log("tube size: " + tubeSizeList[i] + "; percent tube loading = " + curVal);
+        // if percent loading is closer to 100% than previous best then select as new best
+        if(Math.abs(1-curVal) < Math.abs(1-bestValue)){
+            bestValue = curVal;
+            bestSize = tubeSizeList[i];
+        }
+    }
+    return bestSize;
+}
+
+function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length) {
     // returns nozzle rating in tons of refrigeration
     // following variable need to be assigned values before calling function:
-    // refrgt, orificeSize, tLiq, tSuct, length, refrgt, outletStyle, style
+    // refrgt, orificeSize, tLiq, tSuct, length, refrgt,style
     // qt needs to be defined but doesn't need a value
     var n1, kEvap, f1, qt;
     if (tLiq < 10) {
@@ -306,7 +322,7 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length, outletStyle, 
     qn = n1 * kEvap * f1 * kRef;
     return qn;
 }
-function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, q=0, qt) {
+function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, numberCircuits, q=0, qt) {
     // assigns values to q (capacity), plt (percent tube loading), pln (percent nozzle loading)
     // dpn (pressure drop nozzle), dpt (pressure drop tubes), and dp (total pressure drop)
     // returns 0 if no errors, else returns error code
