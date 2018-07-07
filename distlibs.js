@@ -322,6 +322,33 @@ function StdNozzleRating(refrgt, orificeSize, tLiq, tSuct, length) {
     qn = n1 * kEvap * f1 * kRef;
     return qn;
 }
+
+function pctLoadToDP(refrgt, pctNzLoading) {
+    var k;  //k = standard pressure drop for that refrigerant across nozzle
+    switch (refrgt) {
+        case "R-410A":
+            k = 35.0;
+            break; // was 1.19
+        case "R-22":
+        case "R-12":
+        case "R-404A":
+        case "R-407C":
+        case "R-507":
+            k = 25.0;
+            break;
+        case "R-134A":
+        case "R-401A":
+            k = 15.0;
+            break; 
+        case "R-402A":
+            k = 12.2;
+            break;
+        default:
+            ErrorText(99101);
+            return ErrorText(99101); // refrigerant not found
+    }
+    return k * (pctNzLoading/100);
+}
 function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, numberCircuits, q=0, qt) {
     // assigns values to q (capacity), plt (percent tube loading), pln (percent nozzle loading)
     // dpn (pressure drop nozzle), dpt (pressure drop tubes), and dp (total pressure drop)

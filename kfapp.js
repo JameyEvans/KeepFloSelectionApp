@@ -1,8 +1,5 @@
 var dataObject;
-dataObject = nozzleLibrary;
-
-
-
+dataObject = distributorLibrary;
 
 var fmDistType, fmInletType, fmInletSize, fmCircuitCt;
 var fmStrCircuitSize, fmFloatCircuitSize, fmOrificeSize, fmStrOrificeSize, fmNozzleType, fmHasSidePort;
@@ -128,24 +125,27 @@ function genValidDistObjects(){
 	return dataObject.filter(filterTest);
 }
 
-function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length, minNzLoad = 50, maxNzLoad = 150){
-	// returns array of valid orifice sizes	
+function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length, minNzLoad = 75, maxNzLoad = 125){
+	// returns array of valid orifice sizes for given performance characteristics.	
+    // min/maxNzLoad = percent nozzle loading for given specs.
 
 	var keyList = Object.keys(orificeList);
 	var validKeys = [];
 	var pctLoading, nzlRating;
 
-	if(fmStrOrificeSize.toLowerCase() != "select"){
-		validKeys.push(fmStrOrificeSize);
+    if (fmStrOrificeSize.toLowerCase() != "select") {
+        nzlRating = StdNozzleRating(refrgt, orificeList[keyList[fmStrOrificeSize]], tLiq, tSuct, length);
+        pctLoading = (sysCapacity / nzlRating) * 100;
+		validKeys.push([fmStrOrificeSize, nzlRating, pctLoading]);  // was push(fmStrOrificeSize); 07.06.18
 	} else{
 		for (var i = 0; i < keyList.length; i++) {
 			nzlRating = StdNozzleRating(refrgt, orificeList[keyList[i]], tLiq, tSuct, length);
-			console.log("Nozzle Rating (" + keyList[i] + ") = " + nzlRating);
+			//console.log("Nozzle Rating (" + keyList[i] + ") = " + nzlRating);
 			pctLoading = (sysCapacity / nzlRating) * 100;
-			console.log("Percent loading = " + pctLoading + "%");
+			//console.log("Percent loading = " + pctLoading + "%");
 
 			if(pctLoading >= minNzLoad && pctLoading <= maxNzLoad){
-				validKeys.push(keyList[i]);
+				validKeys.push([keyList[i], nzlRating, pctLoading]);  // was push(keyList[i]); 07.06.18
 			}
 		}
 	}
@@ -160,7 +160,8 @@ function genHTMLFormData(){
 	var objArr = genValidDistObjects();
 	var HTMLStr = "";
 	var partNumber;
-	var arrValidNozzle = ["N/A"];
+    var arrValidNozzle = [["N/A",,]];
+    var nzlRating, pctNzLoading, dpNozzle;
 	//clear html in table body
 	tableSelector.innerHtml = ""
 
@@ -175,14 +176,21 @@ function genHTMLFormData(){
 		for (var i = 0; i < arrValidNozzle.length; i++) {
 
 			if(el.type == "nozzle"){
-				partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i]);
+                partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
+                nzlRating = arrValidNozzle[i][1]; //nozzle rating in tons
+                pctNzLoading = arrValidNozzle[i][2]; // percent loading of nozzle
+                dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading);  // pressure drop across nozzle
+                
 
 			} else{
-				partNumber = el.bodyStyle;
+                partNumber = el.bodyStyle;
+                pctNzLoading = "venturi";  // this will need to be updated
+                dpNozzle = "venturi"; // this will need to be updated
 			}
 			var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize,fmSuctionTemp))*100;
 			// pressure drop across tubes assuming 10 psi is 100% loading
-			var dpTubes = percentTubeLoading / 10;
+            var dpTubes = percentTubeLoading / 10;
+            
 
 
 
@@ -194,54 +202,21 @@ function genHTMLFormData(){
 					"<td class=\"suctionTemp>\">" + fmSuctionTemp + "</td>" +
 					"<td class=\"liquidTemp>\">" + fmLiquidTemp + "</td>" +
 					"<td class=\"tubeLength>\">" + fmTubeLength + "</td>" +
-					"<td class=\"dpTotal>\">dP(total)</td>" + 
-					"<td class=\"dpTubes>\">" + dpTubes.toFixed(2) + "</td>" +
-					"<td class=\"pctTubeLoading>\">" + percentTubeLoading.toFixed(1) + "</td>" +
-					"<td class=\"dpNozzle\">dP (nozzle/body)</td>" +
-					"<td class=\"pctDistLoading\">% Dist Loading</td>" +
+					"<td class=\"dpTotal>\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" + 
+					"<td class=\"dpTubes>\">" + dpTubes.toFixed(1) + "</td>" +
+					"<td class=\"pctTubeLoading>\">" + percentTubeLoading.toFixed(1) + "%</td>" +
+					"<td class=\"dpNozzle\">" + dpNozzle.toFixed(1) + "</td>" +
+					"<td class=\"pctDistLoading\">" + pctNzLoading.toFixed(1) + "%</td>" +
 					"<td class=\"inletSize\">" + el.inletDiameter + "</td>" +
 					"<td class=\"outletSize\">" + fmStrCircuitSize + "</td>" +
 					"<td class=\"circuitCount\">" + fmCircuitCt + "</td>" +
-					"<td class=\"orificeSize\">" + arrValidNozzle[i] + "</td>" +
-					"<td class=\"orificeType\">Orifice Type</td>" +
+					"<td class=\"orificeSize\">" + arrValidNozzle[i][0] + "</td>" +
+					"<td class=\"orificeType\">" + el.nozzleType +  "</td>" +
 				"</tr>";				
 			}
 	});
-
+    if (objArr.length == 0) {
+        HTMLStr = "<tr><td colspan = \"17\" > No suitable distributors were detected</td></tr>";
+    }
 	tableSelector.innerHTML = HTMLStr;
 };
-
-// -----------------------------------------------------
-// -----------------------------------------------------
-// fix header bar position once it reaches certain point
-// sort of like freeze-pane in Excel
-
-// // When the user scrolls the page, execute freezePane function 
-// window.onscroll = function() {freezePane()};
-
-// // Get the header
-// var header = document.getElementById("myHeader");
-
-// // Get the offset position of the navbar
-// var sticky = header.getBoundingClientRect().top;
-
-// // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-// function freezePane() {
-//   if (window.pageYOffset > sticky) {
-//     header.classList.add("sticky");
-//     console.log("add sticky");
-//   } else {
-//     header.classList.remove("sticky");
-//     console.log("remove sticky");
-//   }
-//}
-
-//configure table with fixed header and scrolling rows
-//$('#dataTable').DataTable({
-//    scrollY: 400,
-//    scrollCollapse: true,
-//    paging: false,
-//    searching: false,
-//    ordering: false,
-//    info: false
-//});
