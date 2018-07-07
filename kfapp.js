@@ -105,7 +105,7 @@ filterTest = function(el) {
   			// console.log(element[0] + " does not equal 'any'");
 
   			if(element[0] != element[1]){
-  				console.log(element[0] + " does not equal " + element[1]);
+  				//console.log(element[0] + " does not equal " + element[1]);
   				isValid = false
   			}
   		}
@@ -196,15 +196,15 @@ function genHTMLFormData(){
 
 			HTMLStr = HTMLStr + "<tr>" + 
 					"<td class=\"style\">" + el.type + "</td>" +
-					"<td class=\"partNumber>\">" + partNumber + "</td>" +
-					"<td class=\"refrigerant>\">" + fmRefrgt + "</td>" +
-					"<td class=\"capacity>\">" + fmCapacity + "</td>" +
-					"<td class=\"suctionTemp>\">" + fmSuctionTemp + "</td>" +
-					"<td class=\"liquidTemp>\">" + fmLiquidTemp + "</td>" +
-					"<td class=\"tubeLength>\">" + fmTubeLength + "</td>" +
-					"<td class=\"dpTotal>\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" + 
-					"<td class=\"dpTubes>\">" + dpTubes.toFixed(1) + "</td>" +
-					"<td class=\"pctTubeLoading>\">" + percentTubeLoading.toFixed(1) + "%</td>" +
+					"<td class=\"partNumber\">" + partNumber + "</td>" +
+					"<td class=\"refrigerant\">" + fmRefrgt + "</td>" +
+					"<td class=\"capacity\">" + fmCapacity + "</td>" +
+					"<td class=\"suctionTemp\">" + fmSuctionTemp + "</td>" +
+					"<td class=\"liquidTemp\">" + fmLiquidTemp + "</td>" +
+					"<td class=\"tubeLength\">" + fmTubeLength + "</td>" +
+					"<td class=\"dpTotal\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" + 
+					"<td class=\"dpTubes\">" + dpTubes.toFixed(1) + "</td>" +
+					"<td class=\"pctTubeLoading\">" + percentTubeLoading.toFixed(1) + "%</td>" +
 					"<td class=\"dpNozzle\">" + dpNozzle.toFixed(1) + "</td>" +
 					"<td class=\"pctDistLoading\">" + pctNzLoading.toFixed(1) + "%</td>" +
 					"<td class=\"inletSize\">" + el.inletDiameter + "</td>" +
