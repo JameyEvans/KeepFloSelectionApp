@@ -91,7 +91,6 @@ function collapseTable(){
 function toggleAllFields(){
 	/*this.isAllShown =! this.isAllShown;*/
 	$(".hideMyShit").toggleClass("toggleable", this.isAllShown);
-
 }
 
 function updateFormValues(){
