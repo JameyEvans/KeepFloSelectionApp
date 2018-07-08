@@ -6,7 +6,7 @@ var fmStrCircuitSize, fmFloatCircuitSize, fmOrificeSize, fmStrOrificeSize, fmNoz
 var fmRefrgt, fmCapacity, fmSuctionTemp, fmLiquidTemp;
 var fmTubeLength, fmSelectBtn;
 isCollapsed = false;
-var isAllShown = false;
+var isAllShown = true;
 var fields = [];
 var requiredForms, isValid;
 
@@ -59,6 +59,7 @@ fmSelectBtn.addEventListener("click", function (event) {
     if (missingValues.length == 0) {
         // if no errors then populate table containing distributor selections
         genHTMLFormData();
+        toggleAllFields();
     } else {
         alert("The following required fields are missing data: " + missingValues);
     }
@@ -72,29 +73,25 @@ function collapseTable(){
     this.isCollapsed =! this.isCollapsed;
     var element = document.getElementById("collapseIconForDataTable");
     if(this.isCollapsed){
-        var temp = document.getElementById("collapseTable");
-        temp.classList.remove("show");
-        element.classList.remove("glyphicon-minus");
-        element.classList.add("glyphicon-plus");
-    } else {
+        /*var temp = document.getElementById("collapseTable");
+        temp.classList.remove("show");*/
+        this.isAllShown =! this.isAllShown;
         element.classList.remove("glyphicon-plus");
         element.classList.add("glyphicon-minus");
+        toggleAllFields();
+    } else {
+        this.isAllShown =! this.isAllShown;
+        toggleAllFields();
+        element.classList.remove("glyphicon-minus");
+        element.classList.add("glyphicon-plus");
     }
 
 }
 
 function toggleAllFields(){
-	this.isAllShown =! this.isAllShown;
+	/*this.isAllShown =! this.isAllShown;*/
+	$(".hideMyShit").toggleClass("toggleable", this.isAllShown);
 
-    let handleException = function () {
-        //check state and try to get data.
-        //alert user of invalid request.
-    };
-
-	if(this.isAllShown){
-		//todo handle data for all
-	}
-	$(".hideMyShit").toggleClass("toggleable");
 }
 
 function updateFormValues(){
@@ -227,7 +224,7 @@ function genHTMLFormData(){
 
 
 
-			HTMLStr = HTMLStr + "<tr>" + 
+			HTMLStr = HTMLStr + "<tr>" +
 					"<td class=\"style\">" + el.type + "</td>" +
 					"<td class=\"partNumber \">" + partNumber + "</td>" +
 					"<td class=\"refrigerant\">" + fmRefrgt + "</td>" +
@@ -245,7 +242,7 @@ function genHTMLFormData(){
 					"<td class=\"circuitCount hideMyShit\">" + fmCircuitCt + "</td>" +
 					"<td class=\"orificeSize hideMyShit\">" + arrValidNozzle[i][0] + "</td>" +
 					"<td class=\"orificeType hideMyShit\">" + el.nozzleType +  "</td>" +
-				"</tr>";				
+				"</tr>";
 			}
 	});
     if (objArr.length === 0) {
