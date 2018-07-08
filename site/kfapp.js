@@ -9,7 +9,7 @@ isCollapsed = false;
 var isAllShown = true;
 var fields = [];
 var requiredForms, isValid;
-
+var testItem = "This is a test";
 var tableSelector, tableHTML;
 
 var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667,

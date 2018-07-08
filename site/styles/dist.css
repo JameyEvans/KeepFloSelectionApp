@@ -20,11 +20,14 @@ label{
 }
 
 table{
-	margin-top:50px;
 	text-align: center;
 	table-layout: auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: medium;
+}
+
+#myHeader{
+	background-color: whitesmoke;
 }
 
 th{
