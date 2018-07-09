@@ -19,12 +19,11 @@ label{
 	font-size:90%;
 }
 
-table{
-	text-align: center;
+/*table{
 	table-layout: auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: medium;
-}
+}*/
 
 #myHeader{
 	background-color: whitesmoke;
@@ -52,16 +51,42 @@ td{
 	display: none;
 }
 
-
-/* The sticky class is added to the header with JS when it 
-   reaches its scroll position 
-.sticky{
-	position: fixed;
+.table-fixed thead {
+	width: 97%;
 }
 
- /*Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-/*
-.sticky + .content {
-  padding-top: 102px;
+table {
+	width: 100%;
 }
-*/
+table td {
+	vertical-align: text-bottom;
+}
+tbody {
+	height: 750px;
+	background-color: lightgray;
+	width:100%;
+	overflow-y: auto;
+	overflow-x: auto;
+	text-align: left;
+	font-size: 90%;
+}
+/*For Sticky Table Headers with scrolling body. width: 5.82% for 17 columns*/
+tbody td, thead th {
+	width: 5.82%;
+	text-align: left;
+	float: left;
+}
+thead,tbody,tr,td,th {display:block;}
+thead {
+	background: #222222;
+	/* fallback */
+}
+thead th {
+	height: 50px;
+}
+tr:after {
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	clear:both;
+}

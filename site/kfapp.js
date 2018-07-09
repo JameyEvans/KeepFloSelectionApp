@@ -90,6 +90,21 @@ function collapseTable(){
 
 function toggleAllFields(){
 	/*this.isAllShown =! this.isAllShown;*/
+   	var el = $("tbody td, thead th");
+
+    if(this.isAllShown){
+		//set width to 5.82% 17 columns
+        console.log("Setting tbody td, thead th {width: 5.82%}");
+		el.css("width", "11%");
+		/*document.getElementById("tbody td").style.width = "5.82%";
+		document.getElementById("thead th").style.width = "5.82%";*/
+	}else{
+        //set width for 6.82% 9 columns
+        console.log("Setting tbody td, thead th {width: 11%}");
+		el.css("width", "5.82%");
+        /*document.getElementById("td").style.width = "7%";
+        document.getElementById("th").style.width = "7%";*/
+    }
 	$(".hideMyShit").toggleClass("toggleable", this.isAllShown);
 }
 
@@ -118,7 +133,7 @@ function updateFormValues(){
 //			 fmOrificeSize, fmNozzleType, fmHasSidePort
 filterTest = function(el) {
 	// callback function for filter.  Assigns criteria to sort data objects.
-	arr = [[fmDistType, el.type], [fmInletType, el.inletType], [fmInletSize, el.inletDiameter], 
+	arr = [[fmDistType, el.type], [fmInletType, el.inletType], [fmInletSize, el.inletDiameter],
 		   [fmStrCircuitSize, el.circuitSize], [fmNozzleType, el.nozzleType], [fmHasSidePort, el.hasSidePort]];
 
 	// if circuit count is outside of min and max conditions return false
@@ -155,7 +170,7 @@ function genValidDistObjects(){
 }
 
 function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length, minNzLoad = 75, maxNzLoad = 125){
-	// returns array of valid orifice sizes for given performance characteristics.	
+	// returns array of valid orifice sizes for given performance characteristics.
     // min/maxNzLoad = percent nozzle loading for given specs.
 
 	var keyList = Object.keys(orificeList);
@@ -209,7 +224,7 @@ function genHTMLFormData(){
                 nzlRating = arrValidNozzle[i][1]; //nozzle rating in tons
                 pctNzLoading = arrValidNozzle[i][2]; // percent loading of nozzle
                 dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading);  // pressure drop across nozzle
-                
+
 
 			} else{
                 partNumber = el.bodyStyle;
@@ -219,7 +234,7 @@ function genHTMLFormData(){
 			var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize,fmSuctionTemp))*100;
 			// pressure drop across tubes assuming 10 psi is 100% loading
             var dpTubes = percentTubeLoading / 10;
-            
+
 
 
 
@@ -231,7 +246,7 @@ function genHTMLFormData(){
 					"<td class=\"suctionTemp hideMyShit\">" + fmSuctionTemp + "</td>" +
 					"<td class=\"liquidTemp hideMyShit\">" + fmLiquidTemp + "</td>" +
 					"<td class=\"tubeLength hideMyShit\">" + fmTubeLength + "</td>" +
-					"<td class=\"dpTotal\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" + 
+					"<td class=\"dpTotal\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" +
 					"<td class=\"dpTubes\">" + dpTubes.toFixed(1) + "</td>" +
 					"<td class=\"pctTubeLoading\">" + percentTubeLoading.toFixed(1) + "%</td>" +
 					"<td class=\"dpNozzle\">" + dpNozzle.toFixed(1) + "</td>" +
