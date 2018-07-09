@@ -19,12 +19,11 @@ label{
 	font-size:90%;
 }
 
-table{
-	text-align: center;
+/*table{
 	table-layout: auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: medium;
-}
+}*/
 
 #myHeader{
 	background-color: whitesmoke;
@@ -69,6 +68,7 @@ tbody {
 	overflow-y: auto;
 	overflow-x: auto;
 	text-align: left;
+	font-size: 90%;
 }
 /*For Sticky Table Headers with scrolling body. width: 5.82% for 17 columns*/
 tbody td, thead th {

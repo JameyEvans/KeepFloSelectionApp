@@ -90,19 +90,21 @@ function collapseTable(){
 
 function toggleAllFields(){
 	/*this.isAllShown =! this.isAllShown;*/
-	var table = document.getElementById("dataTable");
-	var tableBody = document.getElementsByTagName("tbody td");
-	var tableHeader = document.getElementsByTagName("thead th");
+   	var el = $("tbody td, thead th");
 
     if(this.isAllShown){
 		//set width to 5.82% 17 columns
-		document.getElementById("tbody td").style.width = "5.82%";
-		document.getElementById("thead th").style.width = "5.82%";
+        console.log("Setting tbody td, thead th {width: 5.82%}");
+		el.css("width", "11%");
+		/*document.getElementById("tbody td").style.width = "5.82%";
+		document.getElementById("thead th").style.width = "5.82%";*/
 	}else{
-		//set width for 6.82% 9 columns
-        document.getElementById("td").style.width = "7%";
-        document.getElementById("th").style.width = "7%";
-	}
+        //set width for 6.82% 9 columns
+        console.log("Setting tbody td, thead th {width: 11%}");
+		el.css("width", "5.82%");
+        /*document.getElementById("td").style.width = "7%";
+        document.getElementById("th").style.width = "7%";*/
+    }
 	$(".hideMyShit").toggleClass("toggleable", this.isAllShown);
 }
 
