@@ -3,7 +3,8 @@
     "",
     "\\drawingModal",
     "\\python",
-    "\\site"
+    "\\site",
+    "\\site\\scripts"
   ],
   "SelectedNode": "\\site\\distSelection.html",
   "PreviewInSolutionExplorer": false
