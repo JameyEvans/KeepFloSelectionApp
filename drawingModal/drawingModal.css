@@ -1,0 +1,33 @@
+.container{
+   width: 50%;
+   min-width: 400px;
+   text-align: center;
+   position: relative;
+}
+
+.outsideDiameter{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+}
+
+.oal{
+    position: absolute;
+    top: 0%;
+    left: 49%;
+}
+
+.inletDiameter{
+    position: absolute;
+    top: 53%;
+    left: 90.5%;
+}
+
+.length{
+    position: absolute;
+    top: 11.5%;
+    left: 66jk%;
+}
+.distImg{
+    width: 100%;
+}

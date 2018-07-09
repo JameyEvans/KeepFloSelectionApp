@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\python"
+    "\\drawingModal",
+    "\\python",
+    "\\site"
   ],
-  "SelectedNode": "\\kfapp.js",
+  "SelectedNode": "\\site\\distSelection.html",
   "PreviewInSolutionExplorer": false
 }
