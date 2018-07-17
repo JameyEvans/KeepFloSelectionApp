@@ -10,17 +10,50 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
 </head>
 <body>
-    <div id="primary">
-        <h1>Drawing Modal Test Page!</h1>
-        <div class="container">
-            <img class="distImg" src="./images/standardDistributor.png">
-            <div class="outsideDiameter">OD</div>
-            <div class="oal">oal</div>
-            <div class="inletDiameter">inlet</div>
-            <div class="length">length</div>
-         </div>
+    <h1 id="drawingDemoH1">Drawing Demo Modal</h1>
+
+    <div id="options">
+        <h3>Modal Options:</h3>
+        <p>Distributor Type:</p>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="std" checked="checked">Standard</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="flare">Flare</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="stub">Stub</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="hgb">Hot Gas Bypass</label>
     </div>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Drawing Modal Test Page!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="distImg" id="modalDistImg"src="./images/standardDistributor.png">
+                    <div id="modalDistOD">OD</div>
+                    <div id="modalDistOAL">oal</div>
+                    <div id="modalDistInletOD">inlet</div>
+                    <div id="modalDistInletLg">length</div>
+                    <div class="hiddenModal" id="modalDistFlare">flare</div>
+                    <div class="hiddenModal" id="modalDistSideHoleLoc">sideHole</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="https://youtu.be/M11SvDtPBhA?t=45s" id="partyBtn" class="btn btn-primary">Party!</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -29,6 +62,6 @@
             integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
             crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="./drawingMOdal.js"></script>
+    <script src="./drawingModal.js"></script>
 </body>
 </html>

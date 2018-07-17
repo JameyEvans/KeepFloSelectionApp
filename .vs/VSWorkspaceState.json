@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\drawingModal",
+    "\\drawingModal\\images",
     "\\python",
     "\\site",
     "\\site\\scripts"
   ],
-  "SelectedNode": "\\site\\distSelection.html",
+  "SelectedNode": "\\drawingModal\\drawingModal.js",
   "PreviewInSolutionExplorer": false
 }

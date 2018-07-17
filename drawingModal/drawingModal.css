@@ -1,33 +1,54 @@
-.container{
-   width: 50%;
+#drawingDemoH1{
+    padding-bottom: 1em;
+}
+
+.modal-body{
+   width: 100%;
    min-width: 400px;
    text-align: center;
    position: relative;
 }
 
-.outsideDiameter{
+#modalDistOD{
     position: absolute;
-    top: 50%;
-    left: 2%;
+    top: 47%;
+    left: 9.5%;
 }
 
-.oal{
+#modalDistOAL{
+    position: absolute;
+    top: 9%;
+    left: 46.5%;
+}
+
+#modalDistInletOD{
+    position: absolute;
+    top: 49%;
+    left: 81.5%;
+}
+
+#modalDistInletLg{
+    position: absolute;
+    top: 17.5%;
+    left: 62.2%;
+}
+#modalDistFlare {
+    position: absolute;
+    top: 3%;
+    left: 85%;
+}
+#modalDistSideHoleLoc {
     position: absolute;
     top: 0%;
-    left: 49%;
+    left: 85%;
 }
-
-.inletDiameter{
-    position: absolute;
-    top: 53%;
-    left: 90.5%;
-}
-
-.length{
-    position: absolute;
-    top: 11.5%;
-    left: 66jk%;
+.hiddenModal{
+    display: none;
 }
 .distImg{
     width: 100%;
+}
+
+.btn{
+    margin-top: 1.5em;
 }
