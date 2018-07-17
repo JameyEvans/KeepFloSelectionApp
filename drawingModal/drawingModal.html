@@ -33,10 +33,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Drawing Modal Test Page!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div id="options">
+                        <p>Distributor Type:</p>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="std">Standard</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="flare">Flare</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="stub">Stub</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="hgb">Hot Gas Bypass</label>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <img class="distImg" id="modalDistImg"src="./images/standardDistributor.png">

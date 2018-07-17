@@ -15,8 +15,11 @@ var dimObj = {
     "modalDistFlare": "1/2 Flare Nut",
     "modalDistSideHoleLoc": "50E"
 };
+radioCallback();
 
-$('#options input').on('change', radioCallback());
+$('#options input').on('change', function () {
+    radioCallback()
+});
 
 function radioCallback() {
     radDistType = $('input[name=distTypeRadio]:checked').val();
