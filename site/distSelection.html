@@ -3,7 +3,12 @@
 <head>
     <title>Distributor Selection Tool</title>
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/dist.css">
     <link rel="shortcut icon" href="http://www.cdivalve.com/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
@@ -367,36 +372,62 @@
             </div>
             <div id="collapseTable" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <div class="col-sm-12 table-responsive" id="data-container">
-                        <table class="table table-striped" id="dataTable">
+                    <!-- Data Tables table -->
+                        <table class="display" id="dataTableExample" width="100%">
                             <thead id="myHeader">
-                            <tr>
-                                <th class="style">Style</th>
-                                <th class="partNumber">Part Number</th>
-                                <th class="refrigerant">Refrigerant</th>
-                                <th class="capacity hideMyShit">Tons</th>
-                                <th class="suctionTemp hideMyShit">Evap &deg;F</th>
-                                <th class="liquidTemp hideMyShit">Liquid &deg;F</th>
-                                <th class="tubeLength hideMyShit">Length</th>
-                                <th class="dpTotal">dP(total)</th>
-                                <th class="dpTubes">dP(tubes)</th>
-                                <th class="pctTubeLoading">% Tube Loading</th>
-                                <th class="dpNozzle">dP (nozzle/body)</th>
-                                <th class="pctDistLoading">% Dist Loading</th>
-                                <th class="inletSize hideMyShit">Inlet Size</th>
-                                <th class="outletSize">Outlet Size</th>
-                                <th class="circuitCount hideMyShit">Circuit Count</th>
-                                <th class="orificeSize hideMyShit">Orifice Size</th>
-                                <th class="orificeType hideMyShit">Orifice Type</th>
-                            </tr>
+                                <tr>
+                                    <th class="style">Style</th>
+                                    <th class="partNumber">Part Number</th>
+                                    <th class="refrigerant">Refrigerant</th>
+                                    <th class="capacity">Tons</th>
+                                    <th class="suctionTemp">Evap &deg;F</th>
+                                    <th class="liquidTemp">Liquid &deg;F</th>
+                                    <th class="tubeLength">Length</th>
+                                    <th class="dpTotal">dP(total)</th>
+                                    <th class="dpTubes">dP(tubes)</th>
+                                    <th class="pctTubeLoading">% Tube Loading</th>
+                                    <th class="dpNozzle">dP (nozzle/body)</th>
+                                    <th class="pctDistLoading">% Dist Loading</th>
+                                    <th class="inletSize">Inlet Size</th>
+                                    <th class="outletSize">Outlet Size</th>
+                                    <th class="circuitCount">Circuit Count</th>
+                                    <th class="orificeSize">Orifice Size</th>
+                                    <th class="orificeType">Orifice Type</th>
+                                    <th class="tableArrIndex">tableArrIndex</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+
+                        <!-- Original html table.  Added hidden class to remove from view. -->
+                        <table class="table table-striped hidden" id="dataTable">
+                            <thead id="myHeader">
+                                <tr>
+                                    <th class="style">Style</th>
+                                    <th class="partNumber">Part Number</th>
+                                    <th class="refrigerant">Refrigerant</th>
+                                    <th class="capacity hideMyShit">Tons</th>
+                                    <th class="suctionTemp hideMyShit">Evap &deg;F</th>
+                                    <th class="liquidTemp hideMyShit">Liquid &deg;F</th>
+                                    <th class="tubeLength hideMyShit">Length</th>
+                                    <th class="dpTotal">dP(total)</th>
+                                    <th class="dpTubes">dP(tubes)</th>
+                                    <th class="pctTubeLoading">% Tube Loading</th>
+                                    <th class="dpNozzle">dP (nozzle/body)</th>
+                                    <th class="pctDistLoading">% Dist Loading</th>
+                                    <th class="inletSize hideMyShit">Inlet Size</th>
+                                    <th class="outletSize">Outlet Size</th>
+                                    <th class="circuitCount hideMyShit">Circuit Count</th>
+                                    <th class="orificeSize hideMyShit">Orifice Size</th>
+                                    <th class="orificeType hideMyShit">Orifice Type</th>
+                                </tr>
                             </thead>
                             <tbody id="distContents">
-                            <tr>
-                                <td colspan="17">Complete form to populate data</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="17">Complete form to populate data</td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
                 </div>
                 <div class="panel-footer">
                     <!--Footer Data goes here-->
@@ -442,10 +473,14 @@
 <!--END Quote Request Form *Modal-->
 
 
-<script src="libs/jquery/dist/jquery.min.js"></script>
-<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="data/data.js"></script>
-<script src="kfapp.js"></script>
-<script src="scripts/distlibs.js"></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="data/data.js"></script>
+    <script src="kfapp.js"></script>
+    <script src="scripts/distlibs.js"></script>
 </body>
 </html>

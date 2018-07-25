@@ -75,3 +75,5 @@ function setModalDimLocations(distOD, distOAL, distInletOD, distInletLg = [0, 0]
     };
 
 };
+
+// to show modal use $('#myModal').modal('toggle'); or $('#myModal').modal('show'); or $('#myModal').modal('hide');

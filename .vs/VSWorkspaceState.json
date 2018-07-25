@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\drawingModal",
-    "\\drawingModal\\images",
-    "\\python",
+    "\\DataTablesDemo",
     "\\site",
-    "\\site\\scripts"
+    "\\site\\data",
+    "\\site\\libs",
+    "\\site\\scripts",
+    "\\site\\styles"
   ],
-  "SelectedNode": "\\drawingModal\\drawingModal.js",
+  "SelectedNode": "\\site\\kfapp.js",
   "PreviewInSolutionExplorer": false
 }
