@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DataTablesDemo",
     "\\site",
-    "\\site\\data",
     "\\site\\libs",
     "\\site\\scripts",
     "\\site\\styles"
   ],
-  "SelectedNode": "\\site\\kfapp.js",
+  "SelectedNode": "\\site\\distSelection.html",
   "PreviewInSolutionExplorer": false
 }

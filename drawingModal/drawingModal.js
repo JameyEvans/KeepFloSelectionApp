@@ -1,5 +1,5 @@
 // Get checked distributor type
-var radDistType;
+var distType;
 var imgArr = ["./dickbutt.jpg",
     "./images/standardDistributor.png",
     "./images/hgbDistributor.png",
@@ -15,19 +15,19 @@ var dimObj = {
     "modalDistFlare": "1/2 Flare Nut",
     "modalDistSideHoleLoc": "50E"
 };
-radioCallback();
+viewDrawingModal();
 
 $('#options input').on('change', function () {
-    radioCallback()
+    viewDrawingModal()
 });
 
-function radioCallback() {
-    radDistType = $('input[name=distTypeRadio]:checked').val();
+function viewDrawingModal() {
+    distType = $('input[name=distTypeRadio]:checked').val();
     // set appropriate image corresponding to radio button
     var i;
     // remove any .hiddenModal classes from modal
     $(".modal-body div").removeClass("hiddenModal");
-    switch (radDistType) {
+    switch (distType) {
         case "std":
             i = 1;
             $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
@@ -52,7 +52,7 @@ function radioCallback() {
             i = 0;
     }
     $("#modalDistImg").attr('src', imgArr[i]);
-    console.log("radDistType = " + radDistType);
+    console.log("distType = " + distType);
 };
 
 function setModalDimLocations(distOD, distOAL, distInletOD, distInletLg = [0, 0], distFlare = [0, 0], distSideHoleLoc = [0, 0]) {
