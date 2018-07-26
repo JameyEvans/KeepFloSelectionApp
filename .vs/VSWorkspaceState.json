@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\site",
+    "\\site\\data",
     "\\site\\libs",
     "\\site\\scripts",
     "\\site\\styles"
   ],
-  "SelectedNode": "\\site\\distSelection.html",
+  "SelectedNode": "\\site\\kfapp.js",
   "PreviewInSolutionExplorer": false
 }

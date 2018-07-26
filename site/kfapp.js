@@ -15,15 +15,36 @@ var tableArr = [];
 var tableArrIndex;
 refreshTable();
 
-
+// Allows for select boxes to allow user input
+$(".taggable").select2({
+    tags: true,
+    width: "100%",
+    height: "34px",
+    createTag: function (params) {
+        var term = $.trim(params.term);
+        console.log(term);
+        if (isNaN(term)) {
+            console.log(term + "is not a number");
+            return null;
+        }
+        return {
+            id: term,
+            text: term,
+            newTag: true
+        }
+    }
+});
 
 
 function refreshTable(){
     if ($.fn.DataTable.isDataTable("#dataTableExample")) {
-        $("#dataTableExample").DataTable().clear().destroy();
+        //$("#dataTableExample").DataTable().clear().destroy();
+        $("#dataTableExample").DataTable().clear().rows.add(tableArr).draw();
+        return;
     }
 
     $('#dataTableExample').DataTable({
+        responsive: true,
         data: tableArr,
         paging: false,
         scrollY: 400,
@@ -31,26 +52,35 @@ function refreshTable(){
         fixedHeader: {
             header: true
         },
+        "language": {
+            "emptyTable": "No suitable distributors were found."
+        },
+        "searching": false,
+        "order": [[18, "asc"]], //sort ascending by perfIndex
+        "columnDefs": [
+            { "min-width": "110px", "targets": 1 }],
         columns: [
             { data: "style"},
             { data: "partNumber" },
-            { data: "refrigerant" },
-            { data: "capacity" },
-            { data: "suctionTemp" },
-            { data: "liquidTemp" },
-            { data: "tubeLength" },
-            { data: "dpTotal" },
             { data: "dpTubes" },
             { data: "pctTubeLoading" },
             { data: "dpNozzle" },
             { data: "pctDistLoading" },
+            { data: "dpTotal" },
             { data: "inletSize" },
             { data: "outletSize" },
-            { data: "circuitCount" },
             { data: "orificeSize" },
+            { data: "refrigerant" },
+            { data: "capacity" },
+            { data: "suctionTemp" },
+            { data: "liquidTemp" },
+            { data: "tubeLength" },          
+            { data: "circuitCount" },
             { data: "orificeType" },
-            { data: "tableArrIndex", visible: true }
+            { data: "tableArrIndex", visible: false },
+            { data: "perfIndex", visible: false}
         ]
+        
     });
 }
 
@@ -148,7 +178,7 @@ function updateFormValues(){
 		fmHasSidePort = document.querySelector("#sidePort").selectedOptions[0].value;
 		fmRefrgt = document.querySelector("#refrgType").selectedOptions[0].value;
 		fmCapacity = document.querySelector("#capacity").value;
-		fmSuctionTemp = document.querySelector("#suctionTemp").selectedOptions[0].value;
+		fmSuctionTemp = document.querySelector("#suctionTempOld").selectedOptions[0].value;
 		fmLiquidTemp = document.querySelector("#liquidTemp").selectedOptions[0].value;
 		fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
 }
@@ -245,11 +275,16 @@ function genHTMLFormData(){
 
 
 	objArr.forEach(function(el){
-
-        for (var i = 0; i < arrValidNozzle.length; i++) {
+        var iLength;
+        if (el.type.toLowerCase() === "venturi") {
+            iLength = 1;
+        } else {
+            iLength = arrValidNozzle.length;
+        }
+        for (var i = 0; i < iLength; i++) {
             var tempObject = [];
 
-            if (el.type === "nozzle") {
+            if (el.type.toLowerCase() === "nozzle") {
                 partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
                 tempObject.partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
                 nzlRating = arrValidNozzle[i][1]; //nozzle rating in tons
@@ -271,6 +306,8 @@ function genHTMLFormData(){
             var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
             tempObject.percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
 			// pressure drop across tubes assuming 10 psi is 100% loading
+            tempObject.perfIndex = getPerfIndex(pctNzLoading, percentTubeLoading);
+            //console.log("pn: " + tempObject.partNumber + "pctNzLoading = " + pctNzLoading + "; percentTubeLoading = " + percentTubeLoading + "; perfIndex = " + tempObject.perfIndex);
             var dpTubes = percentTubeLoading / 10;
             tempObject.dpTubes = percentTubeLoading / 10;
             tempObject.style = el.type;
@@ -301,35 +338,10 @@ function genHTMLFormData(){
 
             tableArr.push(tempObject);
             tableArrIndex++;
-
-
-
-			HTMLStr = HTMLStr + "<tr>" +
-					"<td class=\"style\">" + el.type + "</td>" +
-					"<td class=\"partNumber \">" + partNumber + "</td>" +
-					"<td class=\"refrigerant\">" + fmRefrgt + "</td>" +
-					"<td class=\"capacity hideMyShit\">" + fmCapacity + "</td>" +
-					"<td class=\"suctionTemp hideMyShit\">" + fmSuctionTemp + "</td>" +
-					"<td class=\"liquidTemp hideMyShit\">" + fmLiquidTemp + "</td>" +
-					"<td class=\"tubeLength hideMyShit\">" + fmTubeLength + "</td>" +
-					"<td class=\"dpTotal\">" + (dpNozzle + dpTubes).toFixed(1) + "</td>" + 
-					"<td class=\"dpTubes\">" + dpTubes.toFixed(1) + "</td>" +
-					"<td class=\"pctTubeLoading\">" + percentTubeLoading.toFixed(1) + "%</td>" +
-					"<td class=\"dpNozzle\">" + dpNozzle.toFixed(1) + "</td>" +
-					"<td class=\"pctDistLoading\">" + pctNzLoading.toFixed(1) + "%</td>" +
-					"<td class=\"inletSize hideMyShit\">" + el.inletDiameter + "</td>" +
-					"<td class=\"outletSize\">" + fmStrCircuitSize + "</td>" +
-					"<td class=\"circuitCount hideMyShit\">" + fmCircuitCt + "</td>" +
-					"<td class=\"orificeSize hideMyShit\">" + arrValidNozzle[i][0] + "</td>" +
-					"<td class=\"orificeType hideMyShit\">" + el.nozzleType +  "</td>" +
-				"</tr>";
         }
         refreshTable();
 	});
-    if (objArr.length === 0) {
-        HTMLStr = "<tr><td colspan = \"17\" > No suitable distributors were detected</td></tr>";
-    }
-    tableSelector.innerHTML = HTMLStr;
+
 
    
 
@@ -340,8 +352,12 @@ function genHTMLFormData(){
 // ---------------------------------------------------------------------------------
 // drawing modal javascript
 // ---------------------------------------------------------------------------------
-$(document).on("click", "#dataTableExample tr[role='row']", function () {
-    viewDrawingModal($(this).children("td:nth-child(18)")[0].textContent);
+$("#dataTableExample").on("click", "tr[role='row'] td:nth-child(2)", function () {
+    var table = $("#dataTableExample").DataTable();
+    var modalDataObj = table.row($(this).closest('tr')).data();
+    // assign part number to modal span
+    $("#modalPartNumber")[0].innerText = modalDataObj.partNumber;
+    viewDrawingModal(modalDataObj.tableArrIndex);
 });
 
 
@@ -417,5 +433,13 @@ function viewDrawingModal(tableArrIndex) {
     };
 };
 
+function getPerfIndex(pctNzLoading, pctTubeLoading) {
+    var x = 100 - pctNzLoading;
+    if (x < 0) {
+        // slightly favor 100+ percent loading
+        pctNzLoading = pctNzLoading - .1*(pctNzLoading - 100);
+    }
+    return Math.abs(100 - pctNzLoading) + Math.abs(100 - pctTubeLoading);
+}
 
 // to show modal use $('#myModal').modal('toggle'); or $('#myModal').modal('show'); or $('#myModal').modal('hide');

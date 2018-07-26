@@ -3,9 +3,15 @@
 <head>
     <title>Distributor Selection Tool</title>
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/fc-3.2.5/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
+
+    
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- Select2 for better dropdowns: https://select2.org/ -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
@@ -58,11 +64,11 @@
             <div id="standardDist" class="tab-pane fade in active">
                 <div>
                     <!-- distributor specs -->
-                    <div class="col-sm-6 distContainer container">
-                        <h3 class="col-sm-12 title">Distributor</h3>
-                        <div class="col-sm-12 leftFormContent">
+                    <div class=" col-xs-6 distContainer container">
+                        <h3 class="col-xs-12 title">Distributor</h3>
+                        <div class="col-xs-12 leftFormContent">
                             <form>
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="distType">Distributor Type:</label>
                                     <select id="distType" name="distType" class="form-control">
                                         <option value="any" selected>Either</option>
@@ -72,7 +78,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="inletType">Inlet Type:</label>
                                     <select id="inletType" name="inletType" class="form-control">
                                         <option value="any" selected>Any Kind</option>
@@ -82,7 +88,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="inletSize">Inlet Size (inch):</label>
                                     <select id="inletSize" name="inletSize" class="form-control">
                                         <option value="any" selected>Select</option>
@@ -96,14 +102,14 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="numberCircuits">Number of Circuits:</label>
                                     <input type="number" id="numberCircuits" min="2" max="60" class="form-control"
                                            placeholder="Enter number of circuit tubes">
                                 </div>
 
-                                <div class="col-sm-6 form-group">
-                                    <label for="tubingOD">Distributor Tubing OD (inch):</label>
+                                <div class="col-xs-12 col-sm-6 form-group">
+                                    <label for="tubingOD">Circuit Tubing OD (in):</label>
                                     <select id="tubingOD" name="tubingOD" class="form-control">
                                         <option value="any" selected hidden>Select</option>
                                         <option value=0.156>5/32</option>
@@ -115,7 +121,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="nozzleSize">Nozzle Orifice Size:</label>
                                     <select id="nozzleSize" name="nozzleSize" class="form-control">
                                         <option value="any" selected>Select</option>
@@ -152,7 +158,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="nozzleType">Nozzle Type:</label>
                                     <select id="nozzleType" name="nozzleType" class="form-control">
                                         <option value="any" selected>Select</option>
@@ -161,7 +167,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="sidePort">Side Port:</label>
                                     <select id="sidePort" name="sidePort" class="form-control">
                                         <option value="no" selected>None</option>
@@ -170,8 +176,8 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <button type="select" id="distSelectBtn" class="btn btn-primary">
+                                <div class="col-xs-6">
+                                    <button id="distSelectBtn" class="btn btn-primary" style="display:inline-block; clear:left;">
                                         Select Distributor
                                     </button>
                                 </div>
@@ -180,11 +186,11 @@
                     </div>
                     <!-- .......................... Right Form Content................................... -->
                     <!-- performance specs -->
-                    <div class="col-sm-6 perfContainer container">
-                        <h3 class="col-sm-12 title">Performance Criteria</h3>
-                        <div class="col-sm-12 rightFormContent">
+                    <div class="col-xs-6 perfContainer container">
+                        <h3 class="col-xs-12 title">Performance Criteria</h3>
+                        <div class="col-xs-12 rightFormContent">
                             <form>
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="refrgType">Refrigerant Type:</label>
                                     <select id="refrgType" name="refrgType" class="form-control">
                                         <option value="R-12">R-12</option>
@@ -200,14 +206,14 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="capacity">Capacity (tons):</label>
                                     <input type="number" id="capacity" name="capacity" class="form-control">
                                 </div>
 
-                                <div class="col-sm-6 form-group">
-                                    <label for="suctionTemp">Suction Temperature (&deg;F):</label>
-                                    <select id="suctionTemp" name="suctionTemp" class="form-control">
+                                <div class="col-xs-12 col-sm-6 form-group">
+                                    <label for="suctionTempOld">Suction Temperature (&deg;F):</label>
+                                    <select id="suctionTempOld" name="suctionTempOld" class="form-control taggable">
                                         <option value=40 selected>40</option>
                                         <option value=20>20</option>
                                         <option value=0>0</option>
@@ -216,9 +222,21 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <!--<div class="col-xs-12 col-sm-6 form-group">
+                                    <label for="suctionTemp">Suction Temperature (&deg;F):</label>
+                                    <select id="suctionTemp" name="suctionTemp" class="form-control taggable">
+                                        <option value=40 selected>40</option>
+                                        <option value=20>20</option>
+                                        <option value=0>0</option>
+                                        <option value=-20>-20</option>
+                                        <option value=90>90</option>
+                                        <option value=-40>-40</option>
+                                    </select>
+                                </div>-->
+
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="liquidTemp">Liquid Temperature (&deg;F):</label>
-                                    <select id="liquidTemp" name="liquidTemp" class="form-control">
+                                    <select id="liquidTemp" name="liquidTemp" class="form-control taggable">
                                         <option value=50>50</option>
                                         <option value=60>60</option>
                                         <option value=70>70</option>
@@ -230,9 +248,9 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group">
+                                <div class="col-xs-12 col-sm-6 form-group">
                                     <label for="tubeLength">Distributor Tube Length (in):</label>
-                                    <select id="tubeLength" name="tubeLength" class="form-control">
+                                    <select id="tubeLength" name="tubeLength" class="form-control taggable">
                                         <option value=12>12</option>
                                         <option value=18>18</option>
                                         <option value=24>24</option>
@@ -284,7 +302,7 @@
 
                                 <div class="col-sm-6 form-group">
                                     <label for="suctionTemp">Suction Temperature (&deg;F):</label>
-                                    <select id="suctionTemp" name="suctionTemp" class="form-control">
+                                    <select id="suctionTemp" name="suctionTemp" class="form-control taggable">
                                         <option value=40 selected>40</option>
                                         <option value=20>20</option>
                                         <option value=0>0</option>
@@ -355,16 +373,16 @@
 
         <!-- Common Data  -->
 
-        <div class="panel-group col-sm-12" style="padding-top: 15px;">
+        <div class="panel-group col-xs-12" style="padding-top: 15px;">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Distributor Table
-                    <a onclick="collapseTable()">
+                    <!--<a onclick="collapseTable()">
                         <span id="collapseIconForDataTable"
                               class="pull-right glyphicon glyphicon-minus"
                               title="Show/Hide All Fields">
                         </span>
-                    </a>
+                    </a>-->
                     <!--<a data-toggle="collapse" href="#collapseTable">
                         <h4 class="panel-heading pull-left">Distributor Table</h4>
                     </a>-->
@@ -372,27 +390,28 @@
                 <div id="collapseTable" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- Data Tables table -->
-                        <table class="display" id="dataTableExample" width="100%">
+                        <table class="display" id="dataTableExample" style="width: 100%;">
                             <thead id="myHeader">
                                 <tr>
                                     <th class="style">Style</th>
                                     <th class="partNumber">Part Number</th>
+                                    <th class="dpTubes">dP(tubes)</th>
+                                    <th class="pctTubeLoading">% Tube Loading</th>
+                                    <th class="dpNozzle">dP (nozzle/body)</th>
+                                    <th class="pctDistLoading">% Dist Loading</th>
+                                    <th class="dpTotal">dP(total)</th>
+                                    <th class="inletSize">Inlet Size</th>
+                                    <th class="outletSize">Outlet Size</th>
+                                    <th class="orificeSize">Orifice Size</th>
                                     <th class="refrigerant">Refrigerant</th>
                                     <th class="capacity">Tons</th>
                                     <th class="suctionTemp">Evap &deg;F</th>
                                     <th class="liquidTemp">Liquid &deg;F</th>
                                     <th class="tubeLength">Length</th>
-                                    <th class="dpTotal">dP(total)</th>
-                                    <th class="dpTubes">dP(tubes)</th>
-                                    <th class="pctTubeLoading">% Tube Loading</th>
-                                    <th class="dpNozzle">dP (nozzle/body)</th>
-                                    <th class="pctDistLoading">% Dist Loading</th>
-                                    <th class="inletSize">Inlet Size</th>
-                                    <th class="outletSize">Outlet Size</th>
                                     <th class="circuitCount">Circuit Count</th>
-                                    <th class="orificeSize">Orifice Size</th>
                                     <th class="orificeType">Orifice Type</th>
                                     <th class="tableArrIndex">tableArrIndex</th>
+                                    <th class="perfIndex">perfIndex</th>
                                 </tr>
                             </thead>
                         </table>
@@ -433,7 +452,6 @@
                         <div style="vertical-align: center; padding-bottom: 10px;">
                             &copy Control Devices LLC
                             <button class="pull-right btn btn-default"
-                                    onclick="requestQuotePopup()"
                                     data-toggle="modal"
                                     data-target="#quoteRequestForm">
                                 Request Quote
@@ -467,15 +485,13 @@
         </div>
     </div>
     <!--END Quote Request Form *Modal-->
-
-
     <!-- START drawing modal -->
     <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div id="options">
-                        <p>Dimensional Data:</p>
+                        <p>Dimensional Data: <span id="modalPartNumber">part number goes here</span></p>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -502,7 +518,8 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/fc-3.2.5/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="data/data.js"></script>
     <script src="kfapp.js"></script>

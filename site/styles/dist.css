@@ -9,14 +9,52 @@ body{
 	background-color: white;
 }
 
+.container-fluid{
+    min-width: 480px;
+}
+
+.tab-content h3 {
+    height: 27px;
+    font-size: 1.5em;
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 30px;
+}
+.form-group{
+    max-height: 4em;
+    max-width: 275px;
+}
+
+/*responsive data children*/
+span.dtr-title{
+    text-align: left;
+    width: 70%;
+}
+span.dtr-data{
+    text-align: right;
+    width: 70%;
+}
+
+td li{
+    text-align: left;
+}
+table.dataTable td.child{
+    text-align: left;
+    padding-left: 5%;
+}
+/*Dropdown forms used by select2 plugin*/
+.select2-container .select2-selection--single {
+    height: 34px;
+}
 /*.container.main{
 	margin: auto;
 	width: 80%;
 	padding: 10px;
 }*/
-
-label{
-	font-size:90%;
+label {
+    font-size: 90%;
+    white-space: nowrap;
+    margin-right: 10px;
 }
 
 table{
@@ -24,6 +62,17 @@ table{
 	table-layout: auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: medium;
+}
+
+table th{
+    font-size: 15px;
+}
+
+table tr td:nth-child(2):hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: cornflowerblue;
+    cursor: pointer;
 }
 
 #myHeader{
@@ -34,12 +83,14 @@ th{
 	text-align: center;
 }
 
-#distContents tr:hover{
-	background-color: #9BC2E3;
+div.distContainer{
+    padding-left: 0;
+    padding-right: 0;
 }
 
-td{
-	min-width: 70px;
+div.perfContainer{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #data-container{
@@ -109,6 +160,9 @@ td{
     width: 100%;
 }
 
+table td{
+    white-space: nowrap;
+}
 
 /* The sticky class is added to the header with JS when it 
    reaches its scroll position 
