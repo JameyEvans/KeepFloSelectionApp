@@ -2,19 +2,20 @@
 <html>
 <head>
     <title>Distributor Selection Tool</title>
+    <!--todo:Localize all directories-->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/fc-3.2.5/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
-
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
 
     <!-- Select2 for better dropdowns: https://select2.org/ -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
+
+
+
     <link rel="stylesheet" type="text/css" href="styles/dist.css">
     <link rel="shortcut icon" href="http://www.cdivalve.com/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
@@ -388,22 +389,12 @@
                     <span class="dropdown pull-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export Table<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Copy Table</a></li>
-                            <li><a href="#">CSV</a></li>
-                            <li><a href="#">Excel</a></li>
-                            <li><a href="#">PDF</a></li>
-                            <li><a href="#">Print</a></li>
+                            <li><a href="#" onclick="copyTable()">Copy Table</a></li>
+                            <li><a href="#" onclick="exportToCsv()">CSV</a></li>
+                            <li><a href="#" onclick="exportToExcel()">Excel</a></li>
+                            <li><a href="#" onclick="exportToPdf()">PDF</a></li>
                         </ul>
                     </span>
-                    <!--<a onclick="collapseTable()">
-                        <span id="collapseIconForDataTable"
-                              class="pull-right glyphicon glyphicon-minus"
-                              title="Show/Hide All Fields">
-                        </span>
-                    </a>-->
-                    <!--<a data-toggle="collapse" href="#collapseTable">
-                        <h4 class="panel-heading pull-left">Distributor Table</h4>
-                    </a>-->
                 </div>
                 <div id="collapseTable" class="panel-collapse collapse in">
                     <div class="panel-body">
@@ -477,7 +468,7 @@
                                 Request Quote
                             </button>
 
-                            <button class="pull-right btn btn-default stnd-button">
+                            <button class="pull-right btn btn-default stnd-button" onclick="">
                                 Print Report
                             </button>
                         </div>
@@ -541,9 +532,17 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-html5-1.5.2/fc-3.2.5/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <!--<script src="libs/jquery/dist/jquery.min.js"></script>-->
+    <!--<script src="libs/datatable/datatables.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>-->
+    <script src="libs/select2/select2.min.js"></script>
     <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="data/data.js"></script>
     <script src="kfapp.js"></script>

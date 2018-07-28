@@ -167,8 +167,12 @@ table td{
 .stnd-button{
     margin-left: 10px;
     width: 125px;
-
 }
+
+.buttons-html5{
+    display:none;
+}
+
 
 /* The sticky class is added to the header with JS when it 
    reaches its scroll position 

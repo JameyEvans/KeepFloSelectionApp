@@ -68,6 +68,37 @@ function refreshTable(){
         paging: false,
         scrollY: 400,
         scrollX: true,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Export To PDF',
+                extend: 'pdfHtml5',
+                exportOptions:{
+                  columns: ':visible'
+                },
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            },
+            {
+                text: 'Export to Excel',
+                exportOptions:{
+                    columns: ':visible'
+                },
+                extend: 'excel'
+            },
+            {
+                extend: 'copy',
+                exportOptions:{
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions:{
+                    columns: ':visible'
+                }
+            }
+        ],
         fixedHeader: {
             header: true
         },
@@ -99,9 +130,25 @@ function refreshTable(){
             { data: "tableArrIndex", visible: false },
             { data: "perfIndex", visible: false}
         ]
-        
     });
 }
+
+function exportToPdf(){
+    $('.buttons-pdf').click();
+}
+
+function exportToExcel(){
+    $('.buttons-excel').click();
+}
+
+function copyTable(){
+    $('.buttons-copy').click();
+}
+
+function exportToCsv(){
+    $('.buttons-csv').click();
+}
+
 
 var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667,
 					"1/4" : 0.25, "1/3" : 0.3333,
