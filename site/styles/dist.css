@@ -157,11 +157,17 @@ div.perfContainer{
 }
 
 .distImg {
-    width: 100%;
+    width: 500px;
 }
 
 table td{
     white-space: nowrap;
+}
+
+.stnd-button{
+    margin-left: 10px;
+    width: 125px;
+
 }
 
 /* The sticky class is added to the header with JS when it 

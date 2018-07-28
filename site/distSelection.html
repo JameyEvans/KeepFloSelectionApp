@@ -43,11 +43,19 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferences<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#quoteRequestForm"
+                                       data-toggle="modal"
+                                       data-target="#quoteRequestForm"
+                                >Request Quote</a></li>
+                                <li><a href="#">Set Presets</a></li><!--todo: Create Modal for unit presets for %dist offloading etc.-->
+                                <li><a href="#">Set Unit Standard</a></li><!--todo: dropdown with unit conversion buttons?-->
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">Print Report</a></li><!--todo: dropdown with unit conversion buttons?-->
+
+
+
+
+
                             </ul>
                         </li>
                     </ul>
@@ -377,6 +385,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Distributor Table
+                    <span class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export Table<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Copy Table</a></li>
+                            <li><a href="#">CSV</a></li>
+                            <li><a href="#">Excel</a></li>
+                            <li><a href="#">PDF</a></li>
+                            <li><a href="#">Print</a></li>
+                        </ul>
+                    </span>
                     <!--<a onclick="collapseTable()">
                         <span id="collapseIconForDataTable"
                               class="pull-right glyphicon glyphicon-minus"
@@ -451,10 +469,16 @@
                         <!--Footer Data goes here-->
                         <div style="vertical-align: center; padding-bottom: 10px;">
                             &copy Control Devices LLC
-                            <button class="pull-right btn btn-default"
+
+
+                            <button class="pull-right btn btn-primary stnd-button"
                                     data-toggle="modal"
                                     data-target="#quoteRequestForm">
                                 Request Quote
+                            </button>
+
+                            <button class="pull-right btn btn-default stnd-button">
+                                Print Report
                             </button>
                         </div>
                     </div>
