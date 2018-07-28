@@ -13,6 +13,7 @@ var testItem = "This is a test";
 var tableSelector, tableHTML;
 var tableArr = [];
 var tableArrIndex;
+var emptyTableString = "Submit form to populate table with distributor recommendations.";
 refreshTable();
 
 // Allows for select boxes to allow user input
@@ -35,6 +36,24 @@ $(".taggable").select2({
     }
 });
 
+// disable form boxes when certain options are selected
+// if distributor type = venturi then set to default values and disable nozzle orifice, nozzle type, and side port
+$("#distType").on("change", function () {
+    if ($(this)[0].value === "venturi") {
+        // set nozzle orifice to default "select" option amd disable
+        $("#nozzleSize")[0].selectedIndex = 0;
+        $("#nozzleSize").prop("disabled", true);
+        // set nozzle type to default and disable
+        $("#nozzleType")[0].selectedIndex = 0;
+        $("#nozzleType").prop("disabled", true);
+        // set side port to default and disable
+        $("#sidePort")[0].selectedIndex = 0;
+        $("#sidePort").prop("disabled", true);
+    } else {
+        $("#nozzleSize, #nozzleType, #sidePort").prop("disabled", false);
+    }
+});
+// 
 
 function refreshTable(){
     if ($.fn.DataTable.isDataTable("#dataTableExample")) {
@@ -53,7 +72,7 @@ function refreshTable(){
             header: true
         },
         "language": {
-            "emptyTable": "No suitable distributors were found."
+            "emptyTable": "Table is empty."
         },
         "searching": false,
         "order": [[18, "asc"]], //sort ascending by perfIndex
@@ -131,7 +150,7 @@ fmSelectBtn.addEventListener("click", function (event) {
     if (missingValues.length === 0) {
         // if no errors then populate table containing distributor selections
         genHTMLFormData();
-        toggleAllFields();
+        //toggleAllFields();
     } else {
         alert("The following required fields are missing data: " + missingValues);
     }
@@ -205,7 +224,7 @@ filterTest = function(el) {
     	if(element[0] !== null && element[0] !== undefined  && element[0] !== "any" && element[0].toLowerCase() !== "select"){
             // console.log(element[0] + " does not equal 'any'");
 
-    		if(element[0] !== element[1]){
+    		if(element[0] != element[1]){
     			//console.log(element[0] + " does not equal " + element[1]);
                 isValid = false;
     		}
@@ -339,11 +358,8 @@ function genHTMLFormData(){
             tableArr.push(tempObject);
             tableArrIndex++;
         }
-        refreshTable();
 	});
-
-
-   
+    refreshTable();  
 
 }
 
@@ -363,7 +379,7 @@ $("#dataTableExample").on("click", "tr[role='row'] td:nth-child(2)", function ()
 
 function viewDrawingModal(tableArrIndex) {
     var distType;
-    var imgArr = ["./dickbutt.jpg",
+    var imgArr = ["./images/dickbutt.jpg",
         "./images/standardDistributor.png",
         "./images/hgbDistributor.png",
         "./images/flareInlet.png",
