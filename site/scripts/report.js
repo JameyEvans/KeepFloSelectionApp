@@ -1,6 +1,7 @@
 /*REPORT HANDLING*/
 
 function submitForm(){
+    var logo = 'http://www.cdivalve.com/images/styles/control_devices__logo_rgb.svg';
     var form = document.getElementById("customerForm");
     var project = form[0].value;
     var customer = form[1].value;
@@ -10,41 +11,50 @@ function submitForm(){
     var email = 'keepflo@aol.com';
     var page = 1;
     var date = new Date();
-    var shortDate = date.getDate();
+    var shortDate = date.toLocaleDateString();
     var headingFontSize = 18;
     var bodyFontSize = 13;
+    var center = 105;
+    var right = 190;
+    var left = 20;
 
+    //printTable();
 
     var doc = new jsPDF();
     doc.setFontSize(bodyFontSize);
-    doc.text(version, 20, 20);
+    doc.text(version, left, 20);
 
     doc.setFontSize(headingFontSize);
     doc.setFontStyle('bold');
-    doc.text('KeepFlo, Inc.', 110,20,'center');
+    doc.text('KeepFlo, Inc.', center,20,'center');
     doc.setFontStyle('normal');
-    /*doc.text(shortDate, 200, 20,'right');*/
 
     doc.setFontSize(bodyFontSize);
-    doc.text(location, 110, 27,'center');
-    doc.text('Page: ' + page, 200,20, 'right');
+    doc.text(location, center, 27,'center');
+    doc.text(shortDate, right, 20,'right');
+    doc.text('Page: ' + page, right,27, 'right');
 
-    doc.text(phone, 110, 34, 'center');
-    doc.text(email, 110, 41, 'center');
+    doc.text(phone, center, 34, 'center');
+    doc.text(email, center, 40, 'center');
 
-    doc.text('Customer:', 20, 50);
-    doc.text(customer, 50, 50);
-    doc.text('Project:', 20, 60);
-    doc.text(project, 50,60);
+    doc.text('Customer:', left, 50);
+    doc.text(customer, left+30, 50);
+    doc.text('Project:', left, 57);
+    doc.text(project, left+30,57);
     doc.save('kfReport.pdf');
 }
 
 
 function generateReport() {
-    var doc = new jsPDF();
+    $('#customerSubmit').click();
+}
 
-    var customer = $('#customer').text();
+function printTable() {
+    var table = $('#dataTableExample');
+    var columns = getColumns();
+    var rows = table.rows();
 
-    doc.text(customer.toString(), 10, 10);
-    doc.save('a4.pdf');
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('table.pdf');
 }

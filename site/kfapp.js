@@ -124,13 +124,37 @@ function refreshTable(){
             { data: "capacity" },
             { data: "suctionTemp" },
             { data: "liquidTemp" },
-            { data: "tubeLength" },          
+            { data: "tubeLength" },
             { data: "circuitCount" },
             { data: "orificeType" },
             { data: "tableArrIndex", visible: false },
             { data: "perfIndex", visible: false}
         ]
     });
+}
+
+function getColumns(){
+    return [
+        { data: "style"},
+        { data: "partNumber" },
+        { data: "dpTubes" },
+        { data: "pctTubeLoading" },
+        { data: "dpNozzle" },
+        { data: "pctDistLoading" },
+        { data: "dpTotal" },
+        { data: "inletSize" },
+        { data: "outletSize" },
+        { data: "orificeSize" },
+        { data: "refrigerant" },
+        { data: "capacity" },
+        { data: "suctionTemp" },
+        { data: "liquidTemp" },
+        { data: "tubeLength" },
+        { data: "circuitCount" },
+        { data: "orificeType" },
+        { data: "tableArrIndex", visible: false },
+        { data: "perfIndex", visible: false}
+    ]
 }
 
 function exportToPdf(){
@@ -292,10 +316,11 @@ function genValidDistObjects(){
 	return dataObject.filter(filterTest);
 }
 
-function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length, minNzLoad = 75, maxNzLoad = 125){
+function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
 	// returns array of valid orifice sizes for given performance characteristics.	
     // min/maxNzLoad = percent nozzle loading for given specs.
-
+    var minNzLoad = 75;
+    var maxNzLoad = 125;
 	var keyList = Object.keys(orificeList);
 	var validKeys = [];
 	var pctLoading, nzlRating;
@@ -454,7 +479,7 @@ function viewDrawingModal(tableArrIndex) {
             break;
         case "hgb":
             i = 2;
-            setModalDimLocations([58, 12], [20, 49.3], [59.5, 83.9], [35, 68.3], [0, 0], [26.2, 63.6])
+            setModalDimLocations([58, 12], [20, 49.3], [59.5, 83.9], [35, 68.3], [0, 0], [26.2, 63.6]);
             $("#modalDistFlare").addClass("hiddenModal");
             break;
         case "flare":
@@ -474,10 +499,14 @@ function viewDrawingModal(tableArrIndex) {
     console.log("distType = " + distType);
     $("#drawingModal").modal("show");
 
-    function setModalDimLocations(distOD, distOAL, distInletOD, distInletLg = [0, 0], distFlare = [0, 0], distSideHoleLoc = [0, 0]) {
+    function setModalDimLocations(distOD, distOAL, distInletOD/*distInletLg = [0, 0], distFlare = [0, 0], distSideHoleLoc = [0, 0]*/) {
         // function sets css values for each dimensions position.  
         // each input variable is array containing [<top %>, <left %>].  No need to include % sign in value.  
         // setModalDimLocations([12, 11], ....)
+
+        var distInletLg = [0,0];
+        var distFlare=[0,0];
+        var distSideHoleLoc=[0,0];
 
         var idObj = {
             "#modalDistOD": distOD,
