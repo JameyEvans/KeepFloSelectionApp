@@ -16,6 +16,16 @@ var tableArrIndex;
 var emptyTableString = "Submit form to populate table with distributor recommendations.";
 refreshTable();
 
+//handle print
+jQuery(document).bind("keyup keydown", function(e){
+    if(e.ctrlKey && e.keyCode === 80){
+        printTable();
+        return false;
+    }
+});
+
+
+
 // Allows for select boxes to allow user input
 $(".taggable").select2({
     tags: true,
@@ -70,6 +80,20 @@ function refreshTable(){
         scrollX: true,
         dom: 'Bfrtip',
         buttons: [
+
+            {
+                extend: 'print',
+                messageTop: 'This data was produced by the KeepFlo selection software a subsidiary of Control Devices LLC',
+                pageSize: 'A4',
+                customize: function(doc){
+                    $(doc.document.body).find('body').css('font-size','5pt');
+                },
+                text: 'Print Table',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                orientation: 'landscape'
+            },
             {
                 text: 'Export To PDF',
                 extend: 'pdfHtml5',
@@ -171,6 +195,10 @@ function copyTable(){
 
 function exportToCsv(){
     $('.buttons-csv').click();
+}
+
+function printTable(){
+    $('.buttons-print').click();
 }
 
 

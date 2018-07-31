@@ -58,3 +58,11 @@ function printTable() {
     doc.autoTable(columns, rows);
     doc.save('table.pdf');
 }
+
+
+//handle print on ctrl + p
+jQuery(document).bind("keyup keydown", function(e){
+    if(e.ctrlKey && e.keyCode === 80){
+        $('')
+    }
+});
