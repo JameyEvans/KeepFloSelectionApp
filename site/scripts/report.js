@@ -50,7 +50,7 @@ function generateReport() {
 }
 
 function printTable() {
-    var table = $('#dataTableExample');
+    var table = $('#dataTableExample').DataTable();
     var columns = getColumns();
     var rows = table.rows();
 
