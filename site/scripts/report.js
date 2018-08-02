@@ -49,7 +49,11 @@ function generateReport() {
     $('#customerSubmit').click();
 }
 
-function printTable() {
+/*function printTable() {
+    $('.button-print').click();
+}*/
+
+/*function printReport() {
     var table = $('#dataTableExample');
     var columns = getColumns();
     var rows = table.rows();
@@ -57,12 +61,12 @@ function printTable() {
     var doc = new jsPDF('p', 'pt');
     doc.autoTable(columns, rows);
     doc.save('table.pdf');
-}
+}*/
 
 
 //handle print on ctrl + p
 jQuery(document).bind("keyup keydown", function(e){
     if(e.ctrlKey && e.keyCode === 80){
-        $('')
+        $('.buttons-print').click();
     }
 });

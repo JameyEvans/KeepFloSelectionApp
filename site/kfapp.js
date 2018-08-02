@@ -17,12 +17,12 @@ var emptyTableString = "Submit form to populate table with distributor recommend
 refreshTable();
 
 //handle print
-jQuery(document).bind("keyup keydown", function(e){
+/*$(document).bind("keyup keydown", function(e){
     if(e.ctrlKey && e.keyCode === 80){
         printTable();
         return false;
     }
-});
+});*/
 
 
 
