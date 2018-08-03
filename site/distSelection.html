@@ -12,6 +12,7 @@
     <!-- Select2 for better dropdowns: https://select2.org/ -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
 
 
@@ -193,7 +194,7 @@
                                 </div>
 
                                 <div class="col-xs-6">
-                                    <button id="distSelectBtn" class="btn btn-primary" style="display:inline-block; clear:left;">
+                                    <button id="distSelectBtn" class="btn btn-primary " style="display:inline-block; clear:left;">
                                         Select Distributor
                                     </button>
                                 </div>
@@ -382,7 +383,8 @@
                 <div class="panel-heading">
                     Distributor Table
                     <span class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export Table<span class="caret"></span></a>
+                        <a href="#" role="button" onclick="printTable()" style="padding-right:25px;"><span class="fas fa-print"></span>&nbsp;Print</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fas fa-file-export"></span>&nbsp;Export<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" onclick="copyTable()">Copy Table</a></li>
                             <li><a href="#" onclick="exportToCsv()">CSV</a></li>

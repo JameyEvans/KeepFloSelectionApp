@@ -49,20 +49,26 @@ function generateReport() {
     $('#customerSubmit').click();
 }
 
-function printTable() {
-    var table = $('#dataTableExample').DataTable();
+/*function printTable() {
+    $('.button-print').click();
+}*/
+
+/*function printReport() {
+    var table = $('#dataTableExample');
     var columns = getColumns();
     var rows = table.rows();
 
     var doc = new jsPDF('p', 'pt');
     doc.autoTable(columns, rows);
     doc.save('table.pdf');
-}
+}*/
 
 
-//handle print on ctrl + p
+//handle windows print on ctrl + p todo://may need to adjust to handle mac?
 jQuery(document).bind("keyup keydown", function(e){
     if(e.ctrlKey && e.keyCode === 80){
-        $('')
+        $('.buttons-print').click();
     }
 });
+
+
