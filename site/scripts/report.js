@@ -64,9 +64,11 @@ function generateReport() {
 }*/
 
 
-//handle print on ctrl + p
+//handle windows print on ctrl + p todo://may need to adjust to handle mac?
 jQuery(document).bind("keyup keydown", function(e){
     if(e.ctrlKey && e.keyCode === 80){
         $('.buttons-print').click();
     }
 });
+
+
