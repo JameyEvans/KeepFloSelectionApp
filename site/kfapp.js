@@ -84,7 +84,7 @@ function refreshTable(){
             {
                 extend: 'print',
                 messageTop: '<p><strong>KeepFlo, Inc.</strong><br/>Fenton, Missouri<br/>636-349-2626<br/><emphasis>keepflo@aol.com</emphasis></p>',
-                messageBottom: 'KeepFlo, Inc. keepflo@aol.com',
+                messageBottom: '<p>&copy;2018 Control Devices LLC.</p>',
                 pageSize: 'A4',
                 customize: function(win){
                     $(win.document.body).find('table').addClass('display').css('font-size', '13px');
