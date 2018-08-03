@@ -83,16 +83,27 @@ function refreshTable(){
 
             {
                 extend: 'print',
-                messageTop: 'This data was produced by the KeepFlo selection software a subsidiary of Control Devices LLC',
+                messageTop: '<p><strong>KeepFlo, Inc.</strong><br/>Fenton, Missouri<br/>636-349-2626<br/><emphasis>keepflo@aol.com</emphasis></p>',
+                messageBottom: 'KeepFlo, Inc. keepflo@aol.com',
                 pageSize: 'A4',
-                customize: function(doc){
-                    $(doc.document.body).find('body').css('font-size','5pt');
+                customize: function(win){
+                    $(win.document.body).find('table').addClass('display').css('font-size', '13px');
+                    $(win.document.body).find('table').css('text-align','center');
+                    $(win.document.body).find('table').css('border','10pt');
+                    /*$(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+                        $(this).css('background-color', '#D0D0D0');
+                    });*/
+                    /*$(win.document.body).find('th').css('background-color', '#0278BE'); todo: color table header*/
+                    $(win.document.body).find('th').css('background-color', '#F8F8F8');
+                    $(win.document.body).find('h1').css('text-align','left');
                 },
                 text: 'Print Table',
+                title:'KeepFlo Distributor Selection',
                 exportOptions: {
                     columns: ':visible'
                 },
-                orientation: 'landscape'
+                orientation: 'landscape',
+                footer: true,
             },
             {
                 text: 'Export To PDF',
