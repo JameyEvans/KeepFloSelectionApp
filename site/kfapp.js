@@ -366,7 +366,7 @@ function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
 	var pctLoading, nzlRating;
 
     if (fmStrOrificeSize.toLowerCase() !== "select") {
-        nzlRating = StdNozzleRating(refrgt, orificeList[keyList[fmStrOrificeSize]], tLiq, tSuct, length);
+        nzlRating = StdNozzleRating(refrgt, orificeList[fmStrOrificeSize], tLiq, tSuct, length);
         pctLoading = sysCapacity / nzlRating * 100;
 		validKeys.push([fmStrOrificeSize, nzlRating, pctLoading]);  // was push(fmStrOrificeSize); 07.06.18
 	} else{
