@@ -334,7 +334,8 @@ filterTest = function(el) {
     	if(element[0] !== null && element[0] !== undefined  && element[0] !== "any" && element[0].toLowerCase() !== "select"){
             // console.log(element[0] + " does not equal 'any'");
 
-    		if(element[0] != element[1]){
+            // Zach, don't change this to !==.
+            if (element[0] != element[1]) {
     			//console.log(element[0] + " does not equal " + element[1]);
                 isValid = false;
     		}
@@ -423,15 +424,18 @@ function genHTMLFormData(){
                 tempObject.pctNzLoading = pctNzLoading.toFixed(1); // percent loading of nozzle
                 dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading);  // pressure drop across nozzle
                 tempObject.dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading).toFixed(1);  // pressure drop across nozzle
+                tempObject.orificeSize = arrValidNozzle[i][0];
                 
 
-			} else{
+            } else {
+                // if venturi
                 partNumber = el.bodyStyle;
                 tempObject.partNumber = partNumber;
                 pctNzLoading = 999;  // this will need to be updated
                 tempObject.pctNzLoading = pctNzLoading.toFixed(1);
                 dpNozzle = 999; // this will need to be updated
                 tempObject.dpNozzle = dpNozzle.toFixed(1);
+                tempObject.orificeSize = "N/A";
 			}
             var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
             tempObject.percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
@@ -453,7 +457,7 @@ function genHTMLFormData(){
             tempObject.inletSize = el.inletDiameter;
             tempObject.outletSize = fmStrCircuitSize;
             tempObject.circuitCount = fmCircuitCt;
-            tempObject.orificeSize = arrValidNozzle[i][0];
+            
             tempObject.orificeType = el.nozzleType;
             tempObject.tableArrIndex = tableArrIndex;
             tempObject.drawingType = el.drawingType;

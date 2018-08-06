@@ -51,6 +51,26 @@ table.dataTable td.child{
 	width: 80%;
 	padding: 10px;
 }*/
+
+/*Unit buttons within preferences dropdown*/
+.unitDiv button {
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    height: 100%;
+    font-weight: 700;
+    color: steelblue;
+    letter-spacing: 1px;
+    font-size: inherit;
+    transition: all 0.2s;
+}
+
+.unitDiv button:hover {
+    color: white;
+    background: steelblue;
+    border: none;
+}
+
 label {
     font-size: 90%;
     white-space: nowrap;

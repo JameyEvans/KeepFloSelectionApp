@@ -44,7 +44,14 @@
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferences<span class="caret"></span></a>
+                            
                             <ul class="dropdown-menu">
+                                <li>
+                                    <div class="unitDiv">
+                                        <button id="standardUnitBtn">Std</button>
+                                        <button id="metricUnitBtn">Metric</button>
+                                    </div>
+                                </li>
                                 <li>
                                     <a href="#quoteRequestForm"
                                        data-toggle="modal"
@@ -72,10 +79,13 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!--END NAV/TOOL BAR-->
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#standardDist">Select Unknown Distributor</a></li>
-            <li><a data-toggle="tab" href="#rateDistributor">Rate Known Distributor Model</a></li>
-        </ul>
+        <div style="padding-top:4.5em; margin-left: 30px;">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#standardDist">Select Unknown Distributor</a></li>
+                <li><a data-toggle="tab" href="#rateDistributor">Rate Known Distributor Model</a></li>
+            </ul>
+        </div>
+        
 
         <div class="tab-content">
             <div id="standardDist" class="tab-pane fade in active">
