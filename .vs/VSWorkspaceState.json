@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\python"
+    "\\site",
+    "\\site\\data",
+    "\\site\\libs",
+    "\\site\\scripts",
+    "\\site\\styles",
+    "\\site\\templates"
   ],
-  "SelectedNode": "\\kfapp.js",
+  "SelectedNode": "\\site\\distSelection.html",
   "PreviewInSolutionExplorer": false
 }
