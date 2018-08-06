@@ -1,0 +1,54 @@
+#drawingDemoH1{
+    padding-bottom: 1em;
+}
+
+.modal-body{
+   width: 100%;
+   min-width: 400px;
+   text-align: center;
+   position: relative;
+}
+
+#modalDistOD{
+    position: absolute;
+    top: 47%;
+    left: 9.5%;
+}
+
+#modalDistOAL{
+    position: absolute;
+    top: 9%;
+    left: 46.5%;
+}
+
+#modalDistInletOD{
+    position: absolute;
+    top: 49%;
+    left: 81.5%;
+}
+
+#modalDistInletLg{
+    position: absolute;
+    top: 17.5%;
+    left: 62.2%;
+}
+#modalDistFlare {
+    position: absolute;
+    top: 3%;
+    left: 85%;
+}
+#modalDistSideHoleLoc {
+    position: absolute;
+    top: 0%;
+    left: 85%;
+}
+.hiddenModal{
+    display: none;
+}
+.distImg{
+    width: 100%;
+}
+
+.btn{
+    margin-top: 1.5em;
+}

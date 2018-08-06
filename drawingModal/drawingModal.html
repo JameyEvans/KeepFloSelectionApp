@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Drawing Modal Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="drawingModal.css">
+    <link rel="shortcut icon" href="./images/dickbutt.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+</head>
+<body>
+    <h1 id="drawingDemoH1">Drawing Demo Modal</h1>
+
+    <div id="options">
+        <h3>Modal Options:</h3>
+        <p>Distributor Type:</p>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="std" checked="checked">Standard</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="flare">Flare</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="stub">Stub</label>
+        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="hgb">Hot Gas Bypass</label>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drawingModal">
+        Launch demo modal
+    </button>
+
+
+
+    <!-- Drawing Modal -->
+    <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div id="options">
+                        <p>Distributor Type:</p>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="std">Standard</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="flare">Flare</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="stub">Stub</label>
+                        <label class="radio-inline"><input type="radio" name="distTypeRadio" value="hgb">Hot Gas Bypass</label>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <img class="distImg" id="modalDistImg"src="./images/standardDistributor.png">
+                    <div id="modalDistOD">OD</div>
+                    <div id="modalDistOAL">oal</div>
+                    <div id="modalDistInletOD">inlet</div>
+                    <div id="modalDistInletLg">length</div>
+                    <div class="hiddenModal" id="modalDistFlare">flare</div>
+                    <div class="hiddenModal" id="modalDistSideHoleLoc">sideHole</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="https://youtu.be/M11SvDtPBhA?t=45s" id="partyBtn" class="btn btn-primary">Party!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="./drawingModal.js"></script>
+</body>
+</html>

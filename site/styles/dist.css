@@ -9,21 +9,91 @@ body{
 	background-color: white;
 }
 
+.container-fluid{
+    min-width: 480px;
+}
+
+.tab-content h3 {
+    height: 27px;
+    font-size: 1.5em;
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 30px;
+}
+.form-group{
+    max-height: 4em;
+    max-width: 275px;
+}
+
+/*responsive data children*/
+span.dtr-title{
+    text-align: left;
+    width: 70%;
+}
+span.dtr-data{
+    text-align: right;
+    width: 70%;
+}
+
+td li{
+    text-align: left;
+}
+table.dataTable td.child{
+    text-align: left;
+    padding-left: 5%;
+}
+/*Dropdown forms used by select2 plugin*/
+.select2-container .select2-selection--single {
+    height: 34px;
+}
 /*.container.main{
 	margin: auto;
 	width: 80%;
 	padding: 10px;
 }*/
 
-label{
-	font-size:90%;
+/*Unit buttons within preferences dropdown*/
+.unitDiv button {
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    height: 100%;
+    font-weight: 700;
+    color: steelblue;
+    letter-spacing: 1px;
+    font-size: inherit;
+    transition: all 0.2s;
 }
 
-/*table{
+.unitDiv button:hover {
+    color: white;
+    background: steelblue;
+    border: none;
+}
+
+label {
+    font-size: 90%;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+table{
+	text-align: center;
 	table-layout: auto;
 	font-family: 'Roboto', sans-serif;
 	font-size: medium;
-}*/
+}
+
+table th{
+    font-size: 15px;
+}
+
+table tr td:nth-child(2):hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: cornflowerblue;
+    cursor: pointer;
+}
 
 #myHeader{
 	background-color: whitesmoke;
@@ -33,12 +103,14 @@ th{
 	text-align: center;
 }
 
-#distContents tr:hover{
-	background-color: #9BC2E3;
+div.distContainer{
+    padding-left: 0;
+    padding-right: 0;
 }
 
-td{
-	min-width: 70px;
+div.perfContainer{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #data-container{
@@ -51,42 +123,89 @@ td{
 	display: none;
 }
 
-.table-fixed thead {
-	width: 97%;
+.hidden{
+    display: none;
 }
 
-table {
-	width: 100%;
+
+/* Drawing modal css */
+.modal-body {
+    width: 100%;
+    min-width: 400px;
+    text-align: center;
+    position: relative;
 }
-table td {
-	vertical-align: text-bottom;
+
+#modalDistOD {
+    position: absolute;
+    top: 47%;
+    left: 9.5%;
 }
-tbody {
-	height: 750px;
-	background-color: lightgray;
-	width:100%;
-	overflow-y: auto;
-	overflow-x: auto;
-	text-align: left;
-	font-size: 90%;
+
+#modalDistOAL {
+    position: absolute;
+    top: 9%;
+    left: 46.5%;
 }
-/*For Sticky Table Headers with scrolling body. width: 5.82% for 17 columns*/
-tbody td, thead th {
-	width: 5.82%;
-	text-align: left;
-	float: left;
+
+#modalDistInletOD {
+    position: absolute;
+    top: 49%;
+    left: 81.5%;
 }
-thead,tbody,tr,td,th {display:block;}
-thead {
-	background: #222222;
-	/* fallback */
+
+#modalDistInletLg {
+    position: absolute;
+    top: 17.5%;
+    left: 62.2%;
 }
-thead th {
-	height: 50px;
+
+#modalDistFlare {
+    position: absolute;
+    top: 3%;
+    left: 85%;
 }
-tr:after {
-	content: ' ';
-	display: block;
-	visibility: hidden;
-	clear:both;
+
+#modalDistSideHoleLoc {
+    position: absolute;
+    top: 0%;
+    left: 85%;
 }
+
+.hiddenModal {
+    display: none;
+}
+
+.distImg {
+    width: 500px;
+}
+
+table td{
+    white-space: nowrap;
+}
+
+.stnd-button{
+    margin-left: 10px;
+    width: 125px;
+}
+
+.dt-button{
+    display:none;
+}
+
+#customerSubmit{
+    display:none;
+}
+
+/* The sticky class is added to the header with JS when it 
+   reaches its scroll position 
+.sticky{
+	position: fixed;
+}
+
+ /*Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+/*
+.sticky + .content {
+  padding-top: 102px;
+}
+*/
