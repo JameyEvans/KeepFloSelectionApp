@@ -15,7 +15,24 @@ var tableArr = [];
 var tableArrIndex;
 var emptyTableString = "Submit form to populate table with distributor recommendations.";
 var printTableHeadersHTML;
+var isFirstClick = true;
 refreshTable();
+
+// ----------------------------------------------------------------------------------------
+// test functions go here:
+
+$("#selectKnownDist button").on("click", function () {
+    alert("This function has not yet been implemented.");
+});
+
+
+
+// ----------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
@@ -102,7 +119,7 @@ function refreshTable(){
                     return $("#printTableHeaderData")[0].innerHTML;
                 },
                 messageBottom: '<p>&copy;2018 Control Devices LLC.</p>',
-                pageSize: 'A4',
+                pageSize: 'Letter',
                 customize: function(win){
                     $(win.document.body).find('table').addClass('display').css('font-size', '13px');
                     $(win.document.body).find('table').css('text-align','center');
@@ -125,8 +142,13 @@ function refreshTable(){
             {
                 text: 'Export To PDF',
                 extend: 'pdfHtml5',
+
+                message: function () {
+                    return $("#printTableHeaderData")[0].innerHTML;
+                },
+
                 exportOptions:{
-                  columns: ':visible'
+                  columns: ':not(.noVis)'
                 },
                 orientation: 'landscape',
                 pageSize: 'LEGAL'
@@ -154,19 +176,27 @@ function refreshTable(){
         fixedHeader: {
             header: true
         },
-        "language": {
-            "emptyTable": "Table is empty."
+        language: {
+            emptyTable: function () {
+                if (isFirstClick) {
+                    isFirstClick = false;
+                    return "Complete form to populate table with distributor selection.";
+                }
+                else {
+                    return "No suitable distributors were found for this application.";
+                }
+            }
         },
-        "searching": false,
-        "order": [[18, "asc"]], //sort ascending by perfIndex
-        "columnDefs": [
+        searching: false,
+        order: [[18, "asc"]], //sort ascending by perfIndex
+        columnDefs: [
             {
                 "min-width": "110px",
-                "targets": 1
+                targets: 1
             },
             {
-                "targets": [11, 12, 13, 14, 17, 18],
-                "className": "noVis"
+                targets: [11, 12, 13, 14, 17, 18],
+                className: "noVis"
             }],
         columns: [
             { data: "style"},
@@ -491,7 +521,13 @@ function genHTMLFormData(){
             tempObject.dpTotal = (dpNozzle + dpTubes).toFixed(1);
             tempObject.dpTubes = dpTubes.toFixed(1);
             tempObject.pctTubeLoading = percentTubeLoading.toFixed(1) + "%";
-            tempObject.pctDistLoading = pctNzLoading.toFixed(1) + "%";
+            try {
+                tempObject.pctDistLoading = pctNzLoading.toFixed(1) + "%";
+            }
+            catch (err) {
+                tempObject.pctDistLoading = pctNzLoading + "%";
+            }
+            //removed .toFixed(1) temporarily, throwing error
             tempObject.inletSize = el.inletDiameter;
             tempObject.outletSize = fmStrCircuitSize;
             tempObject.circuitCount = fmCircuitCt;
@@ -547,6 +583,16 @@ function viewDrawingModal(tableArrIndex) {
         "modalDistFlare": tableArr[tableArrIndex].flareAnnot,
         "modalDistSideHoleLoc": tableArr[tableArrIndex].sideHoleLoc
     };
+
+    for (var key in dimObj) {
+        if (!isNaN(dimObj[key])) {
+            // if is a number
+            dimObj[key] = parseFloat(dimObj[key]).toFixed(3);
+        }
+        else {
+            console.log(dimObj[key] + " - NOT a num");
+        }        
+    }
     distType = tableArr[tableArrIndex].drawingType;
     // set appropriate image corresponding to radio button
     var i;
@@ -556,22 +602,22 @@ function viewDrawingModal(tableArrIndex) {
         case "std":
             i = 1;
             $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
-            setModalDimLocations([47, 9.5], [9, 46.5], [49, 81.5], [17.5, 62.2], [0, 0], [0, 0]);
+            setModalDimLocations([47, 14], [9, 46.5], [49, 76], [17.3, 61], [0, 0], [0, 0]);
             break;
         case "hgb":
             i = 2;
-            setModalDimLocations([58, 12], [20, 49.3], [59.5, 83.9], [35, 68.3], [0, 0], [26.2, 63.6]);
+            setModalDimLocations([58, 16], [20, 48.5], [59, 79], [34, 66.3], [0, 0], [25.5, 62]);
             $("#modalDistFlare").addClass("hiddenModal");
             break;
         case "flare":
             i = 3;
             $("#modalDistSideHoleLoc, #modalDistInletOD, #modalDistInletLg").addClass("hiddenModal");
-            setModalDimLocations([56.5, 16], [18.5, 52], [0, 0], [0, 0], [73.8, 83], [0, 0]);
+            setModalDimLocations([56.5, 19], [18.5, 52], [0, 0], [0, 0], [73.8, 83], [0, 0]);
             break;
         case "stub":
             i = 4;
             $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
-            setModalDimLocations([57, 12.3], [20.2, 48.5], [59, 83.8], [35.8, 70.7], [0, 0], [0, 0]);
+            setModalDimLocations([57, 16], [20.2, 48.5], [58.5, 78], [35, 68.2], [0, 0], [0, 0]);
             break;
         default:
             i = 0;
@@ -580,14 +626,10 @@ function viewDrawingModal(tableArrIndex) {
     console.log("distType = " + distType);
     $("#drawingModal").modal("show");
 
-    function setModalDimLocations(distOD, distOAL, distInletOD/*distInletLg = [0, 0], distFlare = [0, 0], distSideHoleLoc = [0, 0]*/) {
+    function setModalDimLocations(distOD, distOAL, distInletOD, distInletLg = [0, 0], distFlare = [0, 0], distSideHoleLoc = [0, 0]) {
         // function sets css values for each dimensions position.  
         // each input variable is array containing [<top %>, <left %>].  No need to include % sign in value.  
         // setModalDimLocations([12, 11], ....)
-
-        var distInletLg = [0,0];
-        var distFlare=[0,0];
-        var distSideHoleLoc=[0,0];
 
         var idObj = {
             "#modalDistOD": distOD,

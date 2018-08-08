@@ -339,8 +339,8 @@
                                     <th class="tubeLength">Length</th>
                                     <th class="circuitCount">Circuit Count</th>
                                     <th class="orificeType">Orifice Type</th>
-                                    <th class="tableArrIndex">tableArrIndex</th>
-                                    <th class="perfIndex">perfIndex</th>
+                                    <th class="tableArrIndex hidden">tableArrIndex</th>
+                                    <th class="perfIndex hidden">perfIndex</th>
                                 </tr>
                             </thead>
                         </table>
@@ -357,7 +357,7 @@
                                 Request Quote
                             </button>
 
-                            <button class="pull-right btn btn-default stnd-button"
+                            <button class="pull-right btn btn-default stnd-button hidden"
                                     data-toggle="modal"
                                     data-target="#reportRequestForm">Print Report
                             </button>
@@ -510,7 +510,7 @@
 
 
     <!-- Start Print Table Header HTML -->
-    <div id="printTableHeaderData" style="width: 100%;">
+    <div id="printTableHeaderData" class="hidden" style="width: 100%;">
         <h2>KeepFlo Refrigerant Distributor Selection Data</h2>
         <div style="width: 25%; float: left;">
             <p>Refrigerant: <span id="refrgtSpan">insert refrigerant here</span></p>
