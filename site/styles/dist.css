@@ -13,6 +13,75 @@ body{
     min-width: 480px;
 }
 
+#selectionModeTab{
+    font-size: 12px;
+    /*display: table;*/
+    width: 100%;
+    float: left;
+    margin-top: 4.5em;
+}
+
+
+
+#selectionModeTab button.selectedMode {
+    border-top: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    color: #555555;
+   
+}
+
+#selectionModeTab button.selectedMode:hover {
+    background-color: #FFFFFF;
+}
+
+#selectionModeTab button {   
+    border-bottom: 1px solid #eeeeee;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    background: none;
+    text-transform: uppercase;
+    height: 40px;
+    font-weight: 200;
+    font-size: 14px;
+    color: steelblue;
+    font-size: inherit;
+    transition: all 0.2s;
+    width: 33%;
+    max-width: 280px;
+    min-width: 172px;
+    float: left;
+    /*display: table-cell;*/
+    padding-left: 10px;
+    padding-right: 10px;    
+}
+
+#selectionModeTab button:hover{
+    background-color: lightsteelblue;
+    color: darkslateblue;
+}
+
+#selectionModeTab button:focus{
+    outline: 0;
+}
+
+#selectionModeTab #savingSpaceBtn {
+    max-width: none;
+    min-width: 0;
+    width: auto;
+    /*width: 33%;*/
+    /*float: none;
+    overflow: hidden;*/
+    white-space: nowrap;
+    
+}
+
+
+
+
 .tab-content h3 {
     height: 27px;
     font-size: 1.5em;

@@ -79,11 +79,12 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!--END NAV/TOOL BAR-->
-        <div style="padding-top:4.5em; margin-left: 30px;">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#standardDist">Select Unknown Distributor</a></li>
-                <li><a data-toggle="tab" href="#rateDistributor">Rate Known Distributor Model</a></li>
-            </ul>
+        <div id="selectionModeTab" style="margin-left: 30px;">
+            
+                <button id="selectUnknownBtn" class="selectedMode">Select Unknown Distributor</button>        
+                <button id="rateKnownBtn" >Rate Known Distributor Model</button>
+                <button id="savingSpaceBtn"> </button>
+            
         </div>
         
 
@@ -116,7 +117,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="inletSize">Inlet Size (inch):</label>
+                                    <label for="inletSize">Inlet Size (<span class="unitLg">inch</span>):</label>
                                     <select id="inletSize" name="inletSize" class="form-control">
                                         <option value="any" selected>Select</option>
                                         <option value=0.375>3/8</option>
@@ -136,7 +137,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="tubingOD">Circuit Tubing OD (in):</label>
+                                    <label for="tubingOD">Circuit Tubing OD (<span class="unitLg">inch</span>):</label>
                                     <select id="tubingOD" name="tubingOD" class="form-control">
                                         <option value="any" selected hidden>Select</option>
                                         <option value=0.156>5/32</option>
@@ -234,12 +235,12 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="capacity">Capacity (tons):</label>
+                                    <label for="capacity">Capacity (<span class="unitCapacity">tons</span>):</label>
                                     <input type="number" id="capacity" name="capacity" class="form-control">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="suctionTempOld">Suction Temperature (&deg;F):</label>
+                                    <label for="suctionTempOld">Suction Temperature (&deg;<span class="unitTemp">F</span>):</label>
                                     <select id="suctionTempOld" name="suctionTempOld" class="form-control taggable">
                                         <option value=40 selected>40</option>
                                         <option value=20>20</option>
@@ -250,7 +251,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="liquidTemp">Liquid Temperature (&deg;F):</label>
+                                    <label for="liquidTemp">Liquid Temperature (&deg;<span class="unitTemp">F</span>):</label>
                                     <select id="liquidTemp" name="liquidTemp" class="form-control taggable">
                                         <option value=50>50</option>
                                         <option value=60>60</option>
@@ -264,7 +265,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="tubeLength">Distributor Tube Length (in):</label>
+                                    <label for="tubeLength">Distributor Tube Length (<span class="unitLg">inch</span>):</label>
                                     <select id="tubeLength" name="tubeLength" class="form-control taggable">
                                         <option value=12>12</option>
                                         <option value=18>18</option>
@@ -279,106 +280,18 @@
                                         <option value=72>72</option>
                                     </select>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-            <!-- .........Rate Distributors Tab.............. -->
-            <div id="rateDistributor" class="tab-pane fade in">
-                <div class="container">
-                    <!-- performance specs -->
-                    <div class="col-sm-6 perfContainer container">
-                        <h3 class="col-sm-12 title">Performance Criteria</h3>
-                        <div class="col-sm-12 rightFormContent">
-                            <form>
-                                <div class="col-sm-6 form-group">
-                                    <label for="refrgType">Refrigerant Type:</label>
-                                    <select id="refrgType" name="refrgType" class="form-control">
-                                        <option value="R-12" selected>R-12</option>
-                                        <option value="R-22" selected>R-22</option>
-                                        <option value="R-134a" selected>R-134a</option>
-                                        <option value="R-401a" selected>R-401a</option>
-                                        <option value="R-402a" selected>R-402a</option>
-                                        <option value="R-404a" selected>R-404a</option>
-                                        <option value="R-407c" selected>R-407c</option>
-                                        <option value="R-410a" selected>R-410a</option>
-                                        <option value="R-502" selected>R-502</option>
-                                        <option value="R-507" selected>R-507</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-6 form-group">
-                                    <label for="capacity">Capacity (tons):</label>
-                                    <input type="number" id="capacity" name="capacity" class="form-control">
-                                </div>
-
-                                <div class="col-sm-6 form-group">
-                                    <label for="suctionTemp">Suction Temperature (&deg;F):</label>
-                                    <select id="suctionTemp" name="suctionTemp" class="form-control taggable">
-                                        <option value=40 selected>40</option>
-                                        <option value=20>20</option>
-                                        <option value=0>0</option>
-                                        <option value=-20>-20</option>
-                                        <option value=-40>-40</option>
-                                    </select>
-                                </div>
-
-
-                                <div class="col-sm-6 form-group">
-                                    <label for="liquidTemp">Liquid Temp (&deg;F):</label>
-                                    <input type="text" list="liquidTemp" />
-                                    <datalist id="liquidTemp">
-                                        <option value=50>50</option>
-                                        <option value=60>60</option>
-                                        <option value=70>70</option>
-                                        <option value=80>80</option>
-                                        <option value=90>90</option>
-                                        <option value=100 selected>100</option>
-                                        <option value=110>110</option>
-                                        <option value=120>120</option>
-                                    </datalist>
-                                </div>
-
-                                <div class="col-sm-6 form-group">
-                                    <label for="liquidTemp">Liquid Temperature (&deg;F):</label>
-                                    <select id="liquidTemp" name="liquidTemp" class="form-control">
-                                        <option value=50>50</option>
-                                        <option value=60>60</option>
-                                        <option value=70>70</option>
-                                        <option value=80>80</option>
-                                        <option value=90>90</option>
-                                        <option value=100 selected>100</option>
-                                        <option value=110>110</option>
-                                        <option value=120>120</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-6 form-group">
-                                    <label for="tubeLength">Distributor Tube Length (in):</label>
-                                    <select id="tubeLength" name="tubeLength" class="form-control">
-                                        <option value=12>12</option>
-                                        <option value=18>18</option>
-                                        <option value=24>24</option>
-                                        <option value=30 selected>30</option>
-                                        <option value=36>36</option>
-                                        <option value=42>42</option>
-                                        <option value=48>48</option>
-                                        <option value=54>54</option>
-                                        <option value=60>60</option>
-                                        <option value=66>66</option>
-                                        <option value=72>72</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6 form-group">
+                                <div id="distPartNumberInputDiv" class="col-xs-12 col-sm-6 form-group hidden">
                                     <label for="distPartNumber">Distributor Part Number:</label>
                                     <input type="text" id="distPartNumber" name="distPartNumber" class="form-control">
                                 </div>
-                                <div class="col-sm-6">
-                                    <button type="button" id="distSelectBtn">Rate distributor for properties listed</button>
+
+                                <div id="selectKnownDist" class="col-xs-12 col-sm-6 hidden">
+                                    <button class="btn btn-primary" type="button" style="display:inline-block; clear:left;">
+                                        Rate Known Distributor
+                                    </button>
                                 </div>
+
                             </form>
                         </div>
                     </div>
@@ -595,6 +508,22 @@
     <!-- END Drawing Modal -->
 
 
+
+    <!-- Start Print Table Header HTML -->
+    <div id="printTableHeaderData" style="width: 100%;">
+        <h2>KeepFlo Refrigerant Distributor Selection Data</h2>
+        <div style="width: 25%; float: left;">
+            <p>Refrigerant: <span id="refrgtSpan">insert refrigerant here</span></p>
+            <p>Suction Temperature: <span id="suctionTempSpan">insert suction temp here</span> (&deg;<span class="unitTemp">F</span>)</p>
+            <p>Liquid Temperature: <span id="liquidTempSpan">insert liquid temp here</span> (&deg;<span class="unitTemp">F</span>)</p>
+        </div>
+        <div style="width: 25%; float: left;">
+            <p>Number of Circuits: <span id="circuitCtSpan">insert number circuits here</span></p>
+            <p>Circuit Tube Length: <span id="tubeLengthSpan">insert tube length here</span> (<span class="unitLg">in</span>)</p>
+            <p>Capacity: <span id="capacitySpan">insert capacity here</span> (<span class="unitCapacity">tons</span>)</p>
+        </div>
+
+    </div>
 
 
 

@@ -14,15 +14,10 @@ var tableSelector, tableHTML;
 var tableArr = [];
 var tableArrIndex;
 var emptyTableString = "Submit form to populate table with distributor recommendations.";
+var printTableHeadersHTML;
 refreshTable();
 
-//handle print
-/*$(document).bind("keyup keydown", function(e){
-    if(e.ctrlKey && e.keyCode === 80){
-        printTable();
-        return false;
-    }
-});*/
+
 
 
 
@@ -33,7 +28,7 @@ $(".taggable").select2({
     height: "34px",
     createTag: function (params) {
         var term = $.trim(params.term);
-        console.log(term);
+        //console.log(term);
         if (isNaN(term)) {
             console.log(term + "is not a number");
             return null;
@@ -65,13 +60,33 @@ $("#distType").on("change", function () {
 });
 // 
 
+// Distributor selection mode tabs
+
+$("#selectionModeTab button").on("click", function () {
+    $("#selectionModeTab button").removeClass("selectedMode");
+    $(this).addClass("selectedMode");
+    if ($(this)[0].id === "rateKnownBtn") {
+        $("div.distContainer").addClass("hidden");
+        $("#selectKnownDist").removeClass("hidden");
+        $("#distPartNumberInputDiv").removeClass("hidden");
+        $("div.perfContainer").removeClass("col-xs-6");
+    } else {
+        $("div.distContainer").removeClass("hidden");
+        $("#selectKnownDist").addClass("hidden");
+        $("#distPartNumberInputDiv").addClass("hidden");
+        $("div.perfContainer").addClass("col-xs-6");
+    }
+});
+
+var testVariable;
+
 function refreshTable(){
     if ($.fn.DataTable.isDataTable("#dataTableExample")) {
         //$("#dataTableExample").DataTable().clear().destroy();
         $("#dataTableExample").DataTable().clear().rows.add(tableArr).draw();
         return;
     }
-
+    
     $('#dataTableExample').DataTable({
         responsive: true,
         data: tableArr,
@@ -83,7 +98,9 @@ function refreshTable(){
 
             {
                 extend: 'print',
-                messageTop: '<p><strong>KeepFlo, Inc.</strong><br/>Fenton, Missouri<br/>636-349-2626<br/><emphasis>keepflo@aol.com</emphasis></p>',
+                messageTop: function () {
+                    return $("#printTableHeaderData")[0].innerHTML;
+                },
                 messageBottom: '<p>&copy;2018 Control Devices LLC.</p>',
                 pageSize: 'A4',
                 customize: function(win){
@@ -98,9 +115,9 @@ function refreshTable(){
                     $(win.document.body).find('h1').css('text-align','left');
                 },
                 text: 'Print Table',
-                title:'KeepFlo Distributor Selection',
+                title:'',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':not(.noVis)'
                 },
                 orientation: 'landscape',
                 footer: true,
@@ -143,7 +160,14 @@ function refreshTable(){
         "searching": false,
         "order": [[18, "asc"]], //sort ascending by perfIndex
         "columnDefs": [
-            { "min-width": "110px", "targets": 1 }],
+            {
+                "min-width": "110px",
+                "targets": 1
+            },
+            {
+                "targets": [11, 12, 13, 14, 17, 18],
+                "className": "noVis"
+            }],
         columns: [
             { data: "style"},
             { data: "partNumber" },
@@ -215,7 +239,7 @@ function printTable(){
 
 var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667,
 					"1/4" : 0.25, "1/3" : 0.3333,
-					"1/2" : 0.5, "3/4" : 0.75,
+					"1/2" : 0.5, "2/3" : 0.666667, "3/4" : 0.75,
 					"1" : 1, "1-1/2" : 1.5,
 					"2" : 2, "2-1/2" : 2.5,
 					"3" : 3, "4" : 4,
@@ -309,9 +333,18 @@ function updateFormValues(){
 		fmCapacity = document.querySelector("#capacity").value;
 		fmSuctionTemp = document.querySelector("#suctionTempOld").selectedOptions[0].value;
 		fmLiquidTemp = document.querySelector("#liquidTemp").selectedOptions[0].value;
-		fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
+        fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
+        updatePrintTableHeaderData();
 }
 
+function updatePrintTableHeaderData() {
+    $("#refrgtSpan")[0].innerText = fmRefrgt;
+    $("#suctionTempSpan")[0].innerText = fmSuctionTemp;
+    $("#liquidTempSpan")[0].innerText = fmLiquidTemp;
+    $("#circuitCtSpan")[0].innerText = fmCircuitCt;
+    $("#tubeLengthSpan")[0].innerText = fmTubeLength;
+    $("#capacitySpan")[0].innerText = fmCapacity;
+}
 
 // required form entries: fmCircuitCt, fmRefrgt, fmCapacity, fmSuctionTemp, 
 //						  fmLiquidTemp, fmTubeLength
@@ -399,12 +432,13 @@ function genHTMLFormData(){
 	//clear html in table body
     tableSelector.innerHtml = "";
 
+    // if distributor has potential to be nozzle type then determine all valid nozzle combinations and capacities and store in arrValidNozzle
 	if(fmDistType !== "venturi"){
 		arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad = 50, maxNzLoad = 150);
 	}
 
 
-
+    // loop through each element in objArr of valid distributors
 	objArr.forEach(function(el){
         var iLength;
         if (el.type.toLowerCase() === "venturi") {
@@ -414,6 +448,8 @@ function genHTMLFormData(){
         }
         for (var i = 0; i < iLength; i++) {
             var tempObject = [];
+            var qt = StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp);
+            var percentTubeLoading = ((fmCapacity / fmCircuitCt) / qt) * 100;
 
             if (el.type.toLowerCase() === "nozzle") {
                 partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
@@ -431,14 +467,16 @@ function genHTMLFormData(){
                 // if venturi
                 partNumber = el.bodyStyle;
                 tempObject.partNumber = partNumber;
-                pctNzLoading = 999;  // this will need to be updated
-                tempObject.pctNzLoading = pctNzLoading.toFixed(1);
-                dpNozzle = 999; // this will need to be updated
+                // RateVenturi returns object containing {"q", "dpn", "dpt", "dp"}
+                var venturiStats = {};
+                venturiStats = RateVenturi(fmTubeLength, fmCircuitCt, fmCapacity, qt);
+                dpNozzle = venturiStats.dpn
+                tempObject.pctNzLoading = (dpNozzle / 5).toFixed(1);           
                 tempObject.dpNozzle = dpNozzle.toFixed(1);
                 tempObject.orificeSize = "N/A";
 			}
-            var percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
-            tempObject.percentTubeLoading = ((fmCapacity / fmCircuitCt) / StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp)) * 100;
+            
+            tempObject.percentTubeLoading = percentTubeLoading;
 			// pressure drop across tubes assuming 10 psi is 100% loading
             tempObject.perfIndex = getPerfIndex(pctNzLoading, percentTubeLoading);
             //console.log("pn: " + tempObject.partNumber + "pctNzLoading = " + pctNzLoading + "; percentTubeLoading = " + percentTubeLoading + "; perfIndex = " + tempObject.perfIndex);

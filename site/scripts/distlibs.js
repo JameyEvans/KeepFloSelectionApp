@@ -162,7 +162,7 @@ function StdTubeRating(tLiq, length, style, refrgt, outletSize,tSuct) {
         else if (refrgt == "R-502" || refrgt == "R-402A" ||
             refrgt == "R-404A" || refrgt == "R-507") {
             qStd = 43.51153 * Math.pow(eval(outletSize), 2.91);
-            kEvap = .57194756 + tSuct * 8.6468732e-03 + tSuct * (5.0839548e-05);
+            kEvap = .57194756 + tSuct * (8.6468732e-03 + tSuct * 5.0839548e-05);
         }
     }
     else {
@@ -349,7 +349,7 @@ function pctLoadToDP(refrgt, pctNzLoading) {
     }
     return k * (pctNzLoading/100);
 }
-function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, numberCircuits, q=0, qt) {
+function RateVenturi(length, numberCircuits, q=0, qt) {
     // assigns values to q (capacity), plt (percent tube loading), pln (percent nozzle loading)
     // dpn (pressure drop nozzle), dpt (pressure drop tubes), and dp (total pressure drop)
     // returns 0 if no errors, else returns error code
@@ -369,7 +369,14 @@ function RateVenturi(tLiq, tSuct, length, refrgt, outletSize, style, numberCircu
     dpn = 5 * kLoad;
     dpt = 20 * kLoad * length / 36;
     dp = dpn + dpt;
-    return q;
+
+    var venturiStats = {
+        "q": q,
+        "dpn": dpn,
+        "dpt": dpt,
+        "dp": dp
+    }
+    return venturiStats;
 }
 
 // tLiq = 100;
