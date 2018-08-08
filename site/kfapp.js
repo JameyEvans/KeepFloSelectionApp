@@ -568,11 +568,11 @@ $("#dataTableExample").on("click", "tr[role='row'] td:nth-child(2)", function ()
 
 function viewDrawingModal(tableArrIndex) {
     var distType;
-    var imgArr = ["./images/dickbutt.jpg",
-        "./images/standardDistributor.png",
-        "./images/hgbDistributor.png",
-        "./images/flareInlet.png",
-        "./images/stubInlet.png"
+    var imgArr = ["./site/images/dickbutt.jpg",
+        "./site/images/standardDistributor.png",
+        "./site/images/hgbDistributor.png",
+        "./site/images/flareInlet.png",
+        "./site/images/stubInlet.png"
     ];
 
     var dimObj = {
