@@ -4,7 +4,7 @@ dataObject = distributorLibrary;
 var fmDistType, fmInletType, fmInletSize, fmCircuitCt;
 var fmStrCircuitSize, fmFloatCircuitSize, fmOrificeSize, fmStrOrificeSize, fmNozzleType, fmHasSidePort;
 var fmRefrgt, fmCapacity, fmSuctionTemp, fmLiquidTemp;
-var fmTubeLength, fmSelectBtn;
+var fmTubeLength, fmSelectBtn, fmDistPartNumber;
 isCollapsed = false;
 var isAllShown = true;
 var fields = [];
@@ -22,7 +22,19 @@ refreshTable();
 // test functions go here:
 
 $("#selectKnownDist button").on("click", function () {
-    alert("This function has not yet been implemented.");
+    updateFormValues();
+    //alert("distPartNumber = " + fmDistPartNumber);
+    var tempObject = getDistType(fmDistPartNumber);
+    if (typeof tempObject == "object") {
+        genHTMLFormData(tempObject);
+        if (tableArr.length == 0) {
+            alert("'" + fmDistPartNumber + "' is not a recognized part number.");
+        }
+        return;
+    } else {
+        alert("'" + fmDistPartNumber + "' is not a recognized part number.");
+    }
+
 });
 
 
@@ -97,7 +109,8 @@ $("#selectionModeTab button").on("click", function () {
 
 var testVariable;
 
-function refreshTable(){
+function refreshTable() {
+    const startTime = performance.now();
     if ($.fn.DataTable.isDataTable("#dataTableExample")) {
         //$("#dataTableExample").DataTable().clear().destroy();
         $("#dataTableExample").DataTable().clear().rows.add(tableArr).draw();
@@ -272,7 +285,7 @@ var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667,
 					"1/2" : 0.5, "2/3" : 0.666667, "3/4" : 0.75,
 					"1" : 1, "1-1/2" : 1.5,
 					"2" : 2, "2-1/2" : 2.5,
-					"3" : 3, "4" : 4,
+					"3" : 3, "4" : 4, "4.5":4.5,
 					"5" : 5, "6" : 6,
 					"8" : 8, "10" : 10,
 					"12" : 12, "15" : 15,
@@ -364,6 +377,7 @@ function updateFormValues(){
 		fmSuctionTemp = document.querySelector("#suctionTempOld").selectedOptions[0].value;
 		fmLiquidTemp = document.querySelector("#liquidTemp").selectedOptions[0].value;
         fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
+        fmDistPartNumber = document.querySelector("#distPartNumber").value;
         updatePrintTableHeaderData();
 }
 
@@ -380,43 +394,45 @@ function updatePrintTableHeaderData() {
 //						  fmLiquidTemp, fmTubeLength
 // optional: fmDistType, fmInletType, fmInletSize, fmCircuitSize, fmNozzleType,
 //			 fmOrificeSize, fmNozzleType, fmHasSidePort
-filterTest = function(el) {
-	// callback function for filter.  Assigns criteria to sort data objects.
-	arr = [[fmDistType, el.type], [fmInletType, el.inletType], [fmInletSize, el.inletDiameter], 
-	    [fmStrCircuitSize, el.circuitSize], [fmNozzleType, el.nozzleType], [fmHasSidePort, el.hasSidePort]];
 
-	// if circuit count is outside of min and max conditions return false
-	if(fmCircuitCt < el.minCircuit || fmCircuitCt > el.maxCircuit){
-			// console.log("element " + cnt + " returned false for tube condition.")
+
+function genValidDistObjects(dataArr = dataObject) {
+    filterTest = function (el) {
+        // callback function for filter.  Assigns criteria to sort data objects.
+        arr = [[fmDistType, el.type], [fmInletType, el.inletType], [fmInletSize, el.inletDiameter],
+        [fmStrCircuitSize, el.circuitSize], [fmNozzleType, el.nozzleType], [fmHasSidePort, el.hasSidePort]];
+
+        // if circuit count is outside of min and max conditions return false
+        if (fmCircuitCt < el.minCircuit || fmCircuitCt > el.maxCircuit) {
+            // console.log("element " + cnt + " returned false for tube condition.")
             return false;
- 	}
-    // Check each element in array to compare if it meets criteria.
-    var isValid = true;
-    arr.forEach(function(element){
-    	// console.log("el2 = " + element[0]);
-    	if(element[0] !== null && element[0] !== undefined  && element[0] !== "any" && element[0].toLowerCase() !== "select"){
-            // console.log(element[0] + " does not equal 'any'");
+        }
+        // Check each element in array to compare if it meets criteria.
+        var isValid = true;
+        arr.forEach(function (element) {
+            // console.log("el2 = " + element[0]);
+            if (element[0] !== null && element[0] !== undefined && element[0] !== "any" && element[0].toLowerCase() !== "select") {
+                // console.log(element[0] + " does not equal 'any'");
 
-            // Zach, don't change this to !==.
-            if (element[0] != element[1]) {
-    			//console.log(element[0] + " does not equal " + element[1]);
-                isValid = false;
-    		}
-    	}
-    });
+                // Zach, don't change this to !==.
+                if (element[0] != element[1]) {
+                    //console.log(element[0] + " does not equal " + element[1]);
+                    isValid = false;
+                }
+            }
+        });
 
-    // if element hasn't returned false already then it is a valid object
-    // console.log(el + " returned true.");
-    if(isValid){
-    	return true;
-    }else{
-    	return false;
-    }
-};
+        // if element hasn't returned false already then it is a valid object
+        // console.log(el + " returned true.");
+        if (isValid) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
-function genValidDistObjects(){
 	// returns array containing all valid distributor objects
-	return dataObject.filter(filterTest);
+	return dataArr.filter(filterTest);
 }
 
 function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
@@ -447,14 +463,22 @@ function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
 	return validKeys;
 }
 
-function genHTMLFormData(){
-	if(fmStrCircuitSize === "Select"){
-		fmStrCircuitSize = SelectTubeSize(fmLiquidTemp, fmTubeLength, "nozzle", fmRefrgt, fmSuctionTemp, fmCapacity, fmCircuitCt);
-	}
+function genHTMLFormData(objArr=0) {
+   
     // delete data from tableArr
     this.tableArr = [];
     this.tableArrIndex = 0;
-	var objArr = genValidDistObjects();
+    if (objArr === 0) {
+        if (fmStrCircuitSize === "Select") {
+            fmStrCircuitSize = SelectTubeSize(fmLiquidTemp, fmTubeLength, "nozzle", fmRefrgt, fmSuctionTemp, fmCapacity, fmCircuitCt);
+        }
+        objArr = genValidDistObjects();
+
+    } else {
+        objArr = genValidDistObjects([objArr]);
+    }
+
+	//var objArr = genValidDistObjects();
 	var HTMLStr = "";
 	var partNumber;
     var arrValidNozzle = [["N/A",null,null]];
@@ -464,7 +488,8 @@ function genHTMLFormData(){
 
     // if distributor has potential to be nozzle type then determine all valid nozzle combinations and capacities and store in arrValidNozzle
 	if(fmDistType !== "venturi"){
-		arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad = 50, maxNzLoad = 150);
+        arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad = 50, maxNzLoad = 150);
+        console.log(arrValidNozzle);
 	}
 
 
@@ -501,7 +526,8 @@ function genHTMLFormData(){
                 var venturiStats = {};
                 venturiStats = RateVenturi(fmTubeLength, fmCircuitCt, fmCapacity, qt);
                 dpNozzle = venturiStats.dpn
-                tempObject.pctNzLoading = (dpNozzle / 5).toFixed(1);           
+                pctNzLoading = (dpNozzle / 5) * 100;
+                tempObject.pctNzLoading = pctNzLoading.toFixed(1);           
                 tempObject.dpNozzle = dpNozzle.toFixed(1);
                 tempObject.orificeSize = "N/A";
 			}
@@ -547,8 +573,17 @@ function genHTMLFormData(){
             tableArr.push(tempObject);
             tableArrIndex++;
         }
-	});
+    });
+    // for debugging purposes
+    //const duration = performance.now() - startTime;   
+    //console.log(`genHTMLFormData took ${duration}ms before refreshTable()`);
+    // -------------
     refreshTable();  
+    // -------------
+    // debug
+    //const newDuration = performance.now() - startTime;
+    //console.log(`genHTMLFormData took ${newDuration}ms after refreshTable()`);
+    //
 
 }
 
@@ -602,7 +637,7 @@ function viewDrawingModal(tableArrIndex) {
         case "std":
             i = 1;
             $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
-            setModalDimLocations([47, 14], [9, 46.5], [49, 76], [17.3, 61], [0, 0], [0, 0]);
+            setModalDimLocations([47, 14], [9, 47.8], [49, 76], [17.3, 59.1], [0, 0], [0, 0]);
             break;
         case "hgb":
             i = 2;
@@ -612,12 +647,12 @@ function viewDrawingModal(tableArrIndex) {
         case "flare":
             i = 3;
             $("#modalDistSideHoleLoc, #modalDistInletOD, #modalDistInletLg").addClass("hiddenModal");
-            setModalDimLocations([56.5, 19], [18.5, 52], [0, 0], [0, 0], [73.8, 83], [0, 0]);
+            setModalDimLocations([56.5, 19], [18, 50.7], [0, 0], [0, 0], [73, 79.5], [0, 0]);
             break;
         case "stub":
             i = 4;
             $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
-            setModalDimLocations([57, 16], [20.2, 48.5], [58.5, 78], [35, 68.2], [0, 0], [0, 0]);
+            setModalDimLocations([57, 16], [20.2, 47.5], [58.5, 78], [35, 68.2], [0, 0], [0, 0]);
             break;
         default:
             i = 0;
@@ -655,6 +690,150 @@ function getPerfIndex(pctNzLoading, pctTubeLoading) {
         pctNzLoading = pctNzLoading - .1*(pctNzLoading - 100);
     }
     return Math.abs(100 - pctNzLoading) + Math.abs(100 - pctTubeLoading);
+}
+
+function getDistType(distPartNo) {
+
+    var knownDistObj = {};
+    fmDistType = "any";
+    fmInletType = "any";
+    fmInletSize = "any";
+    fmOrificeSize = "any";
+    fmStrOrificeSize = "Select";
+    fmNozzleType = "any";
+    fmHasSidePort = "no";
+
+
+
+    // venturi starts FXX-, SXX-, X-, or XX-
+    // inletSize/8 - circuitSize / 16 - circuitCount
+
+    // nozzle starts SXXX-, FXXX-, XXX-, XXXX-
+    // body style starting with inletSize / 8 - circuitCount - circuitSize (ex. 3/16) - nozzleNumber - circuitLength
+
+    // if no "-" then not valid part number
+    var result = distPartNo.split("-");
+    var len = result.length
+    if ((len - 1) == 0) {
+        console.log("distPartNo does not contain '-' and is not a valid part number");
+        return -1;
+    }
+
+
+    // if first character = s or f then drop character and set type = stub/flare
+    var firstChar = distPartNo[0].toLowerCase();
+    var evalString = distPartNo;
+
+    if (firstChar == "s") {
+        fmInletType = "solderIDM";
+        //evalString = distPartNo.substring(1);
+
+    } else if (firstChar == "f") {
+        fmInletType = "flare";
+        //evalString = distPartNo.substring(1);
+    }
+    else {
+        fmInletType = "solderODM";
+    }
+
+    // if next characters up to "-" has length < 3 then venturi
+
+    var index;
+    if (result[0].length < 3) {
+        fmDistType = "venturi";
+        fmStrCircuitSize = getFractionalSize(result[1]);
+        fmCircuitCt = result[2];
+        index = findWithAttr(dataObject, "bodyStyle", distPartNo);
+        if (index >= 0) {
+            return dataObject[index];
+        } else {
+            return -1;
+        }
+    }
+    // if next characters up to "-" has length >=3 then nozzle
+    else {
+        fmDistType = "nozzle";
+        fmStrCircuitSize = result[2];
+        fmCircuitCt = result[1];
+    }
+    index = findWithAttr(dataObject, "bodyStyle", result[0], "circuitSize", fmStrCircuitSize);
+    if (index < 0) {
+        // if its not a keepflo body style then maybe they entered a sporlan style
+        index = findWithAttr(dataObject, "sporlanStyle", result[0], "circuitSize", fmStrCircuitSize);
+    }
+    if (index >= 0) {
+        if (len > 3) {
+            if (dataObject[index].hasSidePort == "no") {
+                fmStrOrificeSize = result[3];
+                fmOrificeSize = eval(fmStrOrificeSize);
+
+            } else {
+                fmHasSidePort = "yes";
+                fmStrOrificeSize = result[4];
+                fmOrificeSize = eval(fmStrOrificeSize);
+            }
+        }
+        knownDistObj = dataObject[index];
+        //if (["5/32", "3/16", "1/4", "5/16", "3/8", "1/2"].includes(fmStrCircuitSize)) {
+        //    knownDistObj.circuitSize = fmStrCircuitSize;
+        //}
+        //else {
+        //    alert("Circuit size: '" + fmStrCircuitSize + "' was not recognized.");
+        //}
+        return knownDistObj;
+    } else {
+        return -1;
+    }
+
+
+    return knownDistObj;
+
+
+}
+
+
+function findWithAttr(array, attr1, value1, attr2 = null, value2=null) {
+    // returns index of object in array, with attribute = value
+    // ex.  var Data = [
+    // { id_list: 2, name: 'John', token: '123123' },
+    // { id_list: 1, name: 'Nick', token: '312312' }];
+    // findWithAttr(Data, 'name', 'John'); // returns 0
+    // findWithAttr(Data, 'token', '312312'); // returns 1
+    // findWithAttr(Data, 'id_list', '10'); // returns -1
+
+    if (attr2 === null) {
+        for (var i = 0; i < array.length; i += 1) {
+            if (array[i][attr1] == value1) {
+                return i;
+            }
+        }
+    } else {
+        for (var i = 0; i < array.length; i += 1) {
+            if (array[i][attr1] == value1 && array[i][attr2] == value2) {
+                return i;
+            }
+        }
+
+    }
+    
+    return -1;
+}
+
+function getFractionalSize(numerator, denominator = 16.) {
+    // numerator = float
+    var fraction = numerator / denominator;
+    var len = fraction.toString().length - 2;
+    // return string with reduced fraction / 16
+    var gcd = function (a, b) {
+        if (b < 0.0000001) return a;
+        return gcd(b, Math.floor(a % b))
+    };
+    var denominator = Math.pow(10, len);
+    var numerator = fraction * denominator;
+    var divisor = gcd(numerator, denominator);
+    numerator /= divisor;
+    denominator /= divisor;
+    return Math.floor(numerator) + "/" + Math.floor(denominator);
 }
 
 // to show modal use $('#myModal').modal('toggle'); or $('#myModal').modal('show'); or $('#myModal').modal('hide');
