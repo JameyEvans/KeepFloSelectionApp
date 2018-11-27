@@ -16,6 +16,8 @@ var tableArrIndex;
 var emptyTableString = "Submit form to populate table with distributor recommendations.";
 var printTableHeadersHTML;
 var isFirstClick = true;
+var minNzLoad = 50;
+var maxNzLoad = 200;
 refreshTable();
 
 // ----------------------------------------------------------------------------------------
@@ -43,7 +45,31 @@ $("#selectKnownDist button").on("click", function () {
 
 
 
+// set minNozzleLoad
+$("#fmMinNozzleLoading").on("change", function () {
+    let val = parseFloat($(this)[0].value);
+    if (isNaN(val)) {
+        let message = "'" + $(this)[0].value + "' is not a number.";
+        alert(message);
+        $(this)[0].value = minNzLoad;
+    }
+    else {
+        minNzLoad = parseFloat($(this)[0].value);
+    }
+});
 
+// set maxNzLoad
+$("#fmMaxNozzleLoading").on("change", function () {
+    let val = parseFloat($(this)[0].value);
+    if (isNaN(val)) {
+        let message = "'" + $(this)[0].value + "' is not a number.";
+        alert(message);
+        $(this)[0].value = maxNzLoad;
+    }
+    else {
+        maxNzLoad = parseFloat($(this)[0].value);
+    }
+});
 
 
 
@@ -66,7 +92,7 @@ $(".taggable").select2({
             id: term,
             text: term,
             newTag: true
-        }
+        };
     }
 });
 
@@ -150,7 +176,7 @@ function refreshTable() {
                     columns: ':not(.noVis)'
                 },
                 orientation: 'landscape',
-                footer: true,
+                footer: true
             },
             {
                 text: 'Export To PDF',
@@ -169,20 +195,23 @@ function refreshTable() {
             {
                 text: 'Export to Excel',
                 exportOptions:{
-                    columns: ':visible'
+                    //columns: ':visible'
+                    //columns: ':not(.noVis)'
+                    columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]                 
+                        
                 },
                 extend: 'excel'
             },
             {
                 extend: 'copy',
                 exportOptions:{
-                    columns: ':visible'
+                    columns: ':not(.noVis)'
                 }
             },
             {
                 extend: 'csv',
                 exportOptions:{
-                    columns: ':visible'
+                    columns: ':not(.noVis)'
                 }
             }
         ],
@@ -298,7 +327,7 @@ var orificeList = {"1/9" : 0.1111, "1/6" : 0.1667,
 
 //initialize selectors
 fmSelectBtn = document.querySelector("#distSelectBtn");
-tableSelector = document.querySelector("#distContents");
+//tableSelector = document.querySelector("#distContents");
 
 fmSelectBtn.addEventListener("click", function (event) {
     //not sure why the preventDefault works but it prevents errors.
@@ -411,7 +440,7 @@ function genValidDistObjects(dataArr = dataObject) {
         var isValid = true;
         arr.forEach(function (element) {
             // console.log("el2 = " + element[0]);
-            if (element[0] !== null && element[0] !== undefined && element[0] !== "any" && element[0].toLowerCase() !== "select") {
+            if (element[0] !== null && element[0] !== undefined && element[0] !== "any" && element[0].toLowerCase() !== "unknown") {
                 // console.log(element[0] + " does not equal 'any'");
 
                 // Zach, don't change this to !==.
@@ -438,13 +467,13 @@ function genValidDistObjects(dataArr = dataObject) {
 function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
 	// returns array of valid orifice sizes for given performance characteristics.	
     // min/maxNzLoad = percent nozzle loading for given specs.
-    var minNzLoad = 75;
-    var maxNzLoad = 125;
+    //minNzLoad = 75;
+    //maxNzLoad = 125;
 	var keyList = Object.keys(orificeList);
 	var validKeys = [];
 	var pctLoading, nzlRating;
 
-    if (fmStrOrificeSize.toLowerCase() !== "select") {
+    if (fmStrOrificeSize.toLowerCase() !== "unknown") {
         nzlRating = StdNozzleRating(refrgt, orificeList[fmStrOrificeSize], tLiq, tSuct, length);
         pctLoading = sysCapacity / nzlRating * 100;
 		validKeys.push([fmStrOrificeSize, nzlRating, pctLoading]);  // was push(fmStrOrificeSize); 07.06.18
@@ -463,7 +492,7 @@ function genValidOrificeSizes(sysCapacity, refrgt, tLiq, tSuct, length){
 	return validKeys;
 }
 
-function genHTMLFormData(objArr=0) {
+function genHTMLFormData(objArr = 0) {   
    
     // delete data from tableArr
     this.tableArr = [];
@@ -484,11 +513,11 @@ function genHTMLFormData(objArr=0) {
     var arrValidNozzle = [["N/A",null,null]];
     var nzlRating, pctNzLoading, dpNozzle;
 	//clear html in table body
-    tableSelector.innerHtml = "";
+    //tableSelector.innerHtml = "";
 
     // if distributor has potential to be nozzle type then determine all valid nozzle combinations and capacities and store in arrValidNozzle
 	if(fmDistType !== "venturi"){
-        arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad = 50, maxNzLoad = 150);
+        arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad, maxNzLoad);
         console.log(arrValidNozzle);
 	}
 
@@ -504,7 +533,8 @@ function genHTMLFormData(objArr=0) {
         for (var i = 0; i < iLength; i++) {
             var tempObject = [];
             var qt = StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp);
-            var percentTubeLoading = ((fmCapacity / fmCircuitCt) / qt) * 100;
+            var percentTubeLoading = fmCapacity / fmCircuitCt / qt * 100;
+            var isValid = true;
 
             if (el.type.toLowerCase() === "nozzle") {
                 partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
@@ -525,8 +555,11 @@ function genHTMLFormData(objArr=0) {
                 // RateVenturi returns object containing {"q", "dpn", "dpt", "dp"}
                 var venturiStats = {};
                 venturiStats = RateVenturi(fmTubeLength, fmCircuitCt, fmCapacity, qt);
-                dpNozzle = venturiStats.dpn
+                dpNozzle = venturiStats.dpn;
                 pctNzLoading = (dpNozzle / 5) * 100;
+                if (pctNzLoading <= minNzLoad || pctNzLoading >= maxNzLoad) {
+                    isValid = false;
+                }
                 tempObject.pctNzLoading = pctNzLoading.toFixed(1);           
                 tempObject.dpNozzle = dpNozzle.toFixed(1);
                 tempObject.orificeSize = "N/A";
@@ -569,9 +602,10 @@ function genHTMLFormData(objArr=0) {
             tempObject.sideHoleLoc = el.sideHoleLoc;
 
 
-
-            tableArr.push(tempObject);
-            tableArrIndex++;
+            if (isValid) {
+                tableArr.push(tempObject);
+                tableArrIndex++;
+            }
         }
     });
     // for debugging purposes
@@ -699,7 +733,7 @@ function getDistType(distPartNo) {
     fmInletType = "any";
     fmInletSize = "any";
     fmOrificeSize = "any";
-    fmStrOrificeSize = "Select";
+    fmStrOrificeSize = "Unknown";
     fmNozzleType = "any";
     fmHasSidePort = "no";
 
@@ -713,7 +747,7 @@ function getDistType(distPartNo) {
 
     // if no "-" then not valid part number
     var result = distPartNo.split("-");
-    var len = result.length
+    var len = result.length;
     if ((len - 1) == 0) {
         console.log("distPartNo does not contain '-' and is not a valid part number");
         return -1;
@@ -785,10 +819,6 @@ function getDistType(distPartNo) {
         return -1;
     }
 
-
-    return knownDistObj;
-
-
 }
 
 
@@ -819,9 +849,9 @@ function findWithAttr(array, attr1, value1, attr2 = null, value2=null) {
     return -1;
 }
 
-function getFractionalSize(numerator, denominator = 16.) {
+function getFractionalSize(numer, denom = 16.) {
     // numerator = float
-    var fraction = numerator / denominator;
+    var fraction = numer / denom;
     var len = fraction.toString().length - 2;
     // return string with reduced fraction / 16
     var gcd = function (a, b) {

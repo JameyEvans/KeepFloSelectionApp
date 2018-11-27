@@ -1,0 +1,19 @@
+Preference Modal:
+	* Unit Preferences
+		- Capacity (tons, btu/hr, btu/min, kw)
+		- Temperature (°F, °C)
+		- Tube length (in, cm)
+	* Add min/max distributor loading (50% to 150% default)
+
+Data:
+	* Finish adding dimensional data for each distributor.
+
+Output:
+	* Not currently throwing out venturi distributors outside of allowable distributor loading range. -- done 11/27/18
+
+Table:
+	* Add function to remove selected rows from table
+
+Validation:
+	* Validate capacity data is correct.
+
