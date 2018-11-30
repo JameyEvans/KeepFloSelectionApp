@@ -498,7 +498,7 @@ function genHTMLFormData(objArr = 0) {
     this.tableArr = [];
     this.tableArrIndex = 0;
     if (objArr === 0) {
-        if (fmStrCircuitSize === "Select") {
+        if (fmStrCircuitSize === "Unknown") {
             fmStrCircuitSize = SelectTubeSize(fmLiquidTemp, fmTubeLength, "nozzle", fmRefrgt, fmSuctionTemp, fmCapacity, fmCircuitCt);
         }
         objArr = genValidDistObjects();

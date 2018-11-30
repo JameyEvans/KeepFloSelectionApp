@@ -1,13 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\CDISite",
+    "\\CDISite\\js",
+    "\\CDISite\\p.typekit.net",
+    "\\CDISite\\products",
+    "\\CDISite\\use.typekit.net",
     "\\site",
-    "\\site\\data",
     "\\site\\libs",
-    "\\site\\scripts",
-    "\\site\\styles",
-    "\\site\\templates"
+    "\\site\\libs\\bootstrap",
+    "\\site\\libs\\bootstrap\\dist"
   ],
-  "SelectedNode": "\\distSelection.html",
+  "SelectedNode": "\\CDISite\\styles.css",
   "PreviewInSolutionExplorer": false
 }
