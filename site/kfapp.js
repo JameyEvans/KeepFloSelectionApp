@@ -39,6 +39,17 @@ $("#selectKnownDist button").on("click", function () {
 
 });
 
+var distForm = document.getElementById("standardDist");
+
+distForm.addEventListener("keyup", function (event) {
+    // Cancel the default action if needed
+    event.preventDefault();
+    // Number 13 is the enter key on the keyboard
+    if (event.keyCode === 13) {
+        document.getElementById("distSelectBtn").click();
+    }
+})
+
 
 
 // ----------------------------------------------------------------------------------------
@@ -147,6 +158,7 @@ function refreshTable() {
         responsive: true,
         data: tableArr,
         paging: false,
+        autoWidth: true,
         scrollY: 400,
         scrollX: true,
         dom: 'Bfrtip',
@@ -233,9 +245,10 @@ function refreshTable() {
         order: [[18, "asc"]], //sort ascending by perfIndex
         columnDefs: [
             {
-                "min-width": "110px",
+                "min-width": "80px",
                 targets: 1
             },
+            
             {
                 targets: [11, 12, 13, 14, 17, 18],
                 className: "noVis"
@@ -535,6 +548,7 @@ function genHTMLFormData(objArr = 0) {
             var qt = StdTubeRating(fmLiquidTemp, fmTubeLength, el.type, fmRefrgt, el.circuitSize, fmSuctionTemp);
             var percentTubeLoading = fmCapacity / fmCircuitCt / qt * 100;
             var isValid = true;
+            var dpTubes = null;
 
             if (el.type.toLowerCase() === "nozzle") {
                 partNumber = generateNozzlePartNumber(el.bodyStyle, fmCircuitCt, el.circuitSize, arrValidNozzle[i][0]);
@@ -546,6 +560,7 @@ function genHTMLFormData(objArr = 0) {
                 dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading);  // pressure drop across nozzle
                 tempObject.dpNozzle = pctLoadToDP(fmRefrgt, pctNzLoading).toFixed(1);  // pressure drop across nozzle
                 tempObject.orificeSize = arrValidNozzle[i][0];
+                dpTubes = percentTubeLoading / 10;
                 
 
             } else {
@@ -563,21 +578,23 @@ function genHTMLFormData(objArr = 0) {
                 tempObject.pctNzLoading = pctNzLoading.toFixed(1);           
                 tempObject.dpNozzle = dpNozzle.toFixed(1);
                 tempObject.orificeSize = "N/A";
+                dpTubes = venturiStats.dpt;
 			}
             
             tempObject.percentTubeLoading = percentTubeLoading;
 			// pressure drop across tubes assuming 10 psi is 100% loading
             tempObject.perfIndex = getPerfIndex(pctNzLoading, percentTubeLoading);
             //console.log("pn: " + tempObject.partNumber + "pctNzLoading = " + pctNzLoading + "; percentTubeLoading = " + percentTubeLoading + "; perfIndex = " + tempObject.perfIndex);
-            var dpTubes = percentTubeLoading / 10;
-            tempObject.dpTubes = percentTubeLoading / 10;
+            //var dpTubes = percentTubeLoading / 10;
+            //tempObject.dpTubes = percentTubeLoading / 10;
             tempObject.style = el.type;
             tempObject.refrigerant = fmRefrgt;
             tempObject.capacity = fmCapacity;
             tempObject.suctionTemp = fmSuctionTemp;
             tempObject.liquidTemp = fmLiquidTemp;
             tempObject.tubeLength = fmTubeLength;
-            tempObject.dpTotal = (dpNozzle + dpTubes).toFixed(1);
+            var dpTotal = dpNozzle + dpTubes;
+            tempObject.dpTotal = dpTotal.toFixed(1);
             tempObject.dpTubes = dpTubes.toFixed(1);
             tempObject.pctTubeLoading = percentTubeLoading.toFixed(1) + "%";
             try {

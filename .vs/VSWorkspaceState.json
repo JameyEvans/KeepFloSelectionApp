@@ -9,8 +9,8 @@
     "\\site",
     "\\site\\libs",
     "\\site\\libs\\bootstrap",
-    "\\site\\libs\\bootstrap\\dist"
+    "\\site\\styles"
   ],
-  "SelectedNode": "\\CDISite\\styles.css",
+  "SelectedNode": "\\site\\kfapp.js",
   "PreviewInSolutionExplorer": false
 }

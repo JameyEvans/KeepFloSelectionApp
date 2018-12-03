@@ -9,7 +9,7 @@ body{
 	/*background: #8e9eab;  !* fallback for old browsers *!
 	background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);   Chrome: 10-25, Safari 5.1-6;
 	background: linear-gradient(to right, #eef2f3, #8e9eab); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Karla', sans-serif;
 }
 
 .reqSpan{
@@ -113,7 +113,7 @@ span.dtr-title{
 }
 span.dtr-data{
     text-align: right;
-    width: 70%;
+    width: 70%; /* was 70%*/
     padding-left: 20px;
 }
 
@@ -157,7 +157,8 @@ table.dataTable td.child{
     font-weight: 400;
 }
 label {
-    font-size: 90%;
+    font-size: 13px;
+    font-family: 'Karla', sans-serif;
     white-space: nowrap;
     margin-right: 10px;
 }
@@ -165,12 +166,11 @@ label {
 table{
 	text-align: center;
 	table-layout: auto;
-	font-family: 'Roboto', sans-serif;
-	font-size: medium;
+	
 }
 
 table th{
-    font-size: 15px;
+    font-size: 14px;
 }
 
 table tr td:nth-child(2):hover {
@@ -214,6 +214,24 @@ div.perfContainer{
 
 
 /* Drawing modal css */
+.modal{
+    text-align: center;
+    padding: 0!important;
+}
+
+.modal:before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.modal-dialog{
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
 .modal-content{
     min-width: 550px;
 }
@@ -269,6 +287,7 @@ div.perfContainer{
 
 table td{
     white-space: nowrap;
+    text-transform: capitalize;
 }
 
 .stnd-button{
@@ -279,6 +298,30 @@ table td{
 .dt-button{
     display:none;
 }
+
+.solid-button {
+    border: none;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    /*line-height: 45px;*/
+    min-height: 45px;
+    max-height: 65px;
+    text-transform: uppercase;
+    outline: 0;
+    width: 100%;
+    max-width: 275px;
+    border-radius: 1px;
+    background-color: #0067b2;
+    word-wrap: break-word;
+}
+
+    .solid-button:hover {
+        background-color: #03547F;
+    }
 
 #customerSubmit{
     display:none;

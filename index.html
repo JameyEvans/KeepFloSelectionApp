@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="./site/styles/dist.css">
     <link rel="shortcut icon" href="http://www.cdivalve.com/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 </head>
 <body>
 
@@ -53,7 +54,7 @@
                                     <div class="unitDiv" style="padding: 3px 20px">
                                         <div class="unitRadio" style="padding-left:20px;">
                                             <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" checked><strong>Standard</strong> (Tons of Refrigeration, &deg;F, in.)</label>
-                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" checked><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
+                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType"><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
                                             <label class="radio" style="padding:3px 0px 3px 0px;"><input type="radio" name="unitType"><strong>Metric</strong> (kW, &deg;C, cm)</label>
                                         </div>
                                         <div style="padding: 3px 0px 3px 0px;">
@@ -114,7 +115,7 @@
         
 
         <div class="tab-content">
-            <div id="standardDist" class="tab-pane fade in active">
+            <div id="standardDist" class="tab-pane fade in active" style="max-width: 1162px;">
                 <div>
                     <!-- distributor specs -->
                     <div class=" col-xs-6 distContainer container">
@@ -228,8 +229,8 @@
                                     </select>
                                 </div>
 
-                                <div class="col-xs-6">
-                                    <button id="distSelectBtn" class="btn btn-primary " style="display:inline-block; clear:left;">
+                                <div class="col-sm-6 form-group" style="display: inline-block;">
+                                    <button id="distSelectBtn" class="solid-button">
                                         Make Distributor Selection
                                     </button>
                                 </div>
@@ -311,7 +312,7 @@
                                 </div>
 
                                 <div id="selectKnownDist" class="col-xs-12 col-sm-6 hidden">
-                                    <button class="btn btn-primary" type="button" style="display:inline-block; clear:left;">
+                                    <button class="solid-button" type="button" style="display:inline-block; clear:left;">
                                         Rate Known Distributor
                                     </button>
                                 </div>
@@ -375,9 +376,9 @@
                         <div style="vertical-align:middle; padding-bottom: 10px;">
                             <a href="http://www.cdivalve.com/" target="_blank">&copy Control Devices LLC</a>
 
-                            <button class="pull-right btn btn-primary stnd-button"
+                            <button class="pull-right solid-button"
                                     data-toggle="modal"
-                                    data-target="#quoteRequestForm">
+                                    data-target="#quoteRequestForm" style="width: 125px; min-height: unset; height: 30px;">
                                 Request Quote
                             </button>
 
@@ -505,7 +506,7 @@
 
     <!-- START drawing modal -->
     <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
