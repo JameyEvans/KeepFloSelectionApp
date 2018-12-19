@@ -28,6 +28,52 @@
 <body>
 
 
+    <!--<div class="navContainer">
+        <div id="selectionModeTab">
+            <button id="selectUnknownBtn" class="selectedMode">Select Unknown Distributor</button>
+            <button id="rateKnownBtn">Rate Known Distributor Model</button>
+        </div>
+
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferences<span class="caret"></span></a>
+
+            <ul class="dropdown-menu" style="min-width: 250px">
+                <li>
+                    <div class="unitDiv" style="padding: 3px 20px">
+                        <div class="unitRadio" style="padding-left:20px;">
+                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" checked><strong>Standard</strong> (Tons of Refrigeration, &deg;F, in.)</label>
+                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType"><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
+                            <label class="radio" style="padding:3px 0px 3px 0px;"><input type="radio" name="unitType"><strong>Metric</strong> (kW, &deg;C, cm)</label>
+                        </div>
+                        <div style="padding: 3px 0px 3px 0px;">
+                            <input name="fmMinNozzleLoading" id="fmMinNozzleLoading" style="width:50px; margin-left:25px;" value="50" />
+                        </div>
+                        <div style="padding: 3px 0px 3px 0px;">
+                            <label for="fmMaxNozzleLoading" style="width:100px;">Max Percent<br />Distributor Loading:</label>
+                            <input name="fmMaxNozzleLoading" id="fmMaxNozzleLoading" style="width:50px; margin-left:25px;" value="200" />
+                        </div>
+                    </div>
+                </li>
+
+                <li role="separator" class="divider"></li>
+                <li>
+                    <a href="#quoteRequestForm"
+                       data-toggle="modal"
+                       data-target="#quoteRequestForm">
+                        Request Quote
+                    </a>
+                </li>
+                <li>
+                    <a href="#reportRequestForm"
+                       data-toggle="modal"
+                       data-target="#reportRequestForm">
+                        Print Report
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>-->
     <div class="container-fluid main">
         <!--NAV/TOOL Bar-->
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -39,16 +85,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">KeepFlo Distributor Selection Tool</a>
+                    </button>                   
+                    <!--<a class="navbar-brand" href="#">KeepFlo Distributor Selection Tool</a>-->
                 </div>
+
+                
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div id="selectionModeTab" class="">
+                        <button id="selectUnknownBtn" class="selectedMode">Select Unknown Distributor</button>
+                        <button id="rateKnownBtn">Rate Known Distributor Model</button>
+                    </div>
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferences<span class="caret"></span></a>
-                            
+
                             <ul class="dropdown-menu" style="min-width: 250px">
                                 <li>
                                     <div class="unitDiv" style="padding: 3px 20px">
@@ -63,20 +115,20 @@
                                         </div>
                                         <div style="padding: 3px 0px 3px 0px;">
                                             <label for="fmMaxNozzleLoading" style="width:100px;">Max Percent<br />Distributor Loading:</label>
-                                            <input name="fmMaxNozzleLoading" id="fmMaxNozzleLoading" style="width:50px; margin-left:25px;" value="200"/>
+                                            <input name="fmMaxNozzleLoading" id="fmMaxNozzleLoading" style="width:50px; margin-left:25px;" value="200" />
                                         </div>
-                                        
+
                                         <!--<div class="col-sm-6">
-                                            <input type="radio" name="unitType" value="std" />Standard<br />
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="radio" name="unitType" value="metric" />Metric<br />
-                                        </div>-->
+                            <input type="radio" name="unitType" value="std" />Standard<br />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="radio" name="unitType" value="metric" />Metric<br />
+                        </div>-->
                                         <!--<button id="standardUnitBtn">Std</button>-->
                                         <!--<button id="metricUnitBtn">Metric</button>-->
                                     </div>
                                 </li>
-                                
+
                                 <!--<li><a href="#">Set Presets</a></li><!--todo: Create Modal for unit presets for %dist offloading etc.-->
                                 <!--<li><a href="#">Set Unit Standard</a></li><!--todo: dropdown with unit conversion buttons?-->
                                 <li role="separator" class="divider"></li>
@@ -88,9 +140,10 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a  href="#reportRequestForm"
-                                        data-toggle="modal"
-                                        data-target="#reportRequestForm">Print Report
+                                    <a href="#reportRequestForm"
+                                       data-toggle="modal"
+                                       data-target="#reportRequestForm">
+                                        Print Report
                                     </a>
                                 </li><!--todo: dropdown with unit conversion buttons?-->
 
@@ -105,14 +158,8 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!--END NAV/TOOL BAR-->
-        <div id="selectionModeTab" style="margin-left: 30px;">
-            
-                <button id="selectUnknownBtn" class="selectedMode">Select Unknown Distributor</button>        
-                <button id="rateKnownBtn" >Rate Known Distributor Model</button>
-                <button id="savingSpaceBtn"> </button>
-            
-        </div>
         
+
 
         <div class="tab-content">
             <div id="standardDist" class="tab-pane fade in active" style="max-width: 1162px;">
@@ -384,7 +431,8 @@
 
                             <button class="pull-right btn btn-default stnd-button hidden"
                                     data-toggle="modal"
-                                    data-target="#reportRequestForm">Print Report
+                                    data-target="#reportRequestForm">
+                                Print Report
                             </button>
                         </div>
                     </div>
@@ -394,39 +442,36 @@
     </div>
 
     <!--HIDDEN VALUES-->
-
     <!-- Original html table -->
     <table class="table table-striped hidden" id="dataTable">
         <thead>
-        <tr>
-            <th class="style">Style</th>
-            <th class="partNumber">Part Number</th>
-            <th class="refrigerant">Refrigerant</th>
-            <th class="capacity hideMyShit">Tons</th>
-            <th class="suctionTemp hideMyShit">Evap &deg;F</th>
-            <th class="liquidTemp hideMyShit">Liquid &deg;F</th>
-            <th class="tubeLength hideMyShit">Length</th>
-            <th class="dpTotal">dP(total)</th>
-            <th class="dpTubes">dP(tubes)</th>
-            <th class="pctTubeLoading">% Tube Loading</th>
-            <th class="dpNozzle">dP (nozzle/body)</th>
-            <th class="pctDistLoading">% Dist Loading</th>
-            <th class="inletSize hideMyShit">Inlet Size</th>
-            <th class="outletSize">Outlet Size</th>
-            <th class="circuitCount hideMyShit">Circuit Count</th>
-            <th class="orificeSize hideMyShit">Orifice Size</th>
-            <th class="orificeType hideMyShit">Orifice Type</th>
-        </tr>
+            <tr>
+                <th class="style">Style</th>
+                <th class="partNumber">Part Number</th>
+                <th class="refrigerant">Refrigerant</th>
+                <th class="capacity hideMyShit">Tons</th>
+                <th class="suctionTemp hideMyShit">Evap &deg;F</th>
+                <th class="liquidTemp hideMyShit">Liquid &deg;F</th>
+                <th class="tubeLength hideMyShit">Length</th>
+                <th class="dpTotal">dP(total)</th>
+                <th class="dpTubes">dP(tubes)</th>
+                <th class="pctTubeLoading">% Tube Loading</th>
+                <th class="dpNozzle">dP (nozzle/body)</th>
+                <th class="pctDistLoading">% Dist Loading</th>
+                <th class="inletSize hideMyShit">Inlet Size</th>
+                <th class="outletSize">Outlet Size</th>
+                <th class="circuitCount hideMyShit">Circuit Count</th>
+                <th class="orificeSize hideMyShit">Orifice Size</th>
+                <th class="orificeType hideMyShit">Orifice Type</th>
+            </tr>
         </thead>
         <tbody id="distContents">
-        <tr>
-            <td colspan="17">Complete form to populate data</td>
-        </tr>
+            <tr>
+                <td colspan="17">Complete form to populate data</td>
+            </tr>
         </tbody>
     </table>
     <!--End Table-->
-
-
     <!--Quote Request Form *Modal-->
     <div id="quoteRequestForm"
          class="modal fade"
@@ -448,7 +493,6 @@
         </div>
     </div>
     <!--END Quote Request Form *Modal-->
-
     <!--START Report Modal-->
     <div id="reportRequestForm"
          class="modal fade"
@@ -467,14 +511,14 @@
                             <input type="text" class="form-control" id="projectName" placeholder="New Project">
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div style="text-align: left;">
                             <label>Customer</label>
                             <input type="text" class="form-control" id="customer" placeholder="New Customer">
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div style="text-align: left;" class="checkbox">
                             <label>
@@ -482,7 +526,7 @@
                             </label>
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div style="text-align: left;">
                             <label>Upload Selected Distributors</label>
@@ -502,8 +546,6 @@
         </div>
     </div>
     <!-- END Report Modal -->
-
-
     <!-- START drawing modal -->
     <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -531,9 +573,6 @@
         </div>
     </div>
     <!-- END Drawing Modal -->
-
-
-
     <!-- Start Print Table Header HTML -->
     <div id="printTableHeaderData" class="hidden" style="width: 100%;">
         <h2>KeepFlo Refrigerant Distributor Selection Data</h2>

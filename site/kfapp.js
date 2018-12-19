@@ -9,7 +9,6 @@ isCollapsed = false;
 var isAllShown = true;
 var fields = [];
 var requiredForms, isValid;
-var testItem = "This is a test";
 var tableSelector, tableHTML;
 var tableArr = [];
 var tableArrIndex;

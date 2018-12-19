@@ -4,6 +4,36 @@
     margin: 12.7mm 10mm 10mm 10mm;
 } 
 
+/*@media all{
+    #ieMain {
+        display: none;
+    }
+    
+    /*_:-ms-lang(x), #ieMain{
+        display: block;
+    }
+
+    _:-ms-lang(x), #kfAppMain{
+        display: none;
+    }*/
+
+}
+
+
+
+/*#ieMain{
+    display: none;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    #ieMain {
+        display: block;
+    }
+
+    #kfAppMain {
+        display: none;
+    }
+}*/
 
 body{
 	/*background: #8e9eab;  !* fallback for old browsers *!
@@ -23,71 +53,146 @@ body{
 
 .container-fluid{
     min-width: 480px;
+    padding-left:0;
+    padding-right: 0;
+}
+
+/* New Nav */
+#main-nav a{
+    display: block;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.4s;
+}
+
+#main-nav ul{
+    list-style: none;
+    display: flex;
+}
+
+#main-nav li{
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+#main-nav li:hover .sub-menu{
+    display: block;    
+    width: 100%;
+   
+
+}
+
+#main-nav .sub-menu{
+    display: none;
+}
+
+
+
+/* End New Nav */
+
+
+
+
+
+.navContainer{
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*display: inline-block;*/
+}
+
+.navContainer .dropdown{
+    display: inline-block;
+    float: right;
+}
+.no-bs-dropdown{
+    /*color: red;*/
+}
+.no-bs-dropdown-content{
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 250px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    display: none;
+}
+
+.no-bs-dropdown:hover .no-bs-dropdown-content{
+    display: block;
 }
 
 #selectionModeTab{
-    font-size: 12px;
-    /*display: table;*/
-    width: 100%;
+    width: 50%;
+    height: 50px;
     float: left;
-    margin-top: 4.5em;
+    margin-left: 30px;
 }
 
 
 
-#selectionModeTab button.selectedMode {
-    border-top: 1px solid #eeeeee;
-    border-right: 1px solid #eeeeee;
-    border-left: 1px solid #eeeeee;
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    color: #555555;
-   
-}
+    #selectionModeTab button.selectedMode {
+        border: none;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: 0;
+        font-size: 13px;
+        font-weight: 500;
+        /*line-height: 45px;*/
+        /*min-height: 45px;*/
+        /*max-height: 65px;*/
+        text-transform: uppercase;
+        outline: 0;
+        /*width: 100%;*/
+        /*max-width: 275px;*/
+        border-radius: 1px;
+        background-color: #0067b2;
+        word-wrap: break-word;
+        transition: color 0.5s ease;
+    }
 
 #selectionModeTab button.selectedMode:hover {
-    background-color: #FFFFFF;
+    
 }
 
 #selectionModeTab button {   
-    border-bottom: 1px solid #eeeeee;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    background: none;
-    text-transform: uppercase;
-    height: 40px;
-    font-weight: 200;
-    font-size: 14px;
-    color: steelblue;
-    font-size: inherit;
-    transition: all 0.2s;
-    width: 33%;
-    max-width: 280px;
-    min-width: 172px;
-    float: left;
-    /*display: table-cell;*/
-    padding-left: 10px;
-    padding-right: 10px;    
+   width: 50%;
+   float: left;
+   height: 100%;
+   background: none;
+   border: none;
 }
 
 #selectionModeTab button:hover{
-    background-color: lightsteelblue;
-    color: darkslateblue;
+    
 }
 
 #selectionModeTab button:focus{
-    outline: 0;
+    
 }
 
 #selectionModeTab #savingSpaceBtn {
-    max-width: none;
-    min-width: 0;
-    width: auto;
-    /*width: 33%;*/
-    /*float: none;
-    overflow: hidden;*/
-    white-space: nowrap;
+   
     
 }
 
@@ -100,6 +205,10 @@ body{
     white-space: nowrap;
     text-align: left;
     padding-left: 30px;
+}
+
+.tab-content{
+    margin-top: 50px;
 }
 .form-group{
     max-height: 4em;

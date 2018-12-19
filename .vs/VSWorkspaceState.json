@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CDISite",
     "\\CDISite\\js",
     "\\CDISite\\p.typekit.net",
     "\\CDISite\\products",
     "\\CDISite\\use.typekit.net",
     "\\site",
-    "\\site\\libs",
+    "\\site\\data",
     "\\site\\libs\\bootstrap",
+    "\\site\\scripts",
     "\\site\\styles"
   ],
-  "SelectedNode": "\\site\\kfapp.js",
+  "SelectedNode": "\\site\\data\\distObjects.xlsx",
   "PreviewInSolutionExplorer": false
 }

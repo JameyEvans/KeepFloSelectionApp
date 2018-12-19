@@ -3,7 +3,7 @@ Preference Modal:
 		- Capacity (tons, btu/hr, btu/min, kw)
 		- Temperature (°F, °C)
 		- Tube length (in, cm)
-	* Add min/max distributor loading (50% to 150% default)
+	* Add min/max distributor loading (50% to 150% default) -- Done
 
 Data:
 	* Finish adding dimensional data for each distributor.
@@ -16,4 +16,9 @@ Table:
 
 Validation:
 	* Validate capacity data is correct.
+
+Drawing Modal:
+	* Add flareHGB, stdStraight drawing
+	* Remove Dickbutt; add default "no dimensional data available" screen
+
 
