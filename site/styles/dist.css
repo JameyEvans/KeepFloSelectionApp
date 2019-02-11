@@ -1,17 +1,221 @@
+@page {
+    size: auto; /* auto is the initial value */
+    /* this affects the margin in the printer settings */
+    margin: 12.7mm 10mm 10mm 10mm;
+} 
+
+@media all{
+    #ieMain {
+        display: none;
+    }
+    
+    _:-ms-lang(x), #ieMain{
+        display: block;
+    }
+
+    _:-ms-lang(x), #kfAppMain{
+        display: none;
+    }
+
+ } 
+
+
+#ieMain{
+    display: none;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    #ieMain {
+        display: block;
+    }
+
+    #kfAppMain {
+        display: none;
+    }
+}
+
 body{
 	/*background: #8e9eab;  !* fallback for old browsers *!
 	background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);   Chrome: 10-25, Safari 5.1-6;
 	background: linear-gradient(to right, #eef2f3, #8e9eab); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Karla', sans-serif;
 }
 
-.container{
-	background-color: white;
+a{
+    color: #0067b2;
+}
+span .unitLg{
+    text-transform: none;
+}
+.reqSpan{
+    font-size:115%;
+    color:red;
+}
+
+.container {
+    background-color: white;
 }
 
 .container-fluid{
     min-width: 480px;
+    padding-left:0;
+    padding-right: 0;
 }
+
+/* New Nav */
+#main-nav a{
+    display: block;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.4s;
+}
+
+#main-nav ul{
+    list-style: none;
+    display: flex;
+}
+
+#main-nav li{
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+#main-nav li:hover .sub-menu{
+    display: block;    
+    width: 100%;
+   
+
+}
+
+#main-nav .sub-menu{
+    display: none;
+}
+
+
+
+/* End New Nav */
+
+
+
+
+
+.navContainer{
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*display: inline-block;*/
+}
+
+.navContainer .dropdown{
+    float: right;
+}
+
+.no-bs-dropdown-content{
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 250px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    display: none;
+}
+
+.no-bs-dropdown:hover .no-bs-dropdown-content{
+    display: block;
+}
+
+#selectionModeTab{
+    width: 50%;
+    height: 60px;
+    float: left;
+    margin-left: 30px;
+}
+
+/* table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc{
+    background: none;
+} */
+
+table.dataTable thead th.sorting:after{
+    display: none;
+    background-image: none;
+
+}
+table.dataTable th{
+    font-size: 12px;
+}
+
+
+    #selectionModeTab button.selectedMode {
+        border: none;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: 0 5px 0 5px;
+        font-size: 13px;
+        font-weight: 500;
+        /*line-height: 45px;*/
+        /*min-height: 45px;*/
+        /*max-height: 65px;*/
+        text-transform: uppercase;
+        outline: 0;
+        /*width: 100%;*/
+        /*max-width: 275px;*/
+        border-radius: 1px;
+        background-color: #0067b2;
+        word-wrap: break-word;
+        transition: color 0.5s ease;
+    }
+
+/* #selectionModeTab button.selectedMode:hover {
+    
+} */
+
+#selectionModeTab button {   
+   width: 50%;
+   float: left;
+   height: 100%;
+   background: none;
+   border: none;
+   max-width: 275px;
+   min-width: 120px;
+}
+
+/* #selectionModeTab button:hover{
+    
+}
+
+#selectionModeTab button:focus{
+    
+}
+
+#selectionModeTab #savingSpaceBtn {
+   
+    
+} */
+
+
+
 
 .tab-content h3 {
     height: 27px;
@@ -19,6 +223,10 @@ body{
     white-space: nowrap;
     text-align: left;
     padding-left: 30px;
+}
+
+.tab-content{
+    margin-top: 50px;
 }
 .form-group{
     max-height: 4em;
@@ -32,7 +240,8 @@ span.dtr-title{
 }
 span.dtr-data{
     text-align: right;
-    width: 70%;
+    width: 70%; /* was 70%*/
+    padding-left: 20px;
 }
 
 td li{
@@ -52,18 +261,18 @@ table.dataTable td.child{
 	padding: 10px;
 }*/
 
-/*Unit buttons within preferences dropdown*/
+/*Unit buttons within preferences dropdown
 .unitDiv button {
     border: none;
     background: none;
     text-transform: uppercase;
     height: 100%;
-    font-weight: 700;
-    color: steelblue;
+    font-weight: 700;*/
+    /*color: steelblue;
     letter-spacing: 1px;
     font-size: inherit;
     transition: all 0.2s;
-}
+}*/
 
 .unitDiv button:hover {
     color: white;
@@ -71,8 +280,12 @@ table.dataTable td.child{
     border: none;
 }
 
+.unitDiv label{
+    font-weight: 400;
+}
 label {
-    font-size: 90%;
+    font-size: 13px;
+    font-family: 'Karla', sans-serif;
     white-space: nowrap;
     margin-right: 10px;
 }
@@ -80,23 +293,31 @@ label {
 table{
 	text-align: center;
 	table-layout: auto;
-	font-family: 'Roboto', sans-serif;
-	font-size: medium;
+	
 }
 
 table th{
-    font-size: 15px;
+    font-size: 14px;
 }
 
+/* part number in table */
 table tr td:nth-child(2):hover {
     text-decoration: underline;
     font-weight: bold;
-    color: cornflowerblue;
+    color: #03547F;
     cursor: pointer;
 }
 
+/* Percent Loading out of spec in table */
+.outOfSpec{
+    font-weight: bold;
+    color:#d33333;
+}
+
+/* Table header row */
 #myHeader{
-	background-color: whitesmoke;
+    background-color: whitesmoke;
+    text-align: center;
 }
 
 th{
@@ -119,9 +340,9 @@ div.perfContainer{
 	overflow: auto;
 }
 
-.toggleable{
+/* .toggleable{
 	display: none;
-}
+} */
 
 .hidden{
     display: none;
@@ -129,9 +350,29 @@ div.perfContainer{
 
 
 /* Drawing modal css */
+.modal{
+    text-align: center;
+    padding: 0!important;
+}
+
+.modal:before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.modal-dialog{
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.modal-content{
+    min-width: 550px;
+}
 .modal-body {
     width: 100%;
-    min-width: 400px;
     text-align: center;
     position: relative;
 }
@@ -172,9 +413,9 @@ div.perfContainer{
     left: 85%;
 }
 
-.hiddenModal {
+/* .hiddenModal {
     display: none;
-}
+} */
 
 .distImg {
     width: 500px;
@@ -182,6 +423,7 @@ div.perfContainer{
 
 table td{
     white-space: nowrap;
+    text-transform: capitalize;
 }
 
 .stnd-button{
@@ -193,10 +435,41 @@ table td{
     display:none;
 }
 
+.solid-button {
+    border: none;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 0 5px 0 5px;
+    font-size: 13px;
+    font-weight: 500;
+    /*line-height: 45px;*/
+    min-height: 45px;
+    max-height: 65px;
+    text-transform: uppercase;
+    outline: 0;
+    width: 100%;
+    max-width: 275px;
+    border-radius: 1px;
+    background-color: #0067b2;
+    word-wrap: break-word;
+}
+
+    .solid-button:hover {
+        background-color: #03547F;
+    }
+
 #customerSubmit{
     display:none;
 }
+/* ----- Bootstrap Override ----- */
 
+.form-control:focus{
+    border-color: #0067b2;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(54, 142, 214, 0.466)
+}
+
+/* ------------------------------- */
 /* The sticky class is added to the header with JS when it 
    reaches its scroll position 
 .sticky{

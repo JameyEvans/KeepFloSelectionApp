@@ -16,9 +16,7 @@
     "url": "https://github.com/JameyEvans/KeepFloSelectionApp/issues"
   },
   "homepage": "https://github.com/JameyEvans/KeepFloSelectionApp#readme",
-  "devDependencies": {
-    "excel-as-json": "^2.0.2"
-  },
+  "devDependencies": {},
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",

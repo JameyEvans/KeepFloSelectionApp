@@ -5,5 +5,13 @@
 convertExcel = require('excel-as-json').processFile;
  
 //convertExcel('../../distObjects.xlsx', '../data/data.js');
-convertExcel('../data/distObjects.xlsx', '../data/data.js');
+//convertExcel('../data/distObjects.xlsx', '../data/data.js');
+convertExcel('./testXL.xlsx', '../data/data.js', null, function (err, data) {
+    console.log("entered callback");
+    console.log(data);
+    console.log(err);
+    if (err) {
+        console.log("JSON conversion failure: #{err}");
+    }
+});
 
