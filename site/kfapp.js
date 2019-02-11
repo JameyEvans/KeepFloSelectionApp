@@ -17,11 +17,341 @@ var printTableHeadersHTML;
 var isFirstClick = true;
 var minNzLoad = 50;
 var maxNzLoad = 200;
+// type of unit - "std", "stdBTU", "metric"
+var unitType = "std";
 refreshTable();
 
 // ----------------------------------------------------------------------------------------
 // test functions go here:
 
+var suctionDataDegC = [
+    {
+        id: 4.4,
+        text: "4.4"
+    },
+    {
+        id: -6.7,
+        text: "-6.7"
+    },
+    {
+        id: -17.8,
+        text: "-17.8"
+    },
+    {
+        id: -28.9,
+        text: "-28.9"
+    },
+    {
+        id: -40,
+        text: "-40"
+    }
+];
+
+var suctionDataDegF = [
+    {
+        id: 40,
+        text: "40"
+    },
+    {
+        id: 20,
+        text: "20"
+    },
+    {
+        id: 0,
+        text: "0"
+    },
+    {
+        id: -20,
+        text: "-20"
+    },
+    {
+        id: -40,
+        text: "-40"
+    }
+];
+
+var liquidTempDataDegF = [
+    {
+        id: 50,
+        text: "50"
+    },
+    {
+        id: 60,
+        text: "60"
+    },
+    {
+        id: 70,
+        text: "70"
+    },
+    {
+        id: 80,
+        text: "80"
+    },
+    {
+        id: 90,
+        text: "90"
+    },
+    {
+        id: 100,
+        text: "100"
+    },
+    {
+        id: 110,
+        text: "110"
+    },
+    {
+        id: 120,
+        text: "120"
+    }
+];
+
+var liquidTempDataDegC = [
+    {
+        id: 10,
+        text: "10"
+    },
+    {
+        id: 15.6,
+        text: "15.6"
+    },
+    {
+        id: 21.1,
+        text: "21.1"
+    },
+    {
+        id: 26.7,
+        text: "26.7"
+    },
+    {
+        id: 32.2,
+        text: "32.2"
+    },
+    {
+        id: 37.8,
+        text: "37.8"
+    },
+    {
+        id: 43.3,
+        text: "43.3"
+    },
+    {
+        id: 48.9,
+        text: "48.9"
+    }
+];
+
+var tubeLengthDataInch = [
+    {
+        id: 12,
+        text: "12"
+    },
+    {
+        id: 18,
+        text: "18"
+    },
+    {
+        id: 24,
+        text: "24"
+    },
+    {
+        id: 30,
+        text: "30"
+    },
+    {
+        id: 36,
+        text: "36"
+    },
+    {
+        id: 42,
+        text: "42"
+    },
+    {
+        id: 48,
+        text: "48"
+    },
+    {
+        id: 54,
+        text: "54"
+    },
+    {
+        id: 60,
+        text: "60"
+    },
+    {
+        id: 66,
+        text: "66"
+    },
+    {
+        id: 72,
+        text: "72"
+    }
+];
+
+var tubeLengthDataCm = [
+    {
+        id: 31,
+        text: "31"
+    },
+    {
+        id: 46,
+        text: "46"
+    },
+    {
+        id: 61,
+        text: "61"
+    },
+    {
+        id: 76,
+        text: "76"
+    },
+    {
+        id: 91,
+        text: "91"
+    },
+    {
+        id: 107,
+        text: "107"
+    },
+    {
+        id: 122,
+        text: "122"
+    },
+    {
+        id: 137,
+        text: "137"
+    },
+    {
+        id: 152,
+        text: "152"
+    },
+    {
+        id: 168,
+        text: "168"
+    },
+    {
+        id: 182,
+        text: "182"
+    }
+];
+
+function getSuctionTempData(objSuctionTempData){
+    $("#suctionTempOld").empty().select2({
+        tags: true,
+        data: objSuctionTempData,
+        width: "100%",
+        height: "34px",
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            //console.log(term);
+            if (isNaN(term)) {
+                console.log(term + "is not a number");
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            };
+        }
+    });
+}
+
+function getLiquidTempData(objLiquidTempData){
+    $("#liquidTemp").empty().select2({
+        tags: true,
+        data: objLiquidTempData,
+        width: "100%",
+        height: "34px",
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            //console.log(term);
+            if (isNaN(term)) {
+                console.log(term + "is not a number");
+                return null;
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            };
+        }
+    });
+}
+
+// Update tube length dropdown with new unit data
+function getTubeLengthData(objTubeLengthData){
+    $("#tubeLength").empty().select2({
+        tags: true,
+        data: objTubeLengthData,
+        width: "100%",
+        height: "34px",
+        createTag: function (params) {
+            var term = $.trim(params.term);
+            //console.log(term);
+            if (isNaN(term)) {
+                console.log(term + "is not a number");
+                return null;
+            }
+            if (unitType === "metric"){
+                if(term < 30.5 || term > 182.8){
+                    console.log(term + " cm is outside of allowable range");
+                    return null;
+                }
+            }
+            else{
+                if(term < 12 || term > 72){
+                    console.log(term + " inches is outside of allowable range");
+                    return null;
+                }
+            }
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            };
+        }
+    });
+}
+
+// update units when unit radio changes in preference dropdown
+$('input[type=radio][name=unitType]').on("change", function(){
+    console.log(this.value);
+    switch(this.value){
+        case "standard":
+            unitType="std";
+            updTempUnit("F");
+            getSuctionTempData(suctionDataDegF);
+            getLiquidTempData(liquidTempDataDegF);
+            getTubeLengthData(tubeLengthDataInch);
+            updCapacityUnit("Tons");
+            updLengthUnit("inch");
+            break;
+        case "standardBTU":
+            unitType="stdBTU";
+            updTempUnit("F");
+            getSuctionTempData(suctionDataDegF);
+            getLiquidTempData(liquidTempDataDegF);
+            getTubeLengthData(tubeLengthDataInch);
+            updCapacityUnit("BTU/hr");
+            updLengthUnit("inch");
+            break;
+        case "metric":
+            unitType="metric";
+            updTempUnit("C");
+            getSuctionTempData(suctionDataDegC);
+            getLiquidTempData(liquidTempDataDegC);
+            getTubeLengthData(tubeLengthDataCm);
+            updCapacityUnit("kW");
+            updLengthUnit("cm");
+            break;
+    } 
+});
+
+
+// End Testing
+// ----------------------------------------------------------------------------------------
+
+// event listener for clicking known distributor button
 $("#selectKnownDist button").on("click", function () {
     updateFormValues();
     //alert("distPartNumber = " + fmDistPartNumber);
@@ -39,7 +369,7 @@ $("#selectKnownDist button").on("click", function () {
 });
 
 var distForm = document.getElementById("standardDist");
-
+// If 'ENTER' key is pressed then populate table
 distForm.addEventListener("keyup", function (event) {
     // Cancel the default action if needed
     event.preventDefault();
@@ -47,7 +377,9 @@ distForm.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
         document.getElementById("distSelectBtn").click();
     }
-})
+});
+
+
 
 
 
@@ -94,6 +426,7 @@ $(".taggable").select2({
     createTag: function (params) {
         var term = $.trim(params.term);
         //console.log(term);
+        console.log(params);
         if (isNaN(term)) {
             console.log(term + "is not a number");
             return null;
@@ -105,6 +438,39 @@ $(".taggable").select2({
         };
     }
 });
+
+// update select2 dropdown to not add terms outside allowable temp range for tube length
+$("#tubeLength").select2({
+    tags: true,
+    width: "100%",
+    height: "34px",
+    createTag: function (params) {
+        var term = $.trim(params.term);
+        //console.log(term);
+        //console.log(params);
+        if (isNaN(term)) {
+            console.log(term + "is not a number");
+            return null;
+        }
+        if (unitType === "metric"){
+            if(term < 30.5 || term > 182.8){
+                console.log(term + " cm is outside of allowable range");
+                return null;
+            }
+        }
+        else{
+            if(term < 12 || term > 72){
+                console.log(term + " inches is outside of allowable range");
+                return null;
+            }
+        }
+        return {
+            id: term,
+            text: term,
+            newTag: true
+        };
+    }
+})
 
 // disable form boxes when certain options are selected
 // if distributor type = venturi then set to default values and disable nozzle orifice, nozzle type, and side port
@@ -143,14 +509,15 @@ $("#selectionModeTab button").on("click", function () {
     }
 });
 
-var testVariable;
 
 function refreshTable() {
     const startTime = performance.now();
-    if ($.fn.DataTable.isDataTable("#dataTableExample")) {
-        //$("#dataTableExample").DataTable().clear().destroy();
+    if ($.fn.DataTable.isDataTable("#dataTableExample") && unitType == "std") {
         $("#dataTableExample").DataTable().clear().rows.add(tableArr).draw();
         return;
+    }
+    else if (unitType != "std"){
+        $("#dataTableExample").DataTable().clear().destroy();
     }
     
     $('#dataTableExample').DataTable({
@@ -189,20 +556,20 @@ function refreshTable() {
                 orientation: 'landscape',
                 footer: true
             },
-            {
-                text: 'Export To PDF',
-                extend: 'pdfHtml5',
+            // {
+            //     text: 'Export To PDF',
+            //     extend: 'pdfHtml5',
 
-                message: function () {
-                    return $("#printTableHeaderData")[0].innerHTML;
-                },
+            //     message: function () {
+            //         return $("#printTableHeaderData")[0].innerHTML;
+            //     },
 
-                exportOptions:{
-                  columns: ':not(.noVis)'
-                },
-                orientation: 'landscape',
-                pageSize: 'LEGAL'
-            },
+            //     exportOptions:{
+            //       columns: ':not(.noVis)'
+            //     },
+            //     orientation: 'landscape',
+            //     pageSize: 'LEGAL'
+            // },
             {
                 text: 'Export to Excel',
                 exportOptions:{
@@ -274,6 +641,7 @@ function refreshTable() {
             { data: "perfIndex", visible: false}
         ]
     });
+
 }
 
 function getColumns(){
@@ -300,9 +668,9 @@ function getColumns(){
     ]
 }
 
-function exportToPdf(){
-    $('.buttons-pdf').click();
-}
+// function exportToPdf(){
+//     $('.buttons-pdf').click();
+// }
 
 function exportToExcel(){
     $('.buttons-excel').click();
@@ -414,12 +782,29 @@ function updateFormValues(){
 		fmNozzleType = document.querySelector("#nozzleType").selectedOptions[0].value;
 		fmHasSidePort = document.querySelector("#sidePort").selectedOptions[0].value;
 		fmRefrgt = document.querySelector("#refrgType").selectedOptions[0].value;
-		fmCapacity = document.querySelector("#capacity").value;
-		fmSuctionTemp = document.querySelector("#suctionTempOld").selectedOptions[0].value;
-		fmLiquidTemp = document.querySelector("#liquidTemp").selectedOptions[0].value;
-        fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
         fmDistPartNumber = document.querySelector("#distPartNumber").value;
-        updatePrintTableHeaderData();
+        fmCapacity = document.querySelector("#capacity").value;
+        fmSuctionTemp = document.querySelector("#suctionTempOld").selectedOptions[0].value;
+        fmLiquidTemp = document.querySelector("#liquidTemp").selectedOptions[0].value;
+        fmTubeLength = document.querySelector("#tubeLength").selectedOptions[0].value;
+
+        switch(unitType){
+            case "std":
+                console.log("standard units, no conversion necessary");
+                break;
+            case "stdBTU":
+                console.log("stdBTU units, convert capacity");
+                fmCapacity = fmCapacity / 12000;
+                break;
+            case "metric":
+                console.log("metric: convert capacity, temp, and tube length");
+                fmCapacity = fmCapacity * 0.28434517;
+                fmSuctionTemp = convertCtoF(fmSuctionTemp);
+                fmLiquidTemp = convertCtoF(fmLiquidTemp);
+                fmTubeLength = fmTubeLength / 2.54;
+                break;
+        }
+            updatePrintTableHeaderData();
 }
 
 function updatePrintTableHeaderData() {
@@ -530,7 +915,7 @@ function genHTMLFormData(objArr = 0) {
     // if distributor has potential to be nozzle type then determine all valid nozzle combinations and capacities and store in arrValidNozzle
 	if(fmDistType !== "venturi"){
         arrValidNozzle = genValidOrificeSizes(fmCapacity, fmRefrgt, fmLiquidTemp, fmSuctionTemp, fmTubeLength, minNzLoad, maxNzLoad);
-        console.log(arrValidNozzle);
+        //console.log(arrValidNozzle);
 	}
 
 
@@ -586,12 +971,36 @@ function genHTMLFormData(objArr = 0) {
             //console.log("pn: " + tempObject.partNumber + "pctNzLoading = " + pctNzLoading + "; percentTubeLoading = " + percentTubeLoading + "; perfIndex = " + tempObject.perfIndex);
             //var dpTubes = percentTubeLoading / 10;
             //tempObject.dpTubes = percentTubeLoading / 10;
+            
+            // Convert units back to specified unit type
+            switch(unitType){
+                case "std":
+                    console.log("standard units, no conversion necessary");
+                    tempObject.capacity = Number(fmCapacity).toFixed(1);
+                    tempObject.suctionTemp = fmSuctionTemp;
+                    tempObject.liquidTemp = fmLiquidTemp;
+                    tempObject.tubeLength = fmTubeLength;
+                    break;
+                case "stdBTU":
+                    // tons to btu/hr
+                    console.log("stdBTU units, convert capacity");
+                    tempObject.capacity = Number(fmCapacity * 12000).toFixed(0);
+                    tempObject.suctionTemp = fmSuctionTemp;
+                    tempObject.liquidTemp = fmLiquidTemp;
+                    tempObject.tubeLength = fmTubeLength;                    
+                    break;
+                case "metric":
+                    console.log("metric: convert capacity, temp, and tube length");
+                    tempObject.capacity = Number(fmCapacity * 3.51685).toFixed(1);
+                    tempObject.suctionTemp = convertFtoC(fmSuctionTemp);
+                    tempObject.liquidTemp = convertFtoC(fmLiquidTemp);
+                    tempObject.tubeLength = fmTubeLength * 2.54;
+                    break;
+            }
+
             tempObject.style = el.type;
             tempObject.refrigerant = fmRefrgt;
-            tempObject.capacity = fmCapacity;
-            tempObject.suctionTemp = fmSuctionTemp;
-            tempObject.liquidTemp = fmLiquidTemp;
-            tempObject.tubeLength = fmTubeLength;
+            
             var dpTotal = dpNozzle + dpTubes;
             tempObject.dpTotal = dpTotal.toFixed(1);
             tempObject.dpTubes = dpTubes.toFixed(1);
@@ -602,7 +1011,7 @@ function genHTMLFormData(objArr = 0) {
             catch (err) {
                 tempObject.pctDistLoading = pctNzLoading + "%";
             }
-            //removed .toFixed(1) temporarily, throwing error
+           
             tempObject.inletSize = el.inletDiameter;
             tempObject.outletSize = fmStrCircuitSize;
             tempObject.circuitCount = fmCircuitCt;
@@ -629,6 +1038,7 @@ function genHTMLFormData(objArr = 0) {
     //console.log(`genHTMLFormData took ${duration}ms before refreshTable()`);
     // -------------
     refreshTable();  
+    tblCheckTubeLoading();
     // -------------
     // debug
     //const newDuration = performance.now() - startTime;
@@ -653,11 +1063,13 @@ $("#dataTableExample").on("click", "tr[role='row'] td:nth-child(2)", function ()
 
 function viewDrawingModal(tableArrIndex) {
     var distType;
-    var imgArr = ["./site/images/dickbutt.jpg",
+    var imgArr = ["./site/images/image-not-found.png",
         "./site/images/standardDistributor.png",
         "./site/images/hgbDistributor.png",
         "./site/images/flareInlet.png",
-        "./site/images/stubInlet.png"
+        "./site/images/stubInlet.png",
+        "./site/images/flareHGB.png",
+        "./site/images/ventStdStraight.png"
     ];
 
     var dimObj = {
@@ -681,31 +1093,37 @@ function viewDrawingModal(tableArrIndex) {
     distType = tableArr[tableArrIndex].drawingType;
     // set appropriate image corresponding to radio button
     var i;
-    // remove any .hiddenModal classes from modal
-    $(".modal-body div").removeClass("hiddenModal");
+    // remove any .hidden classes from modal
+    $(".modal-body div").removeClass("hidden");
     switch (distType) {
         case "std":
             i = 1;
-            $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
+            $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hidden");
             setModalDimLocations([47, 14], [9, 47.8], [49, 76], [17.3, 59.1], [0, 0], [0, 0]);
             break;
         case "hgb":
             i = 2;
             setModalDimLocations([58, 16], [20, 48.5], [59, 79], [34, 66.3], [0, 0], [25.5, 62]);
-            $("#modalDistFlare").addClass("hiddenModal");
+            $("#modalDistFlare").addClass("hidden");
             break;
         case "flare":
             i = 3;
-            $("#modalDistSideHoleLoc, #modalDistInletOD, #modalDistInletLg").addClass("hiddenModal");
+            $("#modalDistSideHoleLoc, #modalDistInletOD, #modalDistInletLg").addClass("hidden");
             setModalDimLocations([56.5, 19], [18, 50.7], [0, 0], [0, 0], [73, 79.5], [0, 0]);
             break;
         case "stub":
             i = 4;
-            $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hiddenModal");
+            $("#modalDistFlare, #modalDistSideHoleLoc").addClass("hidden");
             setModalDimLocations([57, 16], [20.2, 47.5], [58.5, 78], [35, 68.2], [0, 0], [0, 0]);
+            break;
+        case "flareHgb":
+            i = 5;
+            $("#modalDistInletOD").addClass("hidden");
+            setModalDimLocations([59,7], [6.5, 50], [0, 0], [27, 55], [91, 65], [14.8, 49.2]);
             break;
         default:
             i = 0;
+            $("#modalDistOAL, #modalDistOD, #modalDistInletOD, #modalDistInletLg, #modalDistFlare, #modalDistSideHoleLoc").addClass("hidden");
     }
     $("#modalDistImg").attr('src', imgArr[i]);
     console.log("distType = " + distType);
@@ -882,4 +1300,42 @@ function getFractionalSize(numer, denom = 16.) {
     return Math.floor(numerator) + "/" + Math.floor(denominator);
 }
 
+function convertFtoC(degF){
+    var multiplier = Math.pow(10,2);
+    var degC = (degF - 32) * (5/9);
+
+    return (Math.round(degC * multiplier)/multiplier);
+}
+
+function convertCtoF(degC){
+    return (degC * (9/5)) + 32;
+}
+
+
+function updCapacityUnit(strUnit){
+    // Updates capacity unit span to value of strUnit
+    $('.unitCapacity').text(strUnit);
+}
+
+function updTempUnit(strUnit){
+    // Updates unitTemp span to value of strUnit.  Do not include degree symbol.  (just 'F' or 'C')
+    $('.unitTemp').text(strUnit);
+}
+
+function updLengthUnit(strUnit){
+    // Updates unitLg span to value of strUnit.  (ie 'inch' to 'cm')
+    $('.unitLg').text(strUnit);
+}
 // to show modal use $('#myModal').modal('toggle'); or $('#myModal').modal('show'); or $('#myModal').modal('hide');
+
+// highlight % tube loading values in table that are outside of 50% - 150%
+function tblCheckTubeLoading(){
+    $("tr td:nth-of-type(4)").each(function(){
+        console.log(this);
+        let elPctTubeLoading = parseFloat(this.innerText);
+        console.log(elPctTubeLoading);
+        if(elPctTubeLoading < 50 || elPctTubeLoading > 150){
+            $(this).addClass("outOfSpec");
+        }
+    });
+}

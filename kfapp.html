@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Distributor Selection Tool Prototype</title>
+    <title>KeepFlo Refrigerant Distributor Selection Tool</title>
     <!--todo:Localize all directories-->
     <!--disable google search-->
     <meta name="robots" content="noindex,nofollow">
@@ -28,53 +28,6 @@
 </head>
 <body>
 
-
-    <!--<div class="navContainer">
-        <div id="selectionModeTab">
-            <button id="selectUnknownBtn" class="selectedMode">Select Unknown Distributor</button>
-            <button id="rateKnownBtn">Rate Known Distributor Model</button>
-        </div>
-
-        <div class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferences<span class="caret"></span></a>
-
-            <ul class="dropdown-menu" style="min-width: 250px">
-                <li>
-                    <div class="unitDiv" style="padding: 3px 20px">
-                        <div class="unitRadio" style="padding-left:20px;">
-                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" checked><strong>Standard</strong> (Tons of Refrigeration, &deg;F, in.)</label>
-                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType"><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
-                            <label class="radio" style="padding:3px 0px 3px 0px;"><input type="radio" name="unitType"><strong>Metric</strong> (kW, &deg;C, cm)</label>
-                        </div>
-                        <div style="padding: 3px 0px 3px 0px;">
-                            <input name="fmMinNozzleLoading" id="fmMinNozzleLoading" style="width:50px; margin-left:25px;" value="50" />
-                        </div>
-                        <div style="padding: 3px 0px 3px 0px;">
-                            <label for="fmMaxNozzleLoading" style="width:100px;">Max Percent<br />Distributor Loading:</label>
-                            <input name="fmMaxNozzleLoading" id="fmMaxNozzleLoading" style="width:50px; margin-left:25px;" value="200" />
-                        </div>
-                    </div>
-                </li>
-
-                <li role="separator" class="divider"></li>
-                <li>
-                    <a href="#quoteRequestForm"
-                       data-toggle="modal"
-                       data-target="#quoteRequestForm">
-                        Request Quote
-                    </a>
-                </li>
-                <li>
-                    <a href="#reportRequestForm"
-                       data-toggle="modal"
-                       data-target="#reportRequestForm">
-                        Print Report
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </div>-->
     <div id="ieMain">
         <p>
             This calculator is not supported for Internet Explorer.  For best performance please use Google Chrome, Microsoft Edge, 
@@ -83,7 +36,7 @@
     </div>
     <div class="container-fluid main" id="kfAppMain">
         <!--NAV/TOOL Bar-->
-        <nav class="navbar navbar-default navbar-fixed-top" style="padding-bottom: 5px;">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 
@@ -99,9 +52,9 @@
                                 <li>
                                     <div class="unitDiv" style="padding: 3px 20px">
                                         <div class="unitRadio" style="padding-left:20px;">
-                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" checked><strong>Standard</strong> (Tons of Refrigeration, &deg;F, in.)</label>
-                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType"><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
-                                            <label class="radio" style="padding:3px 0px 3px 0px;"><input type="radio" name="unitType"><strong>Metric</strong> (kW, &deg;C, cm)</label>
+                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" value="standard" checked><strong>Standard</strong> (Tons of Refrigeration, &deg;F, in.)</label>
+                                            <label class="radio" style="padding:0px 12px 3px 0px;"><input type="radio" name="unitType" value="standardBTU"><strong>Standard</strong> (BTU/hr, &deg;F, in.)</label>
+                                            <label class="radio" style="padding:3px 0px 3px 0px;"><input type="radio" name="unitType" value="metric"><strong>Metric</strong> (kW, &deg;C, cm)</label>
                                         </div>
                                         <div style="padding: 3px 0px 3px 0px;">
                                             <label for="fmMinNozzleLoading" style="width:100px;">Min Percent<br />Distributor Loading:</label>
@@ -125,13 +78,13 @@
                                         Request Quote
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#reportRequestForm"
                                        data-toggle="modal"
                                        data-target="#reportRequestForm">
                                         Print Report
                                     </a>
-                                </li><!--todo: dropdown with unit conversion buttons?-->
+                                </li>todo: dropdown with unit conversion buttons? -->
                             </ul>
                         </li>
                     </ul>
@@ -168,7 +121,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="inletSize">Inlet Size (<span class="unitLg">inch</span>):</label>
+                                    <label for="inletSize">Inlet Size (<span class="unitLg-noUpdate">inch</span>):</label>
                                     <select id="inletSize" name="inletSize" class="form-control">
                                         <option value="any" selected>Any Size</option>
                                         <option value=0.375>3/8</option>
@@ -188,7 +141,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="tubingOD">Circuit Tubing OD (<span class="unitLg">inch</span>):</label>
+                                    <label for="tubingOD">Circuit Tubing OD (<span class="unitLg-noUpdate">inch</span>):</label>
                                     <select id="tubingOD" name="tubingOD" class="form-control">
                                         <option value="any" selected>Unknown</option>
                                         <option value=0.156>5/32</option>
@@ -255,8 +208,8 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6 form-group" style="display: inline-block;">
-                                    <button id="distSelectBtn" class="solid-button">
+                                <div class="col-xs-12 col-sm-6 form-group" style="display: inline-block;">
+                                    <button id="distSelectBtn" class="solid-button formButton">
                                         Make Distributor Selection
                                     </button>
                                 </div>
@@ -286,7 +239,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 form-group">
-                                    <label for="capacity"><span class="reqSpan">* </span>Capacity (<span class="unitCapacity">tons</span>):</label>
+                                    <label for="capacity"><span class="reqSpan">* </span>Capacity (<span class="unitCapacity">Tons</span>):</label>
                                     <input type="number" id="capacity" name="capacity" class="form-control">
                                 </div>
 
@@ -337,7 +290,7 @@
                                     <input type="text" id="distPartNumber" name="distPartNumber" class="form-control">
                                 </div>
 
-                                <div id="selectKnownDist" class="col-xs-12 col-sm-6 hidden">
+                                <div id="selectKnownDist" class="col-xs-12 col-sm-6 hidden formButton">
                                     <button class="solid-button" type="button" style="display:inline-block; clear:left;">
                                         Rate Known Distributor
                                     </button>
@@ -363,7 +316,7 @@
                             <li><a href="#" onclick="copyTable()">Copy Table</a></li>
                             <li><a href="#" onclick="exportToCsv()">CSV</a></li>
                             <li><a href="#" onclick="exportToExcel()">Excel</a></li>
-                            <li><a href="#" onclick="exportToPdf()">PDF</a></li>
+                            <!-- <li><a href="#" onclick="exportToPdf()">PDF</a></li> -->
                         </ul>
                     </span>
                 </div>
@@ -375,19 +328,19 @@
                                 <tr>
                                     <th class="style all">Style</th>
                                     <th class="partNumber all">Part Number</th>
-                                    <th class="dpTubes all">dP(tubes)</th>
+                                    <th class="dpTubes all">&Delta;P(tubes)</th>
                                     <th class="pctTubeLoading all">% Tube Loading</th>
-                                    <th class="dpNozzle all">dP (nozzle/body)</th>
+                                    <th class="dpNozzle all">&Delta;P (nozzle/body)</th>
                                     <th class="pctDistLoading all">% Dist Loading</th>
-                                    <th class="dpTotal all">dP(total)</th>
+                                    <th class="dpTotal all">&Delta;P(total)</th>
                                     <th class="inletSize">Inlet Size</th>
                                     <th class="outletSize">Outlet Size</th>
                                     <th class="orificeSize">Orifice Size</th>
                                     <th class="refrigerant">Refrigerant</th>
-                                    <th class="capacity">Tons</th>
-                                    <th class="suctionTemp">Evap &deg;F</th>
-                                    <th class="liquidTemp">Liquid &deg;F</th>
-                                    <th class="tubeLength">Length</th>
+                                    <th class="capacity">Capacity (<span class="unitCapacity">Tons</span>)</th>
+                                    <th class="suctionTemp">Evap &deg;<span class="unitTemp">F</span></th>
+                                    <th class="liquidTemp">Liquid &deg;<span class="unitTemp">F</span></th>
+                                    <th class="tubeLength">Tube Length (<span class="unitLg">in</span>)</th>
                                     <th class="circuitCount">Circuit Count</th>
                                     <th class="orificeType">Orifice Type</th>
                                     <th class="tableArrIndex hidden">tableArrIndex</th>
@@ -472,13 +425,14 @@
         </div>
     </div>
     <!--END Quote Request Form *Modal-->
+
     <!--START Report Modal-->
-    <div id="reportRequestForm"
+    <!-- <div id="reportRequestForm"
          class="modal fade"
          role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog"> -->
             <!--Modal Content-->
-            <div class="modal-content" style="text-align: left;">
+            <!-- <div class="modal-content" style="text-align: left;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Report Information Form</h4>
@@ -523,7 +477,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- END Report Modal -->
     <!-- START drawing modal -->
     <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -541,8 +495,8 @@
                     <div id="modalDistOAL">oal</div>
                     <div id="modalDistInletOD">inlet</div>
                     <div id="modalDistInletLg">length</div>
-                    <div class="hiddenModal" id="modalDistFlare">flare</div>
-                    <div class="hiddenModal" id="modalDistSideHoleLoc">sideHole</div>
+                    <div class="hidden" id="modalDistFlare">flare</div>
+                    <div class="hidden" id="modalDistSideHoleLoc">sideHole</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -556,21 +510,17 @@
     <div id="printTableHeaderData" class="hidden" style="width: 100%;">
         <h2>KeepFlo Refrigerant Distributor Selection Data</h2>
         <div style="width: 25%; float: left;">
-            <p>Refrigerant: <span id="refrgtSpan">insert refrigerant here</span></p>
-            <p>Suction Temperature: <span id="suctionTempSpan">insert suction temp here</span> (&deg;<span class="unitTemp">F</span>)</p>
-            <p>Liquid Temperature: <span id="liquidTempSpan">insert liquid temp here</span> (&deg;<span class="unitTemp">F</span>)</p>
+            <p>Refrigerant: <span id="refrgtSpan"></span></p>
+            <p>Suction Temperature: <span id="suctionTempSpan"></span> (&deg;<span class="unitTemp">F</span>)</p>
+            <p>Liquid Temperature: <span id="liquidTempSpan"></span> (&deg;<span class="unitTemp">F</span>)</p>
         </div>
         <div style="width: 25%; float: left;">
-            <p>Number of Circuits: <span id="circuitCtSpan">insert number circuits here</span></p>
-            <p>Circuit Tube Length: <span id="tubeLengthSpan">insert tube length here</span> (<span class="unitLg">in</span>)</p>
-            <p>Capacity: <span id="capacitySpan">insert capacity here</span> (<span class="unitCapacity">tons</span>)</p>
+            <p>Number of Circuits: <span id="circuitCtSpan"></span></p>
+            <p>Circuit Tube Length: <span id="tubeLengthSpan"></span> (<span class="unitLg">in</span>)</p>
+            <p>Capacity: <span id="capacitySpan"></span> (<span class="unitCapacity">tons</span>)</p>
         </div>
 
     </div>
-
-
-
-
 
 
     <!--<script src="libs/jquery/dist/jquery.min.js"></script>-->

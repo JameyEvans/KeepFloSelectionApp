@@ -1,15 +1,8 @@
-Preference Modal:
-	* Unit Preferences
-		- Capacity (tons, btu/hr, btu/min, kw)
-		- Temperature (°F, °C)
-		- Tube length (in, cm)
-	* Add min/max distributor loading (50% to 150% default) -- Done
 
-Data:
-	* Finish adding dimensional data for each distributor.
+Internet Explorer alternate view	
 
-Output:
-	* Not currently throwing out venturi distributors outside of allowable distributor loading range. -- done 11/27/18
+Form:
+	* Add tool tips for explaining information as well as showing when errors are entered.  (ie temp not a number)
 
 Table:
 	* Add function to remove selected rows from table
@@ -18,7 +11,37 @@ Validation:
 	* Validate capacity data is correct.
 
 Drawing Modal:
-	* Add flareHGB, stdStraight drawing
-	* Remove Dickbutt; add default "no dimensional data available" screen
+	* Add flareHGB, stdStraight, odFlare drawing
+
+CSS:
+	* Fix spacing between navbar and form
 
 
+Pipefy Info:
+User: quote@cdivalve.com
+pass: CdiValve1
+
+
+
+--------- Completed ----------------
+	Output:
+		* Not currently throwing out venturi distributors outside of allowable distributor loading range. -- done 11/27/18
+	
+	Data:
+		* Finish adding dimensional data for each distributor -- Done	
+
+	Preference Modal:
+		* Add min/max distributor loading (50% to 150% default) -- Done
+	
+	Table:
+		* Add function to remove selected rows from table
+		* Remove export pdf option -- Done
+
+	Form:
+		* Error handling for tube length (inches or cm) -- Done
+
+	Preference Modal:
+		* Unit Preferences -- Done
+			- Capacity (tons, btu/hr, btu/min, kw)
+			- Temperature (ï¿½F, ï¿½C)
+			- Tube length (in, cm)

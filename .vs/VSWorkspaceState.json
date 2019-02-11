@@ -1,16 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CDISite\\js",
-    "\\CDISite\\p.typekit.net",
-    "\\CDISite\\products",
-    "\\CDISite\\use.typekit.net",
     "\\site",
     "\\site\\data",
-    "\\site\\libs\\bootstrap",
+    "\\site\\libs",
     "\\site\\scripts",
-    "\\site\\styles"
+    "\\site\\styles",
+    "\\site\\templates"
   ],
-  "SelectedNode": "\\site\\data\\distObjects.xlsx",
+  "SelectedNode": "\\site\\templates\\distributorTable.html",
   "PreviewInSolutionExplorer": false
 }
