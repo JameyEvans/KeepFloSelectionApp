@@ -3,11 +3,9 @@
     "",
     "\\site",
     "\\site\\data",
-    "\\site\\libs",
     "\\site\\scripts",
-    "\\site\\styles",
-    "\\site\\templates"
+    "\\site\\Testing"
   ],
-  "SelectedNode": "\\site\\templates\\distributorTable.html",
+  "SelectedNode": "\\site\\Testing\\distlibsTesting.js",
   "PreviewInSolutionExplorer": false
 }

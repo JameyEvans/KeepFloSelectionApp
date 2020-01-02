@@ -121,6 +121,7 @@ function ErrorText(e) {
             break;
         case 99101:
             c = "Refrigerant not detected (StdNozzleRating)";
+            break;
         default:
             c = "Unknown error code.";
     }
