@@ -22,7 +22,7 @@
     "bootstrap": "^3.4.1",
     "convert-excel-to-json": "^1.6.1",
     "graceful-fs": "^4.1.15",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^2.3.5"
   }
