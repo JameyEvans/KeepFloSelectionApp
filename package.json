@@ -23,7 +23,7 @@
     "convert-excel-to-json": "^1.6.1",
     "graceful-fs": "^4.1.15",
     "jquery": "^3.3.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^2.3.5"
   }
 }
